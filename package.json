@@ -1,0 +1,91 @@
+{
+  "name": "library",
+  "version": "0.1.2",
+  "license": "mit",
+  "private": false,
+  "description": "<DESCRIPTION>",
+  "author": "Mims H. Wright",
+  "homepage": "https://github.com/mimshwright/<LIBRARY>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mimshwright/<LIBRARY>.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mimshwright/<LIBRARY>/issues"
+  },
+  "keywords": [
+    "<KEYWORDS>"
+  ],
+  "type": "module",
+  "main": "./dist/<LIBRARY>.umd.cjs",
+  "module": "./dist/<LIBRARY>.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/<LIBRARY>.js",
+      "require": "./dist/<LIBRARY>.umd.cjs"
+    }
+  },
+  "files": [
+    "dist",
+    "demo"
+  ],
+  "scripts": {
+    "prepare:peers": "install-peers",
+    "prepare:husky": "husky install",
+    "prepare": "run-p prepare:*",
+    "dev": "vite",
+    "start": "run-s dev",
+    "preview": "vite preview",
+    "test": "jest",
+    "test:coverage": "run-s test --coverage",
+    "test:watch": "run-s test --watch",
+    "lint:prettier": "prettier -l .",
+    "lint:eslint": "eslint *.{t,j,cj}s{,x} --no-error-on-unmatched-pattern",
+    "lint": "run-p lint:*",
+    "fix:prettier": "run-s lint:prettier -w",
+    "fix:eslint": "run-s lint:eslint --fix",
+    "fix": "run-s fix:*",
+    "build:tsc": "tsc",
+    "build:vite": "vite build",
+    "build:vite:demo": "run-s 'build:vite -- -c vite.config.demo.ts'",
+    "build": "run-s build:tsc build:vite",
+    "build:demo": "run-s build:tsc build:vite:demo",
+    "commit": "cz",
+    "ci": "run-s commit",
+    "release": "standard-version",
+    "pushpub": "git push --follow-tags origin main && yarn publish",
+    "predeploy": "run-s build:demo",
+    "deploy": "gh-pages -d demo"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.2.3",
+    "@types/node": "^18.11.9",
+    "@typescript-eslint/eslint-plugin": "^5.0.0",
+    "@typescript-eslint/parser": "^5.44.0",
+    "@vitejs/plugin-react": "^2.2.0",
+    "commitizen": "^4.2.5",
+    "cz-conventional-changelog": "3.3.0",
+    "eslint": "^8.0.1",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-config-standard-with-typescript": "^23.0.0",
+    "eslint-config-typescript": "^3.0.0",
+    "eslint-plugin-import": "^2.25.2",
+    "eslint-plugin-n": "^15.0.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-promise": "^6.0.0",
+    "eslint-plugin-typescript": "^0.14.0",
+    "gh-pages": "^4.0.0",
+    "husky": "^8.0.2",
+    "install-peers-cli": "^2.2.0",
+    "jest": "^29.3.1",
+    "lint-staged": "^13.0.3",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^2.8.0",
+    "standard-version": "^9.5.0",
+    "ts-jest": "^29.0.3",
+    "typescript": "*",
+    "vite": "^3.2.4",
+    "vite-plugin-dts": "^1.7.1"
+  }
+}
