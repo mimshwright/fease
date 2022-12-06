@@ -1,29 +1,29 @@
 {
-  "name": "library",
+  "name": "fease",
   "version": "0.1.2",
   "license": "mit",
   "private": false,
   "description": "<DESCRIPTION>",
   "author": "Mims H. Wright",
-  "homepage": "https://github.com/mimshwright/<LIBRARY>",
+  "homepage": "https://github.com/mimshwright/fease",
   "repository": {
     "type": "git",
-    "url": "https://github.com/mimshwright/<LIBRARY>.git"
+    "url": "https://github.com/mimshwright/fease.git"
   },
   "bugs": {
-    "url": "https://github.com/mimshwright/<LIBRARY>/issues"
+    "url": "https://github.com/mimshwright/fease/issues"
   },
   "keywords": [
     "<KEYWORDS>"
   ],
   "type": "module",
-  "main": "./dist/<LIBRARY>.umd.cjs",
-  "module": "./dist/<LIBRARY>.js",
+  "main": "./dist/fease.umd.cjs",
+  "module": "./dist/fease.js",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/<LIBRARY>.js",
-      "require": "./dist/<LIBRARY>.umd.cjs"
+      "import": "./dist/fease.js",
+      "require": "./dist/fease.umd.cjs"
     }
   },
   "files": [
@@ -38,13 +38,13 @@
     "start": "run-s dev",
     "preview": "vite preview",
     "test": "jest",
-    "test:coverage": "run-s test --coverage",
-    "test:watch": "run-s test --watch",
+    "test:coverage": "run-s test -- --coverage",
+    "test:watch": "run-s test -- --watch",
     "lint:prettier": "prettier -l .",
     "lint:eslint": "eslint *.{t,j,cj}s{,x} --no-error-on-unmatched-pattern",
     "lint": "run-p lint:*",
-    "fix:prettier": "run-s lint:prettier -w",
-    "fix:eslint": "run-s lint:eslint --fix",
+    "fix:prettier": "run-s lint:prettier -- -w",
+    "fix:eslint": "run-s lint:eslint -- --fix",
     "fix": "run-s fix:*",
     "build:tsc": "tsc",
     "build:vite": "vite build",
@@ -59,8 +59,12 @@
     "deploy": "gh-pages -d demo"
   },
   "devDependencies": {
+    "@inlet/react-pixi": "^6.8.0",
     "@types/jest": "^29.2.3",
     "@types/node": "^18.11.9",
+    "@types/ramda": "^0.28.20",
+    "@types/react": "^18.0.26",
+    "@types/react-dom": "^18.0.9",
     "@typescript-eslint/eslint-plugin": "^5.0.0",
     "@typescript-eslint/parser": "^5.44.0",
     "@vitejs/plugin-react": "^2.2.0",
@@ -74,6 +78,7 @@
     "eslint-plugin-n": "^15.0.0",
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-promise": "^6.0.0",
+    "eslint-plugin-react": "^7.31.11",
     "eslint-plugin-typescript": "^0.14.0",
     "gh-pages": "^4.0.0",
     "husky": "^8.0.2",
@@ -81,11 +86,18 @@
     "jest": "^29.3.1",
     "lint-staged": "^13.0.3",
     "npm-run-all": "^4.1.5",
+    "pixi-easing-graph": "^0.1.3",
+    "pixi.js": "^7.0.4",
     "prettier": "^2.8.0",
+    "react": "^17",
+    "react-dom": "^17",
     "standard-version": "^9.5.0",
     "ts-jest": "^29.0.3",
     "typescript": "*",
     "vite": "^3.2.4",
     "vite-plugin-dts": "^1.7.1"
+  },
+  "dependencies": {
+    "ramda": "^0.28.0"
   }
 }

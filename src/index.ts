@@ -1,1 +1,2 @@
-export { default as hello } from "./hello";
+export * as factory from "./factory";
+export * as preset from "./preset";

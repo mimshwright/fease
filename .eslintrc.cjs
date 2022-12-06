@@ -6,7 +6,7 @@ module.exports = {
     jest: true,
   },
 
-  plugins: ["@typescript-eslint", "prettier"],
+  plugins: ["@typescript-eslint", "react", "prettier"],
   extends: [
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
@@ -20,7 +20,7 @@ module.exports = {
   },
   overrides: [{ files: ".eslintrc.cjs", parserOptions: { project: null } }],
   rules: {
-    "@typescript-eslint/quotes": ["error", "double"],
+    "@typescript-eslint/quotes": 0,
     "@typescript-eslint/semi": 0,
     "@typescript-eslint/comma-dangle": [
       "error",
@@ -32,7 +32,7 @@ module.exports = {
         functions: "never",
       },
     ],
-    "no-unused-vars": [
+    "@typescript-eslint/no-unused-vars": [
       "error",
       { vars: "all", varsIgnorePattern: "^_", argsIgnorePattern: "^_" },
     ],
