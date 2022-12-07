@@ -1,4 +1,5 @@
 node_modules
 dist
 demo
+!src/demo
 LICENSE.md

@@ -1,3 +1,4 @@
+import * as decorator from "../src/decorator";
 import * as factory from "../src/factory";
 import { expectAll } from "./testUtil";
 import { repeat } from "ramda";
@@ -22,9 +23,9 @@ describe("fease factories", () => {
     const quad = factory.exp(2);
     describe("scaleX()", () => {
       describe('Scales a function\'s output so that the shape is stretched horizontally. This can be thought of as changing the "duration" of the function with a lower number making it faster and higher making it slower.', () => {
-        const slower = factory.scaleX(2);
-        const same = factory.scaleX(1);
-        const faster = factory.scaleX(0.5);
+        const slower = decorator.scaleX(2);
+        const same = decorator.scaleX(1);
+        const faster = decorator.scaleX(0.5);
 
         it("scales the function on horizontal axis", () => {
           expectTestRange(slower(quad)).toEqual([
@@ -39,9 +40,9 @@ describe("fease factories", () => {
     });
     describe("scaleY()", () => {
       describe('Scales a function\'s output so that the shape is stretched vertically. This can be thought of as changing the "amplitude" of the function.', () => {
-        const smaller = factory.scaleY(0.5);
-        const same = factory.scaleY(1);
-        const bigger = factory.scaleY(2);
+        const smaller = decorator.scaleY(0.5);
+        const same = decorator.scaleY(1);
+        const bigger = decorator.scaleY(2);
 
         it("scales the function on vertical axis", () => {
           // input ** 2 / 2
@@ -57,9 +58,9 @@ describe("fease factories", () => {
       });
       describe("scaleXY()", () => {
         describe("Scales horizontally and verticallly by the same value.", () => {
-          const scale50 = factory.scaleXY(0.5);
-          const scale70 = factory.scaleXY(0.7);
-          const same = factory.scaleXY(1);
+          const scale50 = decorator.scaleXY(0.5);
+          const scale70 = decorator.scaleXY(0.7);
+          const same = decorator.scaleXY(1);
           const sin = factory.sine(1);
 
           it("scales numbers on vertical and horizontal axis simultaneously", () => {
@@ -70,12 +71,12 @@ describe("fease factories", () => {
           });
           it("scaleXY(n)(f)(x) === scaleY(n)(scaleX(n)(f))(x)", () => {
             expectTestRange(scale70(sin)).toMatchFunction(
-              factory.scaleY(0.7)(factory.scaleX(0.7)(sin))
+              decorator.scaleY(0.7)(decorator.scaleX(0.7)(sin))
             );
           });
           it("scaleXY(n)(f)(x) === scaleX(n)(scaleY(n)(f))(x)", () => {
             expectTestRange(scale70(sin)).toMatchFunction(
-              factory.scaleX(0.7)(factory.scaleY(0.7)(sin))
+              decorator.scaleX(0.7)(decorator.scaleY(0.7)(sin))
             );
           });
           it("scaleXY(1)(f)(x) === f(x)", () => {
@@ -106,6 +107,16 @@ describe("fease factories", () => {
       it("Should work with fractions & negatives ", () => {
         expect(factory.exp(-1)(0.5)).toBe(2);
         expect(factory.exp(2.5)(0.5)).toBeCloseTo(Math.sqrt(0.5) * 0.5 * 0.5);
+      });
+    });
+  });
+  describe("poly()", () => {
+    describe("Takes a list of coeficients (one for each exponent starting with 0) and creates a polynomial function", () => {
+      it("poly(cs) === c0 * x ** 0 + c1 * x ** 1... cn * x ** n", () => {
+        const polyCubic = factory.poly([0.1, 1, -1, 1]);
+        const cubic = (x: number) => 0.1 + x - x ** 2 + x ** 3;
+
+        expectTestRange(polyCubic).toMatchFunction(cubic);
       });
     });
   });
