@@ -22,16 +22,7 @@ module.exports = {
   rules: {
     "@typescript-eslint/quotes": 0,
     "@typescript-eslint/semi": 0,
-    "@typescript-eslint/comma-dangle": [
-      "error",
-      {
-        arrays: "always-multiline",
-        objects: "always-multiline",
-        imports: "never",
-        exports: "never",
-        functions: "never",
-      },
-    ],
+    "@typescript-eslint/comma-dangle": 0,
     "@typescript-eslint/no-unused-vars": [
       "error",
       { vars: "all", varsIgnorePattern: "^_", argsIgnorePattern: "^_" },

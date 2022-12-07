@@ -59,7 +59,10 @@
     "deploy": "gh-pages -d demo"
   },
   "devDependencies": {
+    "@emotion/react": "^11.10.5",
+    "@emotion/styled": "^11.10.5",
     "@inlet/react-pixi": "^6.8.0",
+    "@mui/material": "^5.10.17",
     "@types/jest": "^29.2.3",
     "@types/node": "^18.11.9",
     "@types/ramda": "^0.28.20",
