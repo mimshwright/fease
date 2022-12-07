@@ -1,4 +1,4 @@
 {
   "*": "yarn lint:prettier",
-  "*.{j,t}s{,x}": "yarn tsc && yarn lint:eslint"
+  "*.{j,t}s{,x}": "yarn run-p lint:tsc lint:eslint"
 }

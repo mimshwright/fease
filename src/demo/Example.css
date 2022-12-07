@@ -1,0 +1,13 @@
+.Example {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas: "description" "example";
+  text-align: left;
+}
+
+.description {
+  grid-area: "description";
+}
+.example {
+  grid-area: "example";
+}
