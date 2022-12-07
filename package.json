@@ -40,6 +40,7 @@
     "test": "jest",
     "test:coverage": "run-s test -- --coverage",
     "test:watch": "run-s test -- --watch",
+    "lint:typescript": "run-s build:tsc",
     "lint:prettier": "prettier -l .",
     "lint:eslint": "eslint *.{t,j,cj}s{,x} --no-error-on-unmatched-pattern",
     "lint": "run-p lint:*",
