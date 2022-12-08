@@ -9,14 +9,16 @@ const NumberParameter: React.FC<NumberParameterProps> = ({
 }) => {
   return (
     <>
-      <label>{label}</label>
+      <label>
+        {label}: <code>{value}</code>
+      </label>
       <Slider
         value={value}
         onChange={(_e: Event, val) => setter(val as number)}
         max={max}
         min={min}
         step={0.01}
-        valueLabelDisplay="on"
+        valueLabelDisplay="auto"
       />
     </>
   );

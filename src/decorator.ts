@@ -38,8 +38,17 @@ import { EasingFunction, EasingFunctionDecorator } from "./types";
 // transition
 // transitionWeighted
 
-// export const shiftX
-// shiftY
+export const shiftX =
+  (offset: number): EasingFunctionDecorator =>
+  (f: EasingFunction) =>
+  (x: number) =>
+    f(x - offset);
+
+export const shiftY =
+  (offset: number): EasingFunctionDecorator =>
+  (f: EasingFunction) =>
+  (x: number) =>
+    f(x) + offset;
 // shiftXY
 
 export const scaleX =

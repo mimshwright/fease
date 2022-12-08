@@ -1,8 +1,8 @@
 import React from "react";
 import * as decorator from "../decorator";
-import { sine } from "../factory";
+import * as generator from "../factory";
 import Example, { ExampleProps } from "./Example";
-import { cubic, linear, sinWave } from "../preset";
+import * as preset from "../preset";
 import { EventuallyReturnsAnEasingFunction } from "../types";
 import { Button } from "@mui/material";
 
@@ -23,16 +23,34 @@ const exampleData: ExamplesData = [
     description: "tbd",
     examples: [
       {
-        f: linear,
+        f: preset.linear,
         title: "Linear",
         code: "preset.linear()",
         description: "TBD",
       },
       {
-        f: sinWave,
+        f: preset.quad,
+        title: "Quadratic",
+        code: "preset.quad()",
+        description: "TBD",
+      },
+      {
+        f: preset.cubic,
+        title: "Cubic",
+        code: "preset.cubic()",
+        description: "TBD",
+      },
+      {
+        f: preset.sinWave,
         title: "Sine Wave",
         code: "preset.sinWave()",
         description: "TBD",
+      },
+      {
+        f: preset.cosWave,
+        title: "Cosine Wave",
+        code: "preset.cosWave()",
+        description: "(cos is identical to sin but the phase is +25%)",
       },
     ],
   },
@@ -42,7 +60,14 @@ const exampleData: ExamplesData = [
     description: "tbd",
     examples: [
       {
-        f: sine,
+        f: generator.exp,
+        title: "Exponential function",
+        code: "generator.exp(exponent)",
+        description: "Creates an exponential function with a given exponent.",
+        parameters: [{ label: "exponent", min: -2, max: 6, defaultValue: 3 }],
+      },
+      {
+        f: generator.sine,
         title: "Sine",
         code: "generator.sine(freq)",
         description:
@@ -51,13 +76,6 @@ const exampleData: ExamplesData = [
           { label: "frequency", min: 0.01, max: 20, defaultValue: 1 },
         ],
       },
-      // {
-      //   f: cosine,
-      //   title: "Cosine",
-      //   description:
-      //     "Creates a cosine wave funciton with frequency a number of in full oscillations between 0 and 1 input.",
-      //   parameters: [{ label: "frequency", min: 0, max: 20, defaultValue: 1 }],
-      // },
     ],
   },
   {
@@ -65,16 +83,46 @@ const exampleData: ExamplesData = [
     description: "tbd",
     examples: [
       {
+        f: decorator.shiftX,
+        title: "ShiftX",
+        code: "decorator.shiftX(x)(f)",
+        description:
+          "Adds or subtracts from the input value of the function resulting in a shift on the X axis. Affects phase of waveforms.",
+        parameters: [
+          { label: "shift", min: -1, max: 1, defaultValue: 0.5 },
+          {
+            label: "Input Function",
+            defaultValue: preset.cubic,
+            includeInGraph: true,
+          },
+        ],
+      },
+      {
+        f: decorator.shiftY,
+        title: "ShiftY",
+        code: "decorator.shiftY(y)(f)",
+        description:
+          "Adds or subtracts from the output value of the function resulting in a shift on the Y axis.",
+        parameters: [
+          { label: "shift", min: -1, max: 1, defaultValue: 0.5 },
+          {
+            label: "Input Function",
+            defaultValue: preset.cubic,
+            includeInGraph: true,
+          },
+        ],
+      },
+      {
         f: decorator.scaleX,
         title: "ScaleX",
         code: "decorator.scaleX(s)(f)",
         description:
           "Multiplies the input value of the function resulting in results scaled on the X axis. Affects frequency of waveforms.",
         parameters: [
-          { label: "scaleY", min: -1, max: 3, defaultValue: 2 },
+          { label: "scale", min: -1, max: 3, defaultValue: 2 },
           {
             label: "Input Function",
-            defaultValue: cubic,
+            defaultValue: preset.cubic,
             includeInGraph: true,
           },
         ],
@@ -86,10 +134,10 @@ const exampleData: ExamplesData = [
         description:
           "Multiplies the output values of the function resulting in results scaled on the Y axis.  Affects amplitude of waveforms.",
         parameters: [
-          { label: "scaleY", min: -1, max: 3, defaultValue: 2 },
+          { label: "scale", min: -1, max: 3, defaultValue: 2 },
           {
             label: "Input Function",
-            defaultValue: cubic,
+            defaultValue: preset.cubic,
             includeInGraph: true,
           },
         ],
@@ -101,10 +149,10 @@ const exampleData: ExamplesData = [
         description:
           "Scales in the X and Y direction simultaneously. (Note: This is difficult to see on normal functions, but is more visible on a waveform.)",
         parameters: [
-          { label: "scaleY", min: 0.1, max: 2, defaultValue: 0.2 },
+          { label: "scale", min: 0.1, max: 2, defaultValue: 0.2 },
           {
             label: "Input Function",
-            defaultValue: sinWave,
+            defaultValue: preset.sinWave,
             includeInGraph: true,
           },
         ],
