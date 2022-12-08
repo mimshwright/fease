@@ -6,13 +6,21 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  background-color: #0d1d2a;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Yatra One";
 }
 
 a {
@@ -33,7 +41,12 @@ body {
 }
 
 h1 {
-  font-size: 3em;
+  font-size: 6em;
+  line-height: 1;
+  margin-bottom: 1rem;
+}
+h2 {
+  font-size: 4em;
   line-height: 1;
 }
 
@@ -58,7 +71,7 @@ button:focus-visible {
 
 @media (prefers-color-scheme: light) {
   :root {
-    color: #213547;
+    color: #0d1d2a;
     background-color: #ffffff;
   }
   a:hover {

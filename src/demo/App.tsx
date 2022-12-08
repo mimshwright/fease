@@ -22,8 +22,18 @@ const exampleData: ExamplesData = [
     title: "Preset",
     description: "tbd",
     examples: [
-      { f: linear, title: "Linear", description: "TBD" },
-      { f: sinWave, title: "Sine Wave", description: "TBD" },
+      {
+        f: linear,
+        title: "Linear",
+        code: "preset.linear()",
+        description: "TBD",
+      },
+      {
+        f: sinWave,
+        title: "Sine Wave",
+        code: "preset.sinWave()",
+        description: "TBD",
+      },
     ],
   },
 
@@ -34,6 +44,7 @@ const exampleData: ExamplesData = [
       {
         f: sine,
         title: "Sine",
+        code: "generator.sine(freq)",
         description:
           "Creates a sine wave funciton with frequency a number of in full oscillations between 0 and 1 input.",
         parameters: [
@@ -56,6 +67,7 @@ const exampleData: ExamplesData = [
       {
         f: decorator.scaleX,
         title: "ScaleX",
+        code: "decorator.scaleX(s)(f)",
         description:
           "Multiplies the input value of the function resulting in results scaled on the X axis. Affects frequency of waveforms.",
         parameters: [
@@ -70,6 +82,7 @@ const exampleData: ExamplesData = [
       {
         f: decorator.scaleY,
         title: "ScaleY",
+        code: "decorator.scaleY(s)(f)",
         description:
           "Multiplies the output values of the function resulting in results scaled on the Y axis.  Affects amplitude of waveforms.",
         parameters: [
@@ -84,6 +97,7 @@ const exampleData: ExamplesData = [
       {
         f: decorator.scaleXY,
         title: "ScaleXY",
+        code: "decorator.scaleXY(s)(f)",
         description:
           "Scales in the X and Y direction simultaneously. (Note: This is difficult to see on normal functions, but is more visible on a waveform.)",
         parameters: [
@@ -116,7 +130,7 @@ function App() {
       </div>
       {exampleData.map((section) => (
         <section key={section.title}>
-          <h1>{section.title}</h1>
+          <h2>{section.title}</h2>
           <p>{section.description}</p>
           {section.examples.map((props) => (
             <Example

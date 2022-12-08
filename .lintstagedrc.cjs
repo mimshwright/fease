@@ -1,8 +1,5 @@
 module.exports = {
   "*": "yarn lint:prettier",
-  "*.{j,t}s{,x}": [
-    () => "yarn build:tsc",
-    "yarn lint:eslint",
-    () => "yarn test",
-  ],
+  "*.{t}s{,x}": () => "yarn build:tsc",
+  "*.{j,t}s{,x}": ["yarn lint:eslint", () => "yarn test"],
 };

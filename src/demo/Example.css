@@ -4,6 +4,12 @@
   grid-template-areas: "description" "example";
   text-align: left;
 }
+h3 {
+  font-size: 2em;
+}
+code {
+  font-size: 1.5em;
+}
 
 .description {
   grid-area: "description";

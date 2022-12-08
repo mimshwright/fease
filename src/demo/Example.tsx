@@ -30,6 +30,7 @@ const isNumberParameter = (p: Parameter<unknown>): p is ParameterNumber =>
 export interface ExampleProps {
   f: EventuallyReturnsAnEasingFunction;
   title: string;
+  code: string;
   description?: string;
   parameters?: Parameters;
 }
@@ -83,6 +84,7 @@ const applyParametersToFunction = (
 const Example: React.FC<ExampleProps> = ({
   f,
   title,
+  code,
   description = "",
   parameters = [],
 }) => {
@@ -98,8 +100,9 @@ const Example: React.FC<ExampleProps> = ({
   return (
     <div className="Example">
       <div className="description">
-        <h2>{title}</h2>
+        <h3>{title}</h3>
         <p>{description}</p>
+        <code>{code}</code>
         <div className="params">
           {paramsWithState.map((param, i) => (
             <div key={i}>
