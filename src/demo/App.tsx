@@ -1,4 +1,3 @@
-import "./App.css";
 import React from "react";
 import * as decorator from "../decorator";
 import { sine } from "../factory";
@@ -6,6 +5,8 @@ import Example, { ExampleProps } from "./Example";
 import { cubic, linear, sinWave } from "../preset";
 import { EventuallyReturnsAnEasingFunction } from "../types";
 import { Button } from "@mui/material";
+
+import "./App.css";
 
 type ExampleData = Omit<ExampleProps, "f"> & { f: unknown };
 
