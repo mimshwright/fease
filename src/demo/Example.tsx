@@ -2,48 +2,78 @@ import { Stage } from "@inlet/react-pixi";
 import { EasingGraphComponent } from "pixi-easing-graph";
 import { call, map, prop, reduce } from "ramda";
 import React, { SetStateAction, useState } from "react";
-import { EasingFunction } from "../types";
+import { EasingFunction, EventuallyReturnsAnEasingFunction } from "../types";
 import FunctionSelector from "./FunctionSelector";
 import NumberParameter from "./NumberParameter";
+import * as util from "./util";
 
 import "./Example.css";
 
-type ParametricEasingFunction = (
-  p: number | EasingFunction
-) => ParametricEasingFunction | EasingFunction;
-
 type Parameter<T> = { label: string; defaultValue: T };
 type ParameterNumber = Parameter<number> & { min: number; max: number };
-type ParameterFunction = Parameter<EasingFunction>;
+type ParameterFunction = Parameter<EasingFunction> & {
+  includeInGraph?: boolean;
+};
 type Parameters = (ParameterNumber | ParameterFunction)[];
 type Stateful<T> = { value: T; setter: React.Dispatch<SetStateAction<T>> };
 export type StatefulParameterNumber = ParameterNumber & Stateful<number>;
 export type StatefulParameterFunction = ParameterFunction &
   Stateful<EasingFunction>;
+type StatefulParameters = (
+  | StatefulParameterNumber
+  | StatefulParameterFunction
+)[];
+
+const isNumberParameter = (p: Parameter<unknown>): p is ParameterNumber =>
+  typeof p.defaultValue === "number";
 
 export interface ExampleProps {
-  f: ParametricEasingFunction | EasingFunction;
+  f: EventuallyReturnsAnEasingFunction;
   title: string;
   description?: string;
   parameters?: Parameters;
 }
 
-const isDarkMode =
-  window.matchMedia &&
-  window.matchMedia("(prefers-color-scheme: dark)").matches;
-
 const isFunction = (param: unknown): boolean => typeof param === "function";
 
+// Takes a list of parameters and uses `useState` to give them `value` and `setter`.
+const assignStateToParams = map(
+  (
+    param: Parameter<unknown>
+  ): StatefulParameterNumber | StatefulParameterFunction => {
+    if (isNumberParameter(param)) {
+      const [value, setter] = useState<number>(() => param.defaultValue);
+      return { ...param, value, setter } as StatefulParameterNumber;
+    }
+    const [value, setter] = useState<EasingFunction>(
+      () => param.defaultValue as EasingFunction
+    );
+    return { ...param, value, setter } as StatefulParameterFunction;
+  }
+);
+
+// Creates an array of just the current values of the parameters
+const extractValues = map(prop("value"));
+
+// Using the list of parameters, `parameters, and the chain of Unary functions, `f`,
+// applies the parameters to the function ultimately resulting in a fully-parameterized
+// EasingFunction.
 const applyParametersToFunction = (
   parameterValues: (number | EasingFunction)[],
-  f: ParametricEasingFunction | EasingFunction
+  f: EventuallyReturnsAnEasingFunction
 ) =>
   reduce(
-    (f, param) => {
+    (f: unknown, param: unknown) => {
       if (isFunction(param)) {
-        return call(f as ParametricEasingFunction, param as EasingFunction);
+        return call(
+          f as EventuallyReturnsAnEasingFunction<EasingFunction>,
+          param as EasingFunction
+        );
       } else {
-        return call(f as ParametricEasingFunction, param as number);
+        return call(
+          f as EventuallyReturnsAnEasingFunction<number>,
+          param as number
+        );
       }
     },
     f,
@@ -56,19 +86,14 @@ const Example: React.FC<ExampleProps> = ({
   description = "",
   parameters = [],
 }) => {
-  const paramsWithState = map((param: Parameter<unknown>) => {
-    const [value, setter] = useState(() => param.defaultValue);
-    return { ...param, value, setter };
-  })(parameters);
-
-  // paramsWithState.map(({ label, value }) => console.log(label, value));
-
-  const parameterValues = map(prop("value"))(paramsWithState) as (
+  const isDarkMode = util.isDarkMode();
+  const paramsWithState = assignStateToParams(parameters) as StatefulParameters;
+  const parameterValues = extractValues(paramsWithState) as (
     | number
     | EasingFunction
   )[];
-
-  const g: EasingFunction = applyParametersToFunction(parameterValues, f);
+  const easingFunctionWithParametersApplied: EasingFunction =
+    applyParametersToFunction(parameterValues, f);
 
   return (
     <div className="Example">
@@ -100,7 +125,7 @@ const Example: React.FC<ExampleProps> = ({
           }}
         >
           <EasingGraphComponent
-            f={g}
+            f={easingFunctionWithParametersApplied}
             width={200}
             height={200}
             x={50}

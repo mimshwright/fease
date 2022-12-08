@@ -1,7 +1,6 @@
-import { EasingFunction, HOEF } from "./types";
-import { identity, always, addIndex, reduce } from "ramda";
-
-type HOEFN = HOEF<number>;
+// import { shiftX } from "./decorator";
+import { ReturnsEasingFunction } from "./types";
+import { addIndex, reduce } from "ramda";
 
 // linear
 // exponent
@@ -19,21 +18,18 @@ type HOEFN = HOEF<number>;
 // circle
 // physics?
 
-export const I: EasingFunction = identity<number>;
-export const K: HOEFN = always<number>;
+export const exp: ReturnsEasingFunction<number> = (exp) => (x) => x ** exp;
 
-export const exp: HOEFN = (exp) => (x) => x ** exp;
+export const poly: ReturnsEasingFunction<number[]> = (coefficients) => (x) =>
+  addIndex(reduce<number, number>)(
+    (total, coefficient, exponent) => total + coefficient * x ** exponent,
+    0
+  )(coefficients);
 
-export const poly =
-  (coefficients: number[]) =>
-  (x: number): number =>
-    addIndex(reduce<number, number>)(
-      (total, coefficient, exponent) => total + coefficient * x ** exponent,
-      0
-    )(coefficients);
-
-const _2PI = Math.PI * 2;
-export const sine: HOEFN =
+const FULL_ROTATION_IN_RADIANS = Math.PI * 2;
+export const sine: ReturnsEasingFunction<number> =
   (frequency = 1) =>
   (x: number) =>
-    Math.sin(x * _2PI * frequency) / 2 + 0.5;
+    Math.sin(x * frequency * FULL_ROTATION_IN_RADIANS) / 2 + 0.5;
+
+// export const cosine: ReturnsEasingFunction<number> = shiftX(-0.25)(sine);

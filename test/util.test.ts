@@ -1,7 +1,20 @@
-import { render } from "./../src/util";
-import { I } from "../src/factory";
+import { repeat } from "ramda";
+import { render, I, K } from "./../src/util";
+import { defaultTestRange, expectTestRange } from "./testUtil";
 
 describe("utils", () => {
+  describe("I", () => {
+    it("should return the input unchanged", () => {
+      expectTestRange(I).toBeUnchanged();
+    });
+  });
+  describe("K", () => {
+    it("Takes a value as input and returns an easing function that only ever returns that value.", () => {
+      const half = K(0.5);
+      expectTestRange(half).toEqual(repeat(0.5, defaultTestRange.length));
+    });
+  });
+
   describe("render()", () => {
     it("Should create an array of values using the function and 0..1 as input", () => {
       expect(render(11)(I)).toEqual([

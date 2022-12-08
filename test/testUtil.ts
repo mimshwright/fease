@@ -19,3 +19,6 @@ export const expectAll =
       expect(map(f, inputs)).toEqual(map(g, inputs)),
     toBeUnchanged: () => expect(map(f, inputs)).toEqual(inputs),
   });
+
+export const defaultTestRange = [0, 0.25, 0.5, 1.0, 2.0, -1];
+export const expectTestRange = expectAll(defaultTestRange);

@@ -4,8 +4,9 @@ import * as decorator from "../decorator";
 import { sine } from "../factory";
 import Example, { ExampleProps } from "./Example";
 import { cubic, linear, sinWave } from "../preset";
+import { EventuallyReturnsAnEasingFunction } from "../types";
 
-type ExampleData = ExampleProps;
+type ExampleData = Omit<ExampleProps, "f"> & { f: unknown };
 
 type Section = {
   title: string;
@@ -33,8 +34,17 @@ const exampleData: ExamplesData = [
         title: "Sine",
         description:
           "Creates a sine wave funciton with frequency a number of in full oscillations between 0 and 1 input.",
-        parameters: [{ label: "frequency", min: 0, max: 20, defaultValue: 1 }],
+        parameters: [
+          { label: "frequency", min: 0.01, max: 20, defaultValue: 1 },
+        ],
       },
+      // {
+      //   f: cosine,
+      //   title: "Cosine",
+      //   description:
+      //     "Creates a cosine wave funciton with frequency a number of in full oscillations between 0 and 1 input.",
+      //   parameters: [{ label: "frequency", min: 0, max: 20, defaultValue: 1 }],
+      // },
     ],
   },
   {
@@ -42,21 +52,45 @@ const exampleData: ExamplesData = [
     description: "tbd",
     examples: [
       {
+        f: decorator.scaleX,
+        title: "ScaleX",
+        description:
+          "Multiplies the input value of the function resulting in results scaled on the X axis. Affects frequency of waveforms.",
+        parameters: [
+          { label: "scaleY", min: -1, max: 3, defaultValue: 2 },
+          {
+            label: "Input Function",
+            defaultValue: cubic,
+            includeInGraph: true,
+          },
+        ],
+      },
+      {
         f: decorator.scaleY,
         title: "ScaleY",
-        description: "TBD",
+        description:
+          "Multiplies the output values of the function resulting in results scaled on the Y axis.  Affects amplitude of waveforms.",
         parameters: [
-          { label: "scaleY", min: 0, max: 100, defaultValue: 2 },
-          { label: "Input Function", defaultValue: cubic },
+          { label: "scaleY", min: -1, max: 3, defaultValue: 2 },
+          {
+            label: "Input Function",
+            defaultValue: cubic,
+            includeInGraph: true,
+          },
         ],
       },
       {
         f: decorator.scaleXY,
         title: "ScaleXY",
-        description: "TBD",
+        description:
+          "Scales in the X and Y direction simultaneously. (Note: This is difficult to see on normal functions, but is more visible on a waveform.)",
         parameters: [
-          { label: "scaleY", min: 0.1, max: 3, defaultValue: 0.2 },
-          { label: "Input Function", defaultValue: sinWave },
+          { label: "scaleY", min: 0.1, max: 2, defaultValue: 0.2 },
+          {
+            label: "Input Function",
+            defaultValue: sinWave,
+            includeInGraph: true,
+          },
         ],
       },
     ],
@@ -80,7 +114,11 @@ function App() {
           <h1>{section.title}</h1>
           <p>{section.description}</p>
           {section.examples.map((props) => (
-            <Example key={props.title} {...props} />
+            <Example
+              key={props.title}
+              {...props}
+              f={props.f as EventuallyReturnsAnEasingFunction}
+            />
           ))}
         </section>
       ))}

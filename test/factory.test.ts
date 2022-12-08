@@ -1,24 +1,12 @@
 import * as decorator from "../src/decorator";
 import * as factory from "../src/factory";
+import { I, K } from "../src/util";
 import { expectAll } from "./testUtil";
-import { repeat } from "ramda";
 
 const testRange = [0, 0.25, 0.5, 1.0, 2.0, -1];
 const expectTestRange = expectAll(testRange);
 
 describe("fease factories", () => {
-  describe("I", () => {
-    it("should return the input unchanged", () => {
-      expectTestRange(factory.I).toBeUnchanged();
-    });
-  });
-  describe("K", () => {
-    it("Takes a value as input and returns an easing function that only ever returns that value.", () => {
-      const half = factory.K(0.5);
-      expectTestRange(half).toEqual(repeat(0.5, testRange.length));
-    });
-  });
-
   describe("scales", () => {
     const quad = factory.exp(2);
     describe("scaleX()", () => {
@@ -95,14 +83,14 @@ describe("fease factories", () => {
         expect(typeof quad(1)).toBe("number");
       });
       it("exp(0)(x) === K(1)(x)", () => {
-        const one = factory.K(1);
+        const one = K(1);
         const exp0 = factory.exp(0);
         expectTestRange(exp0).toMatchFunction(one);
       });
       it("exp(1)(x) === I(x)", () => {
         const exp1 = factory.exp(1);
 
-        expectTestRange(exp1).toMatchFunction(factory.I);
+        expectTestRange(exp1).toMatchFunction(I);
       });
       it("Should work with fractions & negatives ", () => {
         expect(factory.exp(-1)(0.5)).toBe(2);

@@ -1,5 +1,6 @@
 import { EasingFunction } from "./types";
-import { exp, I, sine } from "./factory";
+import { exp, sine } from "./factory";
+import { I } from "./util";
 
 export const linear: EasingFunction = I;
 export const quad = exp(2);

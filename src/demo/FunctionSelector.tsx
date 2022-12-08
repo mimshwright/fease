@@ -1,5 +1,5 @@
 import React from "react";
-import { FormControlLabel, InputLabel, Radio, RadioGroup } from "@mui/material";
+import { FormControlLabel, Radio, RadioGroup } from "@mui/material";
 import { linear, cubic, sinWave } from "../preset";
 import { EasingFunction } from "../types";
 import { StatefulParameterFunction } from "./Example";

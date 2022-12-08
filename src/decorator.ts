@@ -1,10 +1,5 @@
 import { pipe } from "ramda";
-import { EasingFunction, Decorator } from "./types";
-
-type EFDecorator = Decorator<number, number>;
-
-// I
-// K
+import { EasingFunction, EasingFunctionDecorator } from "./types";
 
 // scaleX = scaleDuration = 1/scaleFreq
 // scaleY = scaleAmp
@@ -48,18 +43,18 @@ type EFDecorator = Decorator<number, number>;
 // shiftXY
 
 export const scaleX =
-  (scale: number): EFDecorator =>
+  (scale: number): EasingFunctionDecorator =>
   (f: EasingFunction) =>
   (x: number) =>
     f(x / scale);
 
 export const scaleY =
-  (scale: number): EFDecorator =>
+  (scale: number): EasingFunctionDecorator =>
   (f: EasingFunction) =>
   (x: number) =>
     f(x) * scale;
 
-export const scaleXY = (scale: number): EFDecorator =>
+export const scaleXY = (scale: number): EasingFunctionDecorator =>
   pipe(scaleY(scale), scaleX(scale));
 
 // shiftXYscaleXY

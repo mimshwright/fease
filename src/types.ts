@@ -1,4 +1,10 @@
-export type EasingFunction = (x: number) => number;
 export type Unary<P, R> = (param: P) => R;
-export type Decorator<P, R> = (f: Unary<P, R>) => Unary<P, R>;
-export type HOEF<T> = (arg: T) => EasingFunction;
+export type EasingFunction = Unary<number, number>;
+
+export type EventuallyReturnsAnEasingFunction<T = unknown> =
+  | ((p: T) => EventuallyReturnsAnEasingFunction<unknown> | EasingFunction)
+  | EasingFunction;
+
+export type TakesNumber<R> = Unary<number, R>;
+export type EasingFunctionDecorator = Unary<EasingFunction, EasingFunction>;
+export type ReturnsEasingFunction<P = unknown> = Unary<P, EasingFunction>;
