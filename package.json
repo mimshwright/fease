@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "license": "mit",
   "private": false,
-  "description": "<DESCRIPTION>",
+  "description": "A functional programming library for creating composable easing functions for animation.",
   "author": "Mims H. Wright",
-  "homepage": "https://github.com/mimshwright/fease",
+  "homepage": "https://mimshwright.github.io/fease/",
   "repository": {
     "type": "git",
     "url": "https://github.com/mimshwright/fease.git"
@@ -14,7 +14,12 @@
     "url": "https://github.com/mimshwright/fease/issues"
   },
   "keywords": [
-    "<KEYWORDS>"
+    "animation",
+    "easing",
+    "functional-programming",
+    "pure-function",
+    "lerp",
+    "graph"
   ],
   "type": "module",
   "main": "./dist/fease.umd.cjs",

@@ -1,31 +1,18 @@
-# Vite npm package template
+# Fease
 
-A template for an npm package using:
+A composable function library for creating animation easing functions.
 
-- vite
-- typescript
-- jest
-- prettier & eslint
-- controlled commits with commitizen, lint-staged, etc.
-- & more!
-
-Inspired by this post by [Onur Önder](https://onderonur.netlify.app/blog/creating-a-typescript-library-with-vite/)
-
-## Setup
-
-1. Install packages.
-1. Edit the top of the package.json file to include the correct package name and description. You can find and replace for "\<LIBRARY\>"
-1. Edit the README.md
-1. You may need to review the `vite.config.js` depending on your library structure.
+More information coming soon.
 
 ## Scripts
 
+- `dev` or `start`: Start the dev server (vite) and run the demo code in your browser.
 - `lint` : lint the code. You can also do `fix` to auto-fix.
 - `test` : test with jest. Also `test:coverage` and `test:watch`
 - `build` : bundle the code
 - `commit` & `release` : see below
 - `pushpub`: Used after `release` it pushes and publishes the library.
-- `deploy`: Build the demo code (index.html) and publish to gh-pages
+- `deploy`: Build the demo code (`index.html` and `src/demo`) and publish to gh-pages
 
 ## Commits & Releases
 
@@ -38,3 +25,8 @@ When ready to release use `yarn release` with the `-r patch|minor|major` flag (d
 You'll then need to publish your changes separately. That can be done with `yarn pushpub`.
 
 You can deploy an updated demo to github pages using `yarn deploy`
+
+## See also
+
+- Easing function graph for pixi.js: [pixi-easing-template](https://github.com/mimshwright/pixi-easing-template)
+- Project template: [vite-library-template](https://github.com/mimshwright/vite-library-template)

@@ -5,6 +5,7 @@ import { sine } from "../factory";
 import Example, { ExampleProps } from "./Example";
 import { cubic, linear, sinWave } from "../preset";
 import { EventuallyReturnsAnEasingFunction } from "../types";
+import { Button } from "@mui/material";
 
 type ExampleData = Omit<ExampleProps, "f"> & { f: unknown };
 
@@ -102,11 +103,14 @@ function App() {
     <div className="App">
       <h1>Fease</h1>
       <div>
+        <p>
+          <b>Note: this project is in 🚧early pre-alpha!🚧</b>
+        </p>
         <a
           style={{ display: "block" }}
           href="https://github.com/mimshwright/fease"
         >
-          View On GitHub
+          <Button variant="contained">View On GitHub</Button>
         </a>
       </div>
       {exampleData.map((section) => (
