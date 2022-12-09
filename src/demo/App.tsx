@@ -4,50 +4,13 @@ import * as generator from "../factory";
 import Example from "./Example";
 import * as preset from "../preset";
 import * as pkg from "../../package.json";
-import { EventuallyReturnsAnEasingFunction, ExamplesData } from "../types";
+import { EventuallyReturnsAnEasingFunction, DemoContent } from "../types";
 import { Button } from "@mui/material";
 
 import "./App.css";
 
-const exampleData: ExamplesData = [
-  {
-    title: "Presets",
-    description:
-      "Commonly used easing functions that require no additional parameters. You'll find most of the well-known easing functions here.",
-    examples: [
-      {
-        f: preset.linear,
-        title: "Linear",
-        code: "preset.linear()",
-        description: "TBD",
-      },
-      {
-        f: preset.quad,
-        title: "Quadratic",
-        code: "preset.quad()",
-        description: "TBD",
-      },
-      {
-        f: preset.cubic,
-        title: "Cubic",
-        code: "preset.cubic()",
-        description: "TBD",
-      },
-      {
-        f: preset.sinWave,
-        title: "Sine Wave",
-        code: "preset.sinWave()",
-        description: "TBD",
-      },
-      {
-        f: preset.cosWave,
-        title: "Cosine Wave",
-        code: "preset.cosWave()",
-        description: "(cos is identical to sin but the phase is +25%)",
-      },
-    ],
-  },
-
+const exampleData: DemoContent = [
+  preset.section,
   {
     title: "Generators",
     description:

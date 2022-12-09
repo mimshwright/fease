@@ -30,10 +30,13 @@ export interface ExampleProps {
   parameters?: Parameters;
 }
 
-export type ExampleData = Omit<ExampleProps, "f"> & { f: unknown };
-export type Section = {
+export type DemoExample = Omit<ExampleProps, "f"> & { f: unknown };
+export type DemoSection = {
   title: string;
   description: string;
-  examples: ExampleData[];
+  examples: DemoExample[];
 };
-export type ExamplesData = Section[];
+export type DemoContent = DemoSection[];
+export const addExampleToSection =
+  (section: DemoSection) => (example: DemoExample) =>
+    section.examples.push(example);
