@@ -1,23 +1,22 @@
 import React from "react";
 import { FormControlLabel, Radio, RadioGroup } from "@mui/material";
-import { linear, cubic, sinWave } from "../preset";
-import { EasingFunction } from "../types";
+import { linear } from "../preset";
 import { StatefulParameterFunction } from "./Example";
-import { equals, filter, pipe, keys, head } from "ramda";
+import { exampleFunctions, getFunctionName } from "./exampleFunctions";
+import { map } from "ramda";
 
 interface FunctionSelectorProps {
   parameter: StatefulParameterFunction;
 }
 
-// examples
-const exampleFunctions: Record<string, EasingFunction> = {
-  linear,
-  cubic,
-  sinWave,
-};
-
-const getFunctionName = (func: EasingFunction): string =>
-  pipe(filter(equals(func)), keys, head)(exampleFunctions) as string;
+const SelectorItem = ({ label }: { label: string }) => (
+  <FormControlLabel
+    key={label}
+    value={label}
+    label={label}
+    control={<Radio />}
+  />
+);
 
 const FunctionSelector: React.FC<FunctionSelectorProps> = ({
   parameter: { label = "Function", value = linear, setter },
@@ -29,13 +28,9 @@ const FunctionSelector: React.FC<FunctionSelectorProps> = ({
         value={getFunctionName(value)}
         onChange={(_, val: string) => setter(() => exampleFunctions[val])}
       >
-        <FormControlLabel value="linear" control={<Radio />} label="Linear" />
-        <FormControlLabel value="cubic" control={<Radio />} label="Cubic" />
-        <FormControlLabel
-          value="sinWave"
-          control={<Radio />}
-          label="Sine Wave"
-        />
+        {map((label: string) => <SelectorItem label={label} />)(
+          Object.keys(exampleFunctions)
+        )}
       </RadioGroup>
     </div>
   );
