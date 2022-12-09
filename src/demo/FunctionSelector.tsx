@@ -10,12 +10,7 @@ interface FunctionSelectorProps {
 }
 
 const SelectorItem = ({ label }: { label: string }) => (
-  <FormControlLabel
-    key={label}
-    value={label}
-    label={label}
-    control={<Radio />}
-  />
+  <FormControlLabel value={label} label={label} control={<Radio />} />
 );
 
 const FunctionSelector: React.FC<FunctionSelectorProps> = ({
@@ -28,7 +23,7 @@ const FunctionSelector: React.FC<FunctionSelectorProps> = ({
         value={getFunctionName(value)}
         onChange={(_, val: string) => setter(() => exampleFunctions[val])}
       >
-        {map((label: string) => <SelectorItem label={label} />)(
+        {map((label: string) => <SelectorItem label={label} key={label} />)(
           Object.keys(exampleFunctions)
         )}
       </RadioGroup>

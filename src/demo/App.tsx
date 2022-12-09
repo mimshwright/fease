@@ -11,30 +11,7 @@ import "./App.css";
 
 const exampleData: DemoContent = [
   preset.section,
-  {
-    title: "Generators",
-    description:
-      "Generators are functions that create a new type of Easing Funciton. They may take 1 or more parameters.",
-    examples: [
-      {
-        f: generator.exp,
-        title: "Exponential function",
-        code: "generator.exp(exponent)",
-        description: "Creates an exponential function with a given exponent.",
-        parameters: [{ label: "exponent", min: -2, max: 6, defaultValue: 3 }],
-      },
-      {
-        f: generator.sine,
-        title: "Sine",
-        code: "generator.sine(freq)",
-        description:
-          "Creates a sine wave funciton with frequency a number of in full oscillations between 0 and 1 input.",
-        parameters: [
-          { label: "frequency", min: 0.01, max: 20, defaultValue: 1 },
-        ],
-      },
-    ],
-  },
+  generator.section,
   {
     title: "Decorators",
     description:
