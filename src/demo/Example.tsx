@@ -1,20 +1,20 @@
 import { Stage } from "@inlet/react-pixi";
 import { EasingGraphComponent } from "pixi-easing-graph";
 import { call, map, prop, reduce } from "ramda";
-import React, { SetStateAction, useState } from "react";
-import { EasingFunction, EventuallyReturnsAnEasingFunction } from "../types";
+import React, { useState, SetStateAction } from "react";
+import {
+  EasingFunction,
+  EventuallyReturnsAnEasingFunction,
+  ExampleProps,
+  isNumberParameter,
+  Parameter,
+  ParameterFunction,
+  ParameterNumber,
+} from "../types";
 import FunctionSelector from "./FunctionSelector";
 import NumberParameter from "./NumberParameter";
 import * as util from "./util";
 
-import "./Example.css";
-
-type Parameter<T> = { label: string; defaultValue: T };
-type ParameterNumber = Parameter<number> & { min: number; max: number };
-type ParameterFunction = Parameter<EasingFunction> & {
-  includeInGraph?: boolean;
-};
-type Parameters = (ParameterNumber | ParameterFunction)[];
 type Stateful<T> = { value: T; setter: React.Dispatch<SetStateAction<T>> };
 export type StatefulParameterNumber = ParameterNumber & Stateful<number>;
 export type StatefulParameterFunction = ParameterFunction &
@@ -24,16 +24,7 @@ type StatefulParameters = (
   | StatefulParameterFunction
 )[];
 
-const isNumberParameter = (p: Parameter<unknown>): p is ParameterNumber =>
-  typeof p.defaultValue === "number";
-
-export interface ExampleProps {
-  f: EventuallyReturnsAnEasingFunction;
-  title: string;
-  code: string;
-  description?: string;
-  parameters?: Parameters;
-}
+import "./Example.css";
 
 const isFunction = (param: unknown): boolean => typeof param === "function";
 
@@ -138,12 +129,12 @@ const Example: React.FC<ExampleProps> = ({
             style="line"
             showExample={true}
             exampleSize={15}
-            background={isDarkMode ? 0x333333 : 0xeeffff}
-            foreground={isDarkMode ? 0x00ffff : 0x0000ff}
             fillAlpha={0.5}
-            exampleColor={0xcc00ff}
-            markerColor={0xff00ff}
-            gridColor={isDarkMode ? 0x6600ff : 0x00ffff}
+            background={isDarkMode ? 0x224444 : 0xeeffff}
+            foreground={isDarkMode ? 0xeeccff : 0x666600}
+            gridColor={isDarkMode ? 0x9944dd : 0xeeccff}
+            markerColor={isDarkMode ? 0xff9900 : 0xff9900}
+            exampleColor={isDarkMode ? 0xffa1ac : 0xff6600}
             gridSubdivisions={true}
           />
         </Stage>

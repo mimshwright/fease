@@ -1,26 +1,19 @@
 import React from "react";
 import * as decorator from "../decorator";
 import * as generator from "../factory";
-import Example, { ExampleProps } from "./Example";
+import Example from "./Example";
 import * as preset from "../preset";
-import { EventuallyReturnsAnEasingFunction } from "../types";
+import * as pkg from "../../package.json";
+import { EventuallyReturnsAnEasingFunction, ExamplesData } from "../types";
 import { Button } from "@mui/material";
 
 import "./App.css";
 
-type ExampleData = Omit<ExampleProps, "f"> & { f: unknown };
-
-type Section = {
-  title: string;
-  description: string;
-  examples: ExampleData[];
-};
-type ExamplesData = Section[];
-
 const exampleData: ExamplesData = [
   {
-    title: "Preset",
-    description: "tbd",
+    title: "Presets",
+    description:
+      "Commonly used easing functions that require no additional parameters. You'll find most of the well-known easing functions here.",
     examples: [
       {
         f: preset.linear,
@@ -56,8 +49,9 @@ const exampleData: ExamplesData = [
   },
 
   {
-    title: "Generator",
-    description: "tbd",
+    title: "Generators",
+    description:
+      "Generators are functions that create a new type of Easing Funciton. They may take 1 or more parameters.",
     examples: [
       {
         f: generator.exp,
@@ -79,8 +73,9 @@ const exampleData: ExamplesData = [
     ],
   },
   {
-    title: "Decorator",
-    description: "tbd",
+    title: "Decorators",
+    description:
+      "Decorators take an Easing Function, and often 1 or more additional parameters, as input and return a modified function.",
     examples: [
       {
         f: decorator.shiftX,
@@ -164,7 +159,8 @@ const exampleData: ExamplesData = [
 function App() {
   return (
     <div className="App">
-      <h1>Fease</h1>
+      <h1>{pkg.name}</h1>
+      <p>v{pkg.version}</p>
       <div>
         <p>
           <b>Note: this project is in 🚧early pre-alpha!🚧</b>
