@@ -1,8 +1,12 @@
-import { addExampleToSection, ReturnsEasingFunction } from "./types";
+import {
+  addExampleToSection,
+  DemoSection,
+  ReturnsEasingFunction,
+} from "./types";
 import { addIndex, reduce } from "ramda";
 import { scaleXY, shiftX } from "./decorator";
 
-export const section = {
+export const section: DemoSection = {
   title: "Generators",
   description:
     "Generators are functions that create a new type of Easing Funciton. They may take 1 or more parameters.",
@@ -31,6 +35,7 @@ addExample({
   title: "Exponential",
   code: "generator.exp(exponent)",
   description: "Creates an exponential function with a given exponent.",
+  seeAlso: ["Polynomial"],
   parameters: [{ label: "exponent", min: -2, max: 6, defaultValue: 3 }],
 });
 
@@ -45,6 +50,7 @@ addExample({
   code: "generator.poly([c0,c1,...c(n-1)])",
   description:
     "Creates a polynomial equation using an array that represents the coefficients of each degree starting with x^0 up to x^n-1. For example, `poly([-8,6,-4,2])` would result in the equation `2x^2 - 4x^2 + 6x -8`",
+  seeAlso: ["Exponential"],
 });
 
 const FULL_ROTATION_IN_RADIANS = Math.PI * 2;

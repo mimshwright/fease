@@ -1,4 +1,8 @@
 :root {
+  --font-headline: "Yatra One", Inter, Helvetica, arial, sans-serif;
+  --font-body: "im-fell-french-canon", georgia, serif;
+  --font-code: Courier, monospace;
+
   /* dark mode */
   --color-bg: #122d2d;
   --color-bg-2: #224444;
@@ -14,17 +18,17 @@
     --color-bg: #eeffff;
     --color-bg-2: #eeffff;
     --color-fg: #122d2d;
-    --color-fg-2: #eeccff;
-    --color-primary: #ff9900;
-    --color-secondary: #ff6600;
+    --color-fg-2: #666600;
+    --color-primary: #ff6600;
+    --color-secondary: #ff9900;
     --color-alt: #eeccff;
     --color-alt-2: #9944dd;
   }
 }
 :root {
-  font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
+  font-family: var(--font-body);
+  font-style: italic;
   font-size: 16px;
-  line-height: 24px;
   font-weight: 400;
 
   color-scheme: light dark;
@@ -38,22 +42,30 @@
   -webkit-text-size-adjust: 100%;
 }
 
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  margin: 0 auto;
+  min-width: 464px;
+  min-height: 100vh;
+  max-width: 1000px;
+}
+
 h1,
 h2,
 h3,
 h4,
 h5,
 h6 {
-  color: var(--color-secondary);
-  font-family: "Yatra One";
+  color: var(--color-primary);
+  font-family: var(--font-headline);
+  margin: 0;
 }
 p {
   margin-top: 0;
 }
 
-.MUIButtonBase-root {
-  background-color: var(--color-primary);
-}
 a {
   font-weight: 500;
   color: var(--color-alt);
@@ -63,22 +75,33 @@ a:hover {
   color: var(--color-alt-2);
 }
 
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+code {
+  font-family: var(--font-code);
+  font-style: normal;
 }
 
 h1 {
   font-size: 6em;
-  line-height: 1;
-  margin-bottom: 1rem;
-  color: var(--color-primary);
   text-transform: lowercase;
 }
 h2 {
   font-size: 4em;
-  line-height: 1;
+}
+h3 {
+  font-size: 2em;
+}
+
+label {
+  display: block;
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.MuiRadio-root,
+.MuiSlider-root {
+  color: var(--color-secondary) !important;
+}
+.MuiButton-root {
+  color: var(--color-primary) !important;
+  border-color: var(--color-primary) !important;
 }

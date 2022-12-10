@@ -2,6 +2,7 @@ import React from "react";
 import { render } from "react-dom";
 import App from "./App";
 import "@fontsource/yatra-one";
+import "@fontsource/im-fell-french-canon";
 import "./main.css";
 
 render(

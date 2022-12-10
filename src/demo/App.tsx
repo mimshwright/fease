@@ -99,32 +99,40 @@ const exampleData: DemoContent = [
 function App() {
   return (
     <div className="App">
-      <h1>{pkg.name}</h1>
-      <p>v{pkg.version}</p>
-      <div>
-        <p>
-          <b>Note: this project is in 🚧early pre-alpha!🚧</b>
-        </p>
+      <header>
+        <h1>
+          {pkg.name}
+          <span className="version"> v{pkg.version}</span>
+        </h1>
+
         <a
           style={{ display: "block" }}
           href="https://github.com/mimshwright/fease"
         >
-          <Button variant="contained">View On GitHub</Button>
+          <Button variant="outlined">View On GitHub</Button>
         </a>
-      </div>
-      {exampleData.map((section) => (
-        <section key={section.title}>
-          <h2>{section.title}</h2>
-          <p>{section.description}</p>
-          {section.examples.map((props) => (
-            <Example
-              key={props.title}
-              {...props}
-              f={props.f as EventuallyReturnsAnEasingFunction}
-            />
-          ))}
-        </section>
-      ))}
+      </header>
+
+      <main>
+        <div>
+          <p className="libraryDescription">Library Description TBD.</p>
+          <p>Note: this project is in 🚧early pre-alpha!🚧</p>
+        </div>
+
+        {exampleData.map((section) => (
+          <section key={section.title}>
+            <h2>{section.title}</h2>
+            <p>{section.description}</p>
+            {section.examples.map((props) => (
+              <Example
+                key={props.title}
+                {...props}
+                f={props.f as EventuallyReturnsAnEasingFunction}
+              />
+            ))}
+          </section>
+        ))}
+      </main>
     </div>
   );
 }

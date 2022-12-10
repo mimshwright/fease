@@ -110,18 +110,17 @@ const Example: React.FC<ExampleProps> = ({
       </div>
       <div className="example">
         <Stage
-          width={500}
-          height={300}
+          width={400}
+          height={400}
           options={{
             resolution: 2,
-            backgroundColor: isDarkMode ? 0x000000 : 0xffffff,
             backgroundAlpha: 0,
           }}
         >
           <EasingGraphComponent
             f={easingFunctionWithParametersApplied}
-            width={200}
-            height={200}
+            width={300}
+            height={300}
             x={50}
             y={50}
             autoPlay={true}

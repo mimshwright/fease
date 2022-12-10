@@ -27,6 +27,7 @@ export interface ExampleProps {
   title: string;
   code: string;
   description?: string;
+  seeAlso?: string[];
   parameters?: Parameters;
 }
 

@@ -27,6 +27,7 @@ addExample({
   title: "Quadratic",
   code: "preset.quad()",
   description: "TBD",
+  seeAlso: ["Exponential"],
 });
 
 export const cubic = exp(3);
@@ -35,6 +36,7 @@ addExample({
   title: "Cubic",
   code: "preset.cubic()",
   description: "TBD",
+  seeAlso: ["Exponential"],
 });
 
 export const quartic = exp(4);
@@ -43,6 +45,7 @@ addExample({
   title: "Quartic",
   code: "preset.quartic()",
   description: "TBD",
+  seeAlso: ["Exponential"],
 });
 export const quintic = exp(5);
 addExample({
@@ -50,6 +53,7 @@ addExample({
   title: "Quintic",
   code: "preset.quintic()",
   description: "TBD",
+  seeAlso: ["Exponential"],
 });
 export const sextic = exp(6);
 addExample({
@@ -57,6 +61,7 @@ addExample({
   title: "Sextic",
   code: "preset.sextic()",
   description: "TBD",
+  seeAlso: ["Exponential"],
 });
 
 // Waveforms
@@ -75,4 +80,5 @@ addExample({
   title: "Cosine Wave",
   code: "preset.cosWave()",
   description: "(cos is identical to sin but the phase is +25%)",
+  seeAlso: ["ShiftX"],
 });

@@ -604,6 +604,11 @@
     minimatch "^3.1.2"
     strip-json-comments "^3.1.1"
 
+"@fontsource/im-fell-french-canon@^4.5.8":
+  version "4.5.8"
+  resolved "https://registry.yarnpkg.com/@fontsource/im-fell-french-canon/-/im-fell-french-canon-4.5.8.tgz#87e74dc8feb87c4095a7167334e006c6171a4832"
+  integrity sha512-O3nV7PgFrTQfJnzynmvkVhcW5hzi4zkJdAo2QE/jIY5oPb0rMwQRbe5XQtShRdZRRx+gpzKBvLpRNMK1+Y0MVQ==
+
 "@fontsource/yatra-one@^4.5.10":
   version "4.5.10"
   resolved "https://registry.yarnpkg.com/@fontsource/yatra-one/-/yatra-one-4.5.10.tgz#d7ad92c962453e0cade14b105ab105bac00dad7d"
