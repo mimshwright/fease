@@ -5289,10 +5289,10 @@ pirates@^4.0.4:
   resolved "https://registry.yarnpkg.com/pirates/-/pirates-4.0.5.tgz#feec352ea5c3268fb23a37c702ab1699f35a5f3b"
   integrity sha512-8V9+HQPupnaXMA23c5hvl69zXvTwTzyAYasnkb0Tts4XvO4CliqONMOnvlq26rkhLC3nWDFBJf73LU1e1VZLaQ==
 
-pixi-easing-graph@^0.1.3:
-  version "0.1.6"
-  resolved "https://registry.yarnpkg.com/pixi-easing-graph/-/pixi-easing-graph-0.1.6.tgz#d2e3675022b6a9d6ee9edd04e2f37faae33c579b"
-  integrity sha512-JtueWmnGE46Vm+/tX+CI77GsYuNT0TyfohSNXhB2zBxZfsFaJ5VVz5EDopwVmUUxNkQQH+zO3AG6A6eZAHQzqg==
+pixi-easing-graph@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/pixi-easing-graph/-/pixi-easing-graph-1.1.0.tgz#c850d982453b1b48e289658ffd3b556c9a5a5679"
+  integrity sha512-S7cIgMSxrA1rC0vx3l6GT7fZUCFZ2kxmH2flkza9ymVdQSOYug7DBiccZGCgqpoty1DhkpoWl5RUTpIsawk3nQ==
   dependencies:
     ramda "^0.28.0"
 
