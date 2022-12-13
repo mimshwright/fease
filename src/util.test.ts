@@ -1,6 +1,6 @@
 import { repeat } from "ramda";
-import { render, I, K } from "./../src/util";
-import { defaultTestRange, expectTestRange } from "./testUtil";
+import { render, I, K } from "./util";
+import { defaultTestRange, expectTestRange } from "./test/testUtil";
 
 describe("utils", () => {
   describe("I", () => {

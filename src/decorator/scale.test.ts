@@ -1,6 +1,6 @@
-import { expectTestRange } from "./testUtil";
-import { sinWave, linear } from "../src/preset";
-import { scaleX, scaleY, scaleXY } from "../src/decorator/scale";
+import { expectTestRange } from "../test/testUtil";
+import { sinWave, linear } from "../preset";
+import { scaleX, scaleY, scaleXY } from "./scale";
 
 describe("decorators - scale", () => {
   describe("scaleX()", () => {

@@ -1,4 +1,4 @@
-import { ReturnsEasingFunction } from "./types";
+import { ReturnsEasingFunction } from "../types";
 import { addIndex, reduce } from "ramda";
 
 // linear

@@ -1,7 +1,7 @@
-import * as decorator from "../src/decorator";
-import * as factory from "../src/factory";
-import { I, K } from "../src/util";
-import { expectAll } from "./testUtil";
+import * as decorator from "../decorator";
+import * as factory from ".";
+import { I, K } from "../util";
+import { expectAll } from "../test/testUtil";
 
 const testRange = [0, 0.25, 0.5, 1.0, 2.0, -1];
 const expectTestRange = expectAll(testRange);

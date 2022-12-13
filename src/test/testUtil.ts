@@ -1,5 +1,5 @@
 import { map, pipe, zip, __ } from "ramda";
-import { Unary } from "../src/types";
+import { Unary } from "../types";
 
 const expectPairToBeCloseTo = ([result, output]: [number, number]): void =>
   expect(result).toBeCloseTo(output);

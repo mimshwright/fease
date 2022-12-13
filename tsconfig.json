@@ -16,6 +16,6 @@
     "noImplicitReturns": true,
     "skipLibCheck": true
   },
-  "include": ["src", "test", "."],
+  "include": ["src", "src/test", "."],
   "exclude": ["node_modules", "dist"]
 }
