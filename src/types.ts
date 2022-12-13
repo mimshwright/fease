@@ -38,6 +38,3 @@ export type DemoSection = {
   examples: DemoExample[];
 };
 export type DemoContent = DemoSection[];
-export const addExampleToSection =
-  (section: DemoSection) => (example: DemoExample) =>
-    section.examples.push(example);

@@ -1,19 +1,11 @@
 import React from "react";
-import * as decorator from "../decorator";
-import * as generator from "../factory";
+import exampleData from "./exampleData";
 import Example from "./Example";
-import * as preset from "../preset";
 import * as pkg from "../../package.json";
-import { EventuallyReturnsAnEasingFunction, DemoContent } from "../types";
+import { EventuallyReturnsAnEasingFunction } from "../types";
 import { Button } from "@mui/material";
 
 import "./App.css";
-
-const exampleData: DemoContent = [
-  preset.section,
-  generator.section,
-  decorator.section,
-];
 
 function App() {
   return (
