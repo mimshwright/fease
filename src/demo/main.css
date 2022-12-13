@@ -27,7 +27,6 @@
 }
 :root {
   font-family: var(--font-body);
-  font-style: italic;
   font-size: 16px;
   font-weight: 400;
 

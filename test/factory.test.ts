@@ -6,7 +6,7 @@ import { expectAll } from "./testUtil";
 const testRange = [0, 0.25, 0.5, 1.0, 2.0, -1];
 const expectTestRange = expectAll(testRange);
 
-describe("fease factories", () => {
+describe("factories", () => {
   describe("scales", () => {
     const quad = factory.exp(2);
     describe("scaleX()", () => {
@@ -102,9 +102,9 @@ describe("fease factories", () => {
     describe("Takes a list of coeficients (one for each exponent starting with 0) and creates a polynomial function", () => {
       it("poly(cs) === c0 * x ** 0 + c1 * x ** 1... cn * x ** n", () => {
         const polyCubic = factory.poly([0.1, 1, -1, 1]);
-        const cubic = (x: number) => 0.1 + x - x ** 2 + x ** 3;
+        const polyCubicManual = (x: number) => 0.1 + x - x ** 2 + x ** 3;
 
-        expectTestRange(polyCubic).toMatchFunction(cubic);
+        expectTestRange(polyCubic).toMatchFunction(polyCubicManual);
       });
     });
   });

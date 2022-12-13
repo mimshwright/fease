@@ -4,7 +4,6 @@ import {
   ReturnsEasingFunction,
 } from "./types";
 import { addIndex, reduce } from "ramda";
-import { scaleXY, shiftX } from "./decorator";
 
 export const section: DemoSection = {
   title: "Generators",
@@ -44,8 +43,9 @@ export const poly: ReturnsEasingFunction<number[]> = (coefficients) => (x) =>
     (total, coefficient, exponent) => total + coefficient * x ** exponent,
     0
   )(coefficients);
+
 addExample({
-  f: scaleXY(0.42)(shiftX(0.9)(poly([2, -1, -2, 2]))),
+  f: poly([2, -1, -2, 2]),
   title: "Polynomial",
   code: "generator.poly([c0,c1,...c(n-1)])",
   description:

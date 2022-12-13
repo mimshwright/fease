@@ -1,4 +1,4 @@
-import { shiftX } from "./decorator";
+import { shiftX } from "./decorator/shift";
 import { DemoSection, EasingFunction, addExampleToSection } from "./types";
 import { exp, sine } from "./factory";
 import { I } from "./util";

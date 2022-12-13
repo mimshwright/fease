@@ -1,6 +1,16 @@
 import { Stage } from "@inlet/react-pixi";
 import { EasingGraphComponent } from "pixi-easing-graph";
-import { call, map, prop, reduce } from "ramda";
+import {
+  assoc,
+  call,
+  filter,
+  map,
+  pipe,
+  prop,
+  propEq,
+  reduce,
+  __,
+} from "ramda";
 import React, { useState, SetStateAction } from "react";
 import {
   EasingFunction,
@@ -14,6 +24,7 @@ import {
 import FunctionSelector from "./FunctionSelector";
 import NumberParameter from "./NumberParameter";
 import * as util from "./util";
+import color from "./color";
 
 type Stateful<T> = { value: T; setter: React.Dispatch<SetStateAction<T>> };
 export type StatefulParameterNumber = ParameterNumber & Stateful<number>;
@@ -25,6 +36,7 @@ type StatefulParameters = (
 )[];
 
 import "./Example.css";
+import { EasingFunctionOptions } from "pixi-easing-graph/dist/EasingGraph";
 
 const isFunction = (param: unknown): boolean => typeof param === "function";
 
@@ -80,6 +92,7 @@ const Example: React.FC<ExampleProps> = ({
   parameters = [],
 }) => {
   const isDarkMode = util.isDarkMode();
+  const pallete = isDarkMode ? color.dark : color.light;
   const paramsWithState = assignStateToParams(parameters) as StatefulParameters;
   const parameterValues = extractValues(paramsWithState) as (
     | number
@@ -87,6 +100,16 @@ const Example: React.FC<ExampleProps> = ({
   )[];
   const easingFunctionWithParametersApplied: EasingFunction =
     applyParametersToFunction(parameterValues, f);
+  const additionalFunctionsToRender: EasingFunctionOptions[] = pipe(
+    filter(propEq("includeInGraph", true)),
+    map(prop("value")),
+    map(assoc("f", __, { foreground: pallete.secondFunction }))
+  )(paramsWithState) as EasingFunctionOptions[];
+
+  const fs = [
+    easingFunctionWithParametersApplied,
+    ...additionalFunctionsToRender,
+  ];
 
   return (
     <div className="Example">
@@ -118,7 +141,7 @@ const Example: React.FC<ExampleProps> = ({
           }}
         >
           <EasingGraphComponent
-            f={easingFunctionWithParametersApplied}
+            f={fs}
             width={300}
             height={300}
             x={50}
@@ -128,13 +151,13 @@ const Example: React.FC<ExampleProps> = ({
             style="line"
             showExample={true}
             exampleSize={15}
-            fillAlpha={0.5}
-            background={isDarkMode ? 0x224444 : 0xeeffff}
-            foreground={isDarkMode ? 0xeeccff : 0x666600}
-            gridColor={isDarkMode ? 0x9944dd : 0xeeccff}
-            markerColor={isDarkMode ? 0xff9900 : 0xff9900}
-            exampleColor={isDarkMode ? 0xffa1ac : 0xff6600}
             gridSubdivisions={true}
+            fillAlpha={0.5}
+            background={pallete.background}
+            foreground={pallete.foreground}
+            gridColor={pallete.gridColor}
+            markerColor={pallete.markerColor}
+            exampleColor={pallete.exampleColor}
           />
         </Stage>
       </div>
