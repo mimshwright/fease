@@ -22,8 +22,11 @@ import {
 } from "./demoTypes";
 import FunctionSelector from "./FunctionSelector";
 import NumberParameter from "./NumberParameter";
-import * as util from "./util";
+import { isDarkMode } from "./demoUtil";
+
 import color from "./color";
+import Highlight from "react-highlight";
+import "highlight.js/styles/shades-of-purple.css";
 
 type Stateful<T> = { value: T; setter: React.Dispatch<SetStateAction<T>> };
 export type StatefulParameterNumber = ParameterNumber & Stateful<number>;
@@ -92,8 +95,7 @@ const Example: React.FC<ExampleProps> = ({
   exampleType = "graph",
   exampleText = "",
 }) => {
-  const isDarkMode = util.isDarkMode();
-  const pallete = isDarkMode ? color.dark : color.light;
+  const pallete = isDarkMode() ? color.dark : color.light;
   const paramsWithState = assignStateToParams(parameters) as StatefulParameters;
   const parameterValues = extractValues(paramsWithState) as (
     | number
@@ -119,7 +121,7 @@ const Example: React.FC<ExampleProps> = ({
         <p>{description}</p>
         <code>{code}</code>
         {exampleType === "text" && exampleText !== "" && (
-          <pre>{exampleText}</pre>
+          <Highlight className="javascript">{exampleText}</Highlight>
         )}
         {parameters.length > 0 && (
           <div className="params">
