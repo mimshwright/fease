@@ -12,15 +12,14 @@ import {
   __,
 } from "ramda";
 import React, { useState, SetStateAction } from "react";
+import { EasingFunction, EventuallyReturnsAnEasingFunction } from "../types";
 import {
-  EasingFunction,
-  EventuallyReturnsAnEasingFunction,
   ExampleProps,
   isNumberParameter,
   Parameter,
   ParameterFunction,
   ParameterNumber,
-} from "../types";
+} from "./demoTypes";
 import FunctionSelector from "./FunctionSelector";
 import NumberParameter from "./NumberParameter";
 import * as util from "./util";
@@ -90,6 +89,8 @@ const Example: React.FC<ExampleProps> = ({
   code,
   description = "",
   parameters = [],
+  exampleType = "graph",
+  exampleText = "",
 }) => {
   const isDarkMode = util.isDarkMode();
   const pallete = isDarkMode ? color.dark : color.light;
@@ -117,50 +118,59 @@ const Example: React.FC<ExampleProps> = ({
         <h3>{title}</h3>
         <p>{description}</p>
         <code>{code}</code>
-        <div className="params">
-          {paramsWithState.map((param, i) => (
-            <div key={i}>
-              {typeof param.value === "number" ? (
-                <NumberParameter parameter={param as StatefulParameterNumber} />
-              ) : (
-                <FunctionSelector
-                  parameter={param as StatefulParameterFunction}
-                />
-              )}
-            </div>
-          ))}
+        {exampleType === "text" && exampleText !== "" && (
+          <pre>{exampleText}</pre>
+        )}
+        {parameters.length > 0 && (
+          <div className="params">
+            {paramsWithState.map((param, i) => (
+              <div key={i}>
+                {typeof param.value === "number" ? (
+                  <NumberParameter
+                    parameter={param as StatefulParameterNumber}
+                  />
+                ) : (
+                  <FunctionSelector
+                    parameter={param as StatefulParameterFunction}
+                  />
+                )}
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+      {exampleType === "graph" && (
+        <div className="example">
+          <Stage
+            width={400}
+            height={400}
+            options={{
+              resolution: 2,
+              backgroundAlpha: 0,
+            }}
+          >
+            <EasingGraphComponent
+              f={fs}
+              width={300}
+              height={300}
+              x={50}
+              y={50}
+              autoPlay={true}
+              loop={true}
+              style="line"
+              showExample={true}
+              exampleSize={15}
+              gridSubdivisions={true}
+              fillAlpha={0.5}
+              background={pallete.background}
+              foreground={pallete.foreground}
+              gridColor={pallete.gridColor}
+              markerColor={pallete.markerColor}
+              exampleColor={pallete.exampleColor}
+            />
+          </Stage>
         </div>
-      </div>
-      <div className="example">
-        <Stage
-          width={400}
-          height={400}
-          options={{
-            resolution: 2,
-            backgroundAlpha: 0,
-          }}
-        >
-          <EasingGraphComponent
-            f={fs}
-            width={300}
-            height={300}
-            x={50}
-            y={50}
-            autoPlay={true}
-            loop={true}
-            style="line"
-            showExample={true}
-            exampleSize={15}
-            gridSubdivisions={true}
-            fillAlpha={0.5}
-            background={pallete.background}
-            foreground={pallete.foreground}
-            gridColor={pallete.gridColor}
-            markerColor={pallete.markerColor}
-            exampleColor={pallete.exampleColor}
-          />
-        </Stage>
-      </div>
+      )}
     </div>
   );
 };

@@ -6,6 +6,15 @@ import { EventuallyReturnsAnEasingFunction } from "../types";
 import { Button } from "@mui/material";
 
 import "./App.css";
+import { DemoExample } from "./demoTypes";
+import { filter } from "ramda";
+
+const filterOutHiddenExamples = filter(
+  ({ exampleType = "graph" }: DemoExample) => exampleType !== "hidden"
+);
+const getExamples = <T extends { examples: Record<string, DemoExample> }>(
+  section: T
+) => Object.values(section.examples) as DemoExample[];
 
 function App() {
   return (
@@ -34,7 +43,7 @@ function App() {
           <section key={section.title}>
             <h2>{section.title}</h2>
             <p>{section.description}</p>
-            {section.examples.map((props) => (
+            {filterOutHiddenExamples(getExamples(section)).map((props) => (
               <Example
                 key={props.title}
                 {...props}
