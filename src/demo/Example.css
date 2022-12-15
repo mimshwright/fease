@@ -23,6 +23,7 @@
   text-align: center;
   grid-area: example;
   margin-top: 3rem;
+  min-height: 400px;
 }
 
 @media (max-width: 768px) {

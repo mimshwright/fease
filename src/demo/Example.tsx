@@ -1,3 +1,4 @@
+import VisibilitySensor from "react-visibility-sensor";
 import { Stage } from "@inlet/react-pixi";
 import { EasingGraphComponent } from "pixi-easing-graph";
 import {
@@ -95,6 +96,9 @@ const Example: React.FC<ExampleProps> = ({
   exampleType = "graph",
   exampleText = "",
 }) => {
+  const [isVisible, setIsVisible] = useState(false);
+  const onVisibilityChange = (visible: boolean) => setIsVisible(visible);
+
   const pallete = isDarkMode() ? color.dark : color.light;
   const paramsWithState = assignStateToParams(parameters) as StatefulParameters;
   const parameterValues = extractValues(paramsWithState) as (
@@ -115,65 +119,73 @@ const Example: React.FC<ExampleProps> = ({
   ];
 
   return (
-    <div className="Example">
-      <div className="description">
-        <h3>{title}</h3>
-        <p>{description}</p>
-        <code>{code}</code>
-        {exampleType === "text" && exampleText !== "" && (
-          <Highlight className="javascript">{exampleText}</Highlight>
-        )}
-        {parameters.length > 0 && (
-          <div className="params">
-            {paramsWithState.map((param, i) => (
-              <div key={i}>
-                {typeof param.value === "number" ? (
-                  <NumberParameter
-                    parameter={param as StatefulParameterNumber}
-                  />
-                ) : (
-                  <FunctionSelector
-                    parameter={param as StatefulParameterFunction}
-                  />
-                )}
-              </div>
-            ))}
-          </div>
-        )}
-      </div>
-      {exampleType === "graph" && (
-        <div className="example">
-          <Stage
-            width={400}
-            height={400}
-            options={{
-              resolution: 2,
-              backgroundAlpha: 0,
-            }}
-          >
-            <EasingGraphComponent
-              f={fs}
-              width={300}
-              height={300}
-              x={50}
-              y={50}
-              autoPlay={true}
-              loop={true}
-              style="line"
-              showExample={true}
-              exampleSize={15}
-              gridSubdivisions={true}
-              fillAlpha={0.5}
-              background={pallete.background}
-              foreground={pallete.foreground}
-              gridColor={pallete.gridColor}
-              markerColor={pallete.markerColor}
-              exampleColor={pallete.exampleColor}
-            />
-          </Stage>
+    <VisibilitySensor
+      onChange={onVisibilityChange}
+      intervalCheck={true}
+      intervalDelay={100}
+      partialVisibility={true}
+    >
+      <div className="Example">
+        <div className="description">
+          <h3>{title}</h3>
+          <p>{description}</p>
+          <code>{code}</code>
+          {exampleType === "text" && exampleText !== "" && (
+            <Highlight className="javascript">{exampleText}</Highlight>
+          )}
+          {parameters.length > 0 && (
+            <div className="params">
+              {paramsWithState.map((param, i) => (
+                <div key={i}>
+                  {typeof param.value === "number" ? (
+                    <NumberParameter
+                      parameter={param as StatefulParameterNumber}
+                    />
+                  ) : (
+                    <FunctionSelector
+                      parameter={param as StatefulParameterFunction}
+                    />
+                  )}
+                </div>
+              ))}
+            </div>
+          )}
         </div>
-      )}
-    </div>
+
+        <div className="example">
+          {exampleType === "graph" && isVisible && (
+            <Stage
+              width={400}
+              height={400}
+              options={{
+                resolution: 2,
+                backgroundAlpha: 0,
+              }}
+            >
+              <EasingGraphComponent
+                f={fs}
+                width={300}
+                height={300}
+                x={50}
+                y={50}
+                autoPlay={true}
+                loop={true}
+                style="line"
+                showExample={true}
+                exampleSize={15}
+                gridSubdivisions={true}
+                fillAlpha={0.5}
+                background={pallete.background}
+                foreground={pallete.foreground}
+                gridColor={pallete.gridColor}
+                markerColor={pallete.markerColor}
+                exampleColor={pallete.exampleColor}
+              />
+            </Stage>
+          )}
+        </div>
+      </div>
+    </VisibilitySensor>
   );
 };
 
