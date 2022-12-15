@@ -1,9 +1,12 @@
-import { linear, cubic, sinWave } from "../preset";
+import { linear, cubic, quintic, cubicInOut } from "./../preset/exp";
+import { sinWave } from "../preset/waveform";
 import { EasingFunction } from "../types";
 
 export const exampleFunctions: Record<string, EasingFunction> = {
   linear,
   cubic,
+  cubicInOut,
+  quintic,
   sinWave,
 };
 

@@ -6,7 +6,7 @@ import "./NumberParameter.css";
 type NumberParameterProps = { parameter: StatefulParameterNumber };
 
 const NumberParameter: React.FC<NumberParameterProps> = ({
-  parameter: { label, value, setter, min, max },
+  parameter: { label, value, setter, min, max, step = 0.01 },
 }) => {
   return (
     <div className="NumberParameter">
@@ -18,7 +18,7 @@ const NumberParameter: React.FC<NumberParameterProps> = ({
         onChange={(_e: Event, val) => setter(val as number)}
         max={max}
         min={min}
-        step={0.01}
+        step={step}
         valueLabelDisplay="auto"
       />
     </div>

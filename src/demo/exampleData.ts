@@ -4,6 +4,7 @@ import * as preset from "../preset";
 import * as factory from "../factory";
 import * as decorator from "../decorator";
 import * as util from "../util";
+import { EasingFunction } from "../types";
 
 // By using the KeyTypeGuard, the demo is forced to create an example for each
 // function exported by the library.
@@ -36,6 +37,34 @@ const exampleData: [
         f: preset.cubic,
         title: "Cubic",
         code: "preset.cubic()",
+        description: "TBD",
+        seeAlso: ["Exponential"],
+        // aliases: ["cubicIn"],
+      },
+      cubicIn: {
+        f: preset.cubicIn,
+        exampleType: "hidden",
+        title: "CubicIn",
+        code: "",
+        description: "alias of cubic",
+      },
+      cubicOut: {
+        f: preset.cubicOut,
+        title: "CubicOut",
+        code: "preset.cubicOut()",
+        description: "TBD",
+      },
+      cubicInOut: {
+        f: preset.cubicInOut,
+        title: "CubicInOut",
+        code: "preset.cubicInOut()",
+        description: "TBD",
+        seeAlso: ["Exponential"],
+      },
+      cubicMiddle: {
+        f: preset.cubicMiddle,
+        title: "CubicMiddle",
+        code: "preset.cubicMiddle()",
         description: "TBD",
         seeAlso: ["Exponential"],
       },
@@ -228,6 +257,172 @@ const exampleData: [
         code: "decorator.reflectXY(f)",
         description:
           "Flips the function both horizontally and vertically. Equivalent to making the function 'ease out'.",
+        parameters: [
+          {
+            label: "Input Function",
+            defaultValue: preset.cubic,
+            includeInGraph: true,
+          },
+        ],
+      },
+      split: {
+        f: decorator.split,
+        title: "Split",
+        code: "decorator.split(f)(g)",
+        description:
+          "Takes two functions, f and g, and returns an easing fucntion that splits the function into two parts using `f` for the first part and `g` for the second.",
+        parameters: [
+          {
+            label: "Input Function 1",
+            defaultValue: preset.sinWave,
+            includeInGraph: true,
+          },
+          {
+            label: "Input Function 2",
+            defaultValue: preset.linear,
+            includeInGraph: true,
+          },
+        ],
+      },
+      splitN: {
+        f: (f: EasingFunction) => (g: EasingFunction) => (h: EasingFunction) =>
+          decorator.splitN([f, g, h]),
+        title: "SplitN",
+        code: "decorator.splitn([f,g,h])",
+        description:
+          "Takes an array of multiple functions, f and g, and returns an easing fucntion that is split into n parts, switching between the functions evenly.",
+        parameters: [
+          {
+            label: "Input Function 1",
+            defaultValue: preset.sinWave,
+            includeInGraph: true,
+          },
+          {
+            label: "Input Function 2",
+            defaultValue: preset.cubic,
+            includeInGraph: true,
+          },
+          {
+            label: "Input Function 3",
+            defaultValue: preset.linear,
+            includeInGraph: true,
+          },
+        ],
+      },
+      splitScale: {
+        f: (f: EasingFunction) => (g: EasingFunction) => (h: EasingFunction) =>
+          decorator.splitScale([f, g, h]),
+        title: "SplitScale",
+        code: "decorator.splitScale([f,g,h])",
+        description:
+          "Same as splitN() except splitScale also scales each function so that it fits within its alloted space.",
+        parameters: [
+          {
+            label: "Input Function 1",
+            defaultValue: preset.cubic,
+            includeInGraph: true,
+          },
+          {
+            label: "Input Function 2",
+            defaultValue: preset.linear,
+            includeInGraph: true,
+          },
+          {
+            label: "Input Function 3",
+            defaultValue: preset.cubic,
+            includeInGraph: true,
+          },
+        ],
+      },
+      sequence: {
+        f: (f: EasingFunction) => (g: EasingFunction) => (h: EasingFunction) =>
+          decorator.sequence([f, g, h]),
+        title: "Sequence",
+        code: "decorator.sequence([f,g,h])",
+        description:
+          "Same as splitScale() except sequence scales each function to start at the end of the last one.",
+        parameters: [
+          {
+            label: "Input Function 1",
+            defaultValue: preset.cubic,
+            includeInGraph: true,
+          },
+          {
+            label: "Input Function 2",
+            defaultValue: preset.linear,
+            includeInGraph: true,
+          },
+          {
+            label: "Input Function 3",
+            defaultValue: preset.cubic,
+            includeInGraph: true,
+          },
+        ],
+      },
+      repeat: {
+        f: decorator.repeat,
+        title: "Repeat",
+        code: "decorator.repeat(times)(f)",
+        description:
+          "Creates a function that repeats another function n times within the span of the fuction.",
+        parameters: [
+          { label: "times", defaultValue: 5, min: 1, max: 10, step: 1 },
+          {
+            label: "Input Function",
+            defaultValue: preset.linear,
+            includeInGraph: false,
+          },
+        ],
+      },
+      repeatSequence: {
+        f: decorator.repeatSequence,
+        title: "RepeatSequence",
+        code: "decorator.repeatSequence(times)(f)",
+        description:
+          "Creates a function that repeats another function n times within the span of the fuction but each one will be played one after the next.",
+        parameters: [
+          { label: "times", defaultValue: 5, min: 1, max: 10, step: 1 },
+          {
+            label: "Input Function",
+            defaultValue: preset.cubic,
+            includeInGraph: false,
+          },
+        ],
+      },
+      easeOut: {
+        f: decorator.easeOut,
+        title: "EaseOut",
+        code: "decorator.easeOut(f)",
+        description:
+          "Takes a function that normally starts slow and ends fast (ease in) and returns a function that starts fast and ends slow (ease out).",
+        parameters: [
+          {
+            label: "Input Function",
+            defaultValue: preset.cubic,
+            includeInGraph: true,
+          },
+        ],
+      },
+      easeInOut: {
+        f: decorator.easeInOut,
+        title: "EaseInOut",
+        code: "decorator.easeInOut(f)",
+        description:
+          "Takes a function that normally starts slow and ends fast (ease in) and returns a function that starts slow, goes fast, and ends slow (ease in out).",
+        parameters: [
+          {
+            label: "Input Function",
+            defaultValue: preset.cubic,
+            includeInGraph: true,
+          },
+        ],
+      },
+      easeMiddle: {
+        f: decorator.easeMiddle,
+        title: "EaseMiddle",
+        code: "decorator.easeMiddle(f)",
+        description:
+          "Takes a function that normally starts slow and ends fast (ease in) and returns a function that starts fast, goes slow, and ends fast (ease out in / ease middle).",
         parameters: [
           {
             label: "Input Function",

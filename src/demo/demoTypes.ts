@@ -3,7 +3,11 @@
 import { EasingFunction, EventuallyReturnsAnEasingFunction } from "../types";
 
 export type Parameter<T> = { label: string; defaultValue: T };
-export type ParameterNumber = Parameter<number> & { min: number; max: number };
+export type ParameterNumber = Parameter<number> & {
+  min: number;
+  max: number;
+  step?: number;
+};
 export type ParameterFunction = Parameter<EasingFunction> & {
   includeInGraph?: boolean;
 };
