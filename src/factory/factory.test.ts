@@ -49,7 +49,7 @@ describe("factories", () => {
           const scale50 = decorator.scaleXY(0.5);
           const scale70 = decorator.scaleXY(0.7);
           const same = decorator.scaleXY(1);
-          const sin = factory.sine(1);
+          const sin = factory.sinusoid(1);
 
           it("scales numbers on vertical and horizontal axis simultaneously", () => {
             expectTestRange(scale50(sin)).toBeCloseTo([

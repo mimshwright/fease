@@ -172,20 +172,20 @@ const exampleData: [
           "Creates a polynomial equation using an array that represents the coefficients of each degree starting with x^0 up to x^n-1. For example, `poly([-8,6,-4,2])` would result in the equation `2x^2 - 4x^2 + 6x -8`",
         seeAlso: ["Exponential"],
       },
-      sine: {
-        f: factory.sine,
-        title: "Sine",
-        code: "factory.sine(freq)",
+      sinusoid: {
+        f: factory.sinusoid,
+        title: "Sinusoid",
+        code: "factory.sinusoid(freq)",
         description:
           "Creates a sine wave funciton with frequency as a number of in full oscillations between 0 and 1 input.",
         parameters: [
           { label: "frequency", min: 0.25, max: 20, defaultValue: 1 },
         ],
       },
-      saw: {
-        f: factory.saw,
-        title: "Saw",
-        code: "factory.saw(freq)",
+      sawtooth: {
+        f: factory.sawtooth,
+        title: "Sawtooth",
+        code: "factory.sawtooth(freq)",
         description:
           "Creates a sawtooth wave funciton with frequency as a number of in full oscillations between 0 and 1 input.",
         parameters: [

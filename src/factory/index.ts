@@ -1,14 +1,13 @@
 import { ReturnsEasingFunction } from "../types";
 import { addIndex, reduce } from "ramda";
 
+const FULL_ROTATION_IN_RADIANS = Math.PI * 2;
+
 // linear
 // constant
 // threshhold
-// sin
-// cos
 // tan
 // triangle
-// sawtooth
 // square
 // pulse
 // random
@@ -23,15 +22,12 @@ export const poly: ReturnsEasingFunction<number[]> = (coefficients) => (x) =>
     0
   )(coefficients);
 
-const FULL_ROTATION_IN_RADIANS = Math.PI * 2;
-export const sine: ReturnsEasingFunction<number> =
+export const sinusoid: ReturnsEasingFunction<number> =
   (frequency = 1) =>
   (x: number) =>
     Math.sin(x * frequency * FULL_ROTATION_IN_RADIANS) / 2 + 0.5;
 
-// export const cosine: ReturnsEasingFunction<number> = shiftX(-0.25)(sine);
-
-export const saw: ReturnsEasingFunction<number> =
+export const sawtooth: ReturnsEasingFunction<number> =
   (frequency = 1) =>
   (x: number) =>
     (x % (1 / frequency)) * frequency;
