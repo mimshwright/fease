@@ -156,6 +156,23 @@ const exampleData: [
     description:
       "Factories are functions that create a new type of Easing Funciton. They may take 1 or more parameters.",
     examples: {
+      threshold: {
+        f: factory.threshold,
+        title: "Threshold",
+        code: "factory.threshold(breakpoint)",
+        description:
+          "Creates a function that returns 0 until the input value crosses a threshold then returns 1. For example, if the breakpoint is 0.5, the function will return 0 until x is >= 0.5, after that it will return 1.0",
+        seeAlso: ["makeRepeatable", "square", "pulse"],
+        parameters: [
+          {
+            label: "Breakpoint",
+            min: 0,
+            max: 1,
+            step: 0.01,
+            defaultValue: 0.5,
+          },
+        ],
+      },
       exp: {
         f: factory.exp,
         title: "Exponential",
@@ -189,6 +206,29 @@ const exampleData: [
         description:
           "Creates a sawtooth wave funciton with frequency as a number of in full oscillations between 0 and 1 input.",
         parameters: [
+          { label: "frequency", min: 0.25, max: 20, defaultValue: 2 },
+        ],
+      },
+      square: {
+        f: factory.square,
+        title: "Square",
+        code: "factory.square(freq)",
+        description:
+          "Creates a square wave with frequency as a number of in full oscillations between 0 and 1 input.",
+        seeAlso: ["makeRepeatable", "square", "pulse"],
+        parameters: [
+          { label: "frequency", min: 0.25, max: 20, defaultValue: 2 },
+        ],
+      },
+      pulse: {
+        f: factory.pulse,
+        title: "Pulse",
+        code: "factory.pulse(shape)(freq)",
+        description:
+          "Creates a pulse wave with an offset value for the shape of the wave and frequency as a number of in full oscillations between 0 and 1 input.",
+        seeAlso: ["makeRepeatable", "square", "pulse"],
+        parameters: [
+          { label: "shape", min: 0.0, max: 1, step: 0.01, defaultValue: 0.7 },
           { label: "frequency", min: 0.25, max: 20, defaultValue: 2 },
         ],
       },
@@ -493,6 +533,27 @@ const exampleData: [
         description:
           "Takes a function that normally starts slow and ends fast (ease in) and returns a function that starts fast, goes slow, and ends fast (ease out in / ease middle).",
         parameters: [
+          {
+            label: "Input Function",
+            defaultValue: preset.cubic,
+            includeInGraph: true,
+          },
+        ],
+      },
+      wavify: {
+        f: decorator.wavify,
+        title: "wavify",
+        code: "decorator.wavify(f)",
+        description:
+          "Turns a function into a repeating waveform with a number for frequency for how many times it should repeat between the input values of 0 and 1.",
+        parameters: [
+          {
+            label: "Frequency",
+            defaultValue: 1,
+            min: 0.2,
+            max: 10,
+            step: 0.1,
+          },
           {
             label: "Input Function",
             defaultValue: preset.cubic,

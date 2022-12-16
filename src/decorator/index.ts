@@ -3,6 +3,7 @@ export * from "./shift";
 export * from "./reflect";
 export * from "./split";
 export * from "./ease";
+export * from "./wavify";
 // mirror f + reflectX(f)
 
 // easeOut
