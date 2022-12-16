@@ -2,6 +2,7 @@
 
 import { EasingFunction, EventuallyReturnsAnEasingFunction } from "../types";
 
+export type FunctionExamples = Record<string, EasingFunction>;
 export type Parameter<T> = { label: string; defaultValue: T };
 export type ParameterNumber = Parameter<number> & {
   min: number;
@@ -10,6 +11,7 @@ export type ParameterNumber = Parameter<number> & {
 };
 export type ParameterFunction = Parameter<EasingFunction> & {
   includeInGraph?: boolean;
+  options?: FunctionExamples;
 };
 type Parameters = (ParameterNumber | ParameterFunction)[];
 

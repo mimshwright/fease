@@ -25,21 +25,12 @@ const exampleData: [
         code: "preset.linear()",
         description: "TBD",
       },
-      quad: {
-        f: preset.quad,
+      quadIn: {
+        f: preset.quadIn,
         title: "Quadratic",
-        code: "preset.quad()",
+        code: "preset.quadIn()",
         description: "TBD",
         seeAlso: ["Exponential"],
-      },
-
-      cubic: {
-        f: preset.cubic,
-        title: "Cubic",
-        code: "preset.cubic()",
-        description: "TBD",
-        seeAlso: ["Exponential"],
-        // aliases: ["cubicIn"],
       },
       cubicIn: {
         f: preset.cubicIn,
@@ -68,9 +59,50 @@ const exampleData: [
         description: "TBD",
         seeAlso: ["Exponential"],
       },
+      quarticIn: {
+        f: preset.quarticIn,
+        title: "QuarticIn",
+        code: "preset.quarticIn()",
+        description: "TBD",
+        seeAlso: ["Exponential"],
+      },
+      quinticIn: {
+        f: preset.quinticIn,
+        title: "QuinticIn",
+        code: "preset.quinticIn()",
+        description: "TBD",
+        seeAlso: ["Exponential"],
+      },
+      sexticIn: {
+        f: preset.sexticIn,
+        title: "SexticIn",
+        code: "preset.sexticIn()",
+        description: "TBD",
+        seeAlso: ["Exponential"],
+      },
 
+      // hidden
+
+      quad: {
+        f: preset.quad,
+        exampleType: "hidden",
+        title: "Quadratic",
+        code: "preset.quad()",
+        description: "TBD",
+        seeAlso: ["Exponential"],
+      },
+      cubic: {
+        f: preset.cubic,
+        exampleType: "hidden",
+        title: "Cubic",
+        code: "preset.cubic()",
+        description: "TBD",
+        seeAlso: ["Exponential"],
+        // aliases: ["cubicIn"],
+      },
       quartic: {
         f: preset.quartic,
+        exampleType: "hidden",
         title: "Quartic",
         code: "preset.quartic()",
         description: "TBD",
@@ -78,6 +110,7 @@ const exampleData: [
       },
       quintic: {
         f: preset.quintic,
+        exampleType: "hidden",
         title: "Quintic",
         code: "preset.quintic()",
         description: "TBD",
@@ -85,11 +118,14 @@ const exampleData: [
       },
       sextic: {
         f: preset.sextic,
+        exampleType: "hidden",
         title: "Sextic",
         code: "preset.sextic()",
         description: "TBD",
         seeAlso: ["Exponential"],
       },
+
+      /// waves
 
       sinWave: {
         f: preset.sinWave,
@@ -104,6 +140,14 @@ const exampleData: [
         code: "preset.cosWave()",
         description: "(cos is identical to sin but the phase is +25%)",
         seeAlso: ["ShiftX"],
+      },
+
+      sawWave: {
+        f: preset.sawWave,
+        title: "Sawtooth Wave",
+        code: "preset.sawWave()",
+        description: "TBD",
+        seeAlso: ["repeat", "linear"],
       },
     },
   },
@@ -133,9 +177,19 @@ const exampleData: [
         title: "Sine",
         code: "factory.sine(freq)",
         description:
-          "Creates a sine wave funciton with frequency a number of in full oscillations between 0 and 1 input.",
+          "Creates a sine wave funciton with frequency as a number of in full oscillations between 0 and 1 input.",
         parameters: [
-          { label: "frequency", min: 0.01, max: 20, defaultValue: 1 },
+          { label: "frequency", min: 0.25, max: 20, defaultValue: 1 },
+        ],
+      },
+      saw: {
+        f: factory.saw,
+        title: "Saw",
+        code: "factory.saw(freq)",
+        description:
+          "Creates a sawtooth wave funciton with frequency as a number of in full oscillations between 0 and 1 input.",
+        parameters: [
+          { label: "frequency", min: 0.25, max: 20, defaultValue: 2 },
         ],
       },
     },
@@ -221,6 +275,11 @@ const exampleData: [
             label: "Input Function",
             defaultValue: preset.sinWave,
             includeInGraph: true,
+            options: {
+              sineWave: preset.sinWave,
+              cosWave: preset.cosWave,
+              sawWave: preset.sawWave,
+            },
           },
         ],
       },
@@ -256,12 +315,17 @@ const exampleData: [
         title: "ReflectXY",
         code: "decorator.reflectXY(f)",
         description:
-          "Flips the function both horizontally and vertically. Equivalent to making the function 'ease out'.",
+          "Flips the function both horizontally and vertically. Equivalent to rotating the graph 180°.",
+        seeAlso: ["easeOut"],
         parameters: [
           {
             label: "Input Function",
-            defaultValue: preset.cubic,
+            defaultValue: preset.cubicIn,
             includeInGraph: true,
+            options: {
+              cubicOut: preset.cubicOut,
+              cubicMiddle: preset.cubicMiddle,
+            },
           },
         ],
       },
@@ -408,12 +472,17 @@ const exampleData: [
         title: "EaseInOut",
         code: "decorator.easeInOut(f)",
         description:
-          "Takes a function that normally starts slow and ends fast (ease in) and returns a function that starts slow, goes fast, and ends slow (ease in out).",
+          "Takes a function that normally starts slow and ends fast (ease in) and returns a function that starts slow, goes fast, and ends slow (ease in out). In actuality, the function is composed using `sequence` and `reflectXY` so the results are unpredictable if you use a non-easeIn function as an input.",
         parameters: [
           {
             label: "Input Function",
             defaultValue: preset.cubic,
             includeInGraph: true,
+            options: {
+              quadIn: preset.quadIn,
+              cubicIn: preset.cubicIn,
+              cubicOut: preset.cubicOut,
+            },
           },
         ],
       },

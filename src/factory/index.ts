@@ -30,3 +30,8 @@ export const sine: ReturnsEasingFunction<number> =
     Math.sin(x * frequency * FULL_ROTATION_IN_RADIANS) / 2 + 0.5;
 
 // export const cosine: ReturnsEasingFunction<number> = shiftX(-0.25)(sine);
+
+export const saw: ReturnsEasingFunction<number> =
+  (frequency = 1) =>
+  (x: number) =>
+    (x % (1 / frequency)) * frequency;

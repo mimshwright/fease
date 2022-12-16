@@ -2,7 +2,7 @@ import React from "react";
 import { FormControlLabel, Radio, RadioGroup } from "@mui/material";
 import { linear } from "../preset";
 import { StatefulParameterFunction } from "./Example";
-import { exampleFunctions, getFunctionName } from "./exampleFunctions";
+import { defaultExampleFunctions, getFunctionName } from "./exampleFunctions";
 import { map } from "ramda";
 
 interface FunctionSelectorProps {
@@ -14,17 +14,22 @@ const SelectorItem = ({ label }: { label: string }) => (
 );
 
 const FunctionSelector: React.FC<FunctionSelectorProps> = ({
-  parameter: { label = "Function", value = linear, setter },
+  parameter: {
+    label = "Function",
+    value = linear,
+    setter,
+    options = defaultExampleFunctions,
+  },
 }) => {
   return (
     <div className="FunctionSelector">
       <label>{label}</label>
       <RadioGroup
-        value={getFunctionName(value)}
-        onChange={(_, val: string) => setter(() => exampleFunctions[val])}
+        value={getFunctionName(options)(value)}
+        onChange={(_, val: string) => setter(() => options[val])}
       >
         {map((label: string) => <SelectorItem label={label} key={label} />)(
-          Object.keys(exampleFunctions)
+          Object.keys(options)
         )}
       </RadioGroup>
     </div>
