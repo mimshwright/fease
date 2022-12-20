@@ -1,6 +1,8 @@
 import { expectTestRange } from "../test/testUtil";
 import { sinWave, linear } from "../preset";
 import { scaleX, scaleY, scaleXY } from "./scale";
+import { always } from "ramda";
+import { I } from "../util";
 
 describe("decorators - scale", () => {
   describe("scaleX()", () => {
@@ -27,7 +29,11 @@ describe("decorators - scale", () => {
         expect(fReverse(1.0)).toBeCloseTo(-1.0);
       });
       it("scaleX(0)(f)(x) === (x) => 0 (prevent div by 0)", () => {
-        expectTestRange(fZero).toMatchFunction((_: number) => 0);
+        const scaleX0 = scaleX(0);
+        const zero = scaleX0(I);
+        expect(zero(0)).toBe(0);
+        expect(zero(2)).toBe(0);
+        expectTestRange(fZero).toMatchFunction(always(0));
       });
     });
   });

@@ -1,3 +1,4 @@
+import { sinWave } from "./../preset/waveform";
 import { DemoSection } from "./demoTypes";
 
 import * as preset from "../preset";
@@ -6,151 +7,18 @@ import * as decorator from "../decorator";
 import * as util from "../util";
 import { EasingFunction } from "../types";
 
+const doubleLinear = decorator.scaleY(2)(preset.linear);
+const bigSine = decorator.shiftY(-0.5)(decorator.scaleY(1.5)(preset.sinWave));
+const bigCenteredSine = decorator.shiftY(-0.25)(decorator.scaleY(1.5)(sinWave));
+
 // By using the KeyTypeGuard, the demo is forced to create an example for each
 // function exported by the library.
 const exampleData: [
-  DemoSection<typeof preset>,
   DemoSection<typeof factory>,
   DemoSection<typeof decorator>,
+  DemoSection<typeof preset>,
   DemoSection<typeof util>
 ] = [
-  {
-    title: "Presets",
-    description:
-      "Commonly used easing functions that require no additional parameters. You'll find most of the well-known easing functions here.",
-    examples: {
-      linear: {
-        f: preset.linear,
-        title: "Linear",
-        code: "preset.linear()",
-        description: "TBD",
-      },
-      quadIn: {
-        f: preset.quadIn,
-        title: "Quadratic",
-        code: "preset.quadIn()",
-        description: "TBD",
-        seeAlso: ["Exponential"],
-      },
-      cubicIn: {
-        f: preset.cubicIn,
-        exampleType: "hidden",
-        title: "CubicIn",
-        code: "",
-        description: "alias of cubic",
-      },
-      cubicOut: {
-        f: preset.cubicOut,
-        title: "CubicOut",
-        code: "preset.cubicOut()",
-        description: "TBD",
-      },
-      cubicInOut: {
-        f: preset.cubicInOut,
-        title: "CubicInOut",
-        code: "preset.cubicInOut()",
-        description: "TBD",
-        seeAlso: ["Exponential"],
-      },
-      cubicMiddle: {
-        f: preset.cubicMiddle,
-        title: "CubicMiddle",
-        code: "preset.cubicMiddle()",
-        description: "TBD",
-        seeAlso: ["Exponential"],
-      },
-      quarticIn: {
-        f: preset.quarticIn,
-        title: "QuarticIn",
-        code: "preset.quarticIn()",
-        description: "TBD",
-        seeAlso: ["Exponential"],
-      },
-      quinticIn: {
-        f: preset.quinticIn,
-        title: "QuinticIn",
-        code: "preset.quinticIn()",
-        description: "TBD",
-        seeAlso: ["Exponential"],
-      },
-      sexticIn: {
-        f: preset.sexticIn,
-        title: "SexticIn",
-        code: "preset.sexticIn()",
-        description: "TBD",
-        seeAlso: ["Exponential"],
-      },
-
-      // hidden
-
-      quad: {
-        f: preset.quad,
-        exampleType: "hidden",
-        title: "Quadratic",
-        code: "preset.quad()",
-        description: "TBD",
-        seeAlso: ["Exponential"],
-      },
-      cubic: {
-        f: preset.cubic,
-        exampleType: "hidden",
-        title: "Cubic",
-        code: "preset.cubic()",
-        description: "TBD",
-        seeAlso: ["Exponential"],
-        // aliases: ["cubicIn"],
-      },
-      quartic: {
-        f: preset.quartic,
-        exampleType: "hidden",
-        title: "Quartic",
-        code: "preset.quartic()",
-        description: "TBD",
-        seeAlso: ["Exponential"],
-      },
-      quintic: {
-        f: preset.quintic,
-        exampleType: "hidden",
-        title: "Quintic",
-        code: "preset.quintic()",
-        description: "TBD",
-        seeAlso: ["Exponential"],
-      },
-      sextic: {
-        f: preset.sextic,
-        exampleType: "hidden",
-        title: "Sextic",
-        code: "preset.sextic()",
-        description: "TBD",
-        seeAlso: ["Exponential"],
-      },
-
-      /// waves
-
-      sinWave: {
-        f: preset.sinWave,
-        title: "Sine Wave",
-        code: "preset.sinWave()",
-        description: "TBD",
-      },
-
-      cosWave: {
-        f: preset.cosWave,
-        title: "Cosine Wave",
-        code: "preset.cosWave()",
-        description: "(cos is identical to sin but the phase is +25%)",
-        seeAlso: ["ShiftX"],
-      },
-
-      sawWave: {
-        f: preset.sawWave,
-        title: "Sawtooth Wave",
-        code: "preset.sawWave()",
-        description: "TBD",
-        seeAlso: ["repeat", "linear"],
-      },
-    },
-  },
   {
     title: "Factories",
     description:
@@ -209,6 +77,16 @@ const exampleData: [
           { label: "frequency", min: 0.25, max: 20, defaultValue: 2 },
         ],
       },
+      triangle: {
+        f: factory.triangle,
+        title: "Triangle",
+        code: "factory.triangle(freq)",
+        description:
+          "Creates a triangle wave funciton with frequency as a number of in full oscillations between 0 and 1 input.",
+        parameters: [
+          { label: "frequency", min: 0.25, max: 20, defaultValue: 2 },
+        ],
+      },
       square: {
         f: factory.square,
         title: "Square",
@@ -239,6 +117,104 @@ const exampleData: [
     description:
       "Decorators take an Easing Function, and often 1 or more additional parameters, as input and return a modified function.",
     examples: {
+      min: {
+        f: decorator.min,
+        title: "Min",
+        code: "min(n)(f)",
+        description: "Sets a minimum output value for the function.",
+        parameters: [
+          { label: "lo", defaultValue: 0, min: -0.5, max: 1.5, step: 0.05 },
+          { label: "Input Function", defaultValue: preset.cubicIn },
+        ],
+      },
+      max: {
+        f: decorator.max,
+        title: "Max",
+        code: "max(hi)(f)",
+        description: "Sets a maximum output value for the function.",
+        parameters: [
+          { label: "hi", defaultValue: 1, min: -0.5, max: 1.5, step: 0.05 },
+          { label: "Input Function", defaultValue: preset.cubicIn },
+        ],
+      },
+      clamp: {
+        f: decorator.clamp,
+        title: "Clamp",
+        code: "clamp(lo)(hi)(f)",
+        description:
+          "Sets a minimum and maximum output value for the function.",
+        parameters: [
+          { label: "low", defaultValue: 0.15, min: -0.5, max: 1.5, step: 0.05 },
+          {
+            label: "high",
+            defaultValue: 0.85,
+            min: -0.5,
+            max: 1.5,
+            step: 0.05,
+          },
+          { label: "Input Function", defaultValue: preset.sinWave },
+        ],
+      },
+      clamp01: {
+        f: decorator.clamp01,
+        title: "Clamp01",
+        code: "clamp(f)",
+        description:
+          "Same as clamp but automatically applies 0 and 1 as the range.",
+        parameters: [{ label: "Input Function", defaultValue: preset.cubicIn }],
+      },
+      abs: {
+        f: decorator.abs,
+        title: "Absolute",
+        code: "deocrator.abs(f)",
+        description:
+          "Any negative values produced by the function lose their negative sign.",
+        parameters: [
+          {
+            label: "Input Function",
+            defaultValue: bigSine,
+            options: {
+              "sine - scaleY: 1.5, shiftY: -0.5": bigSine,
+            },
+          },
+        ],
+      },
+      constrain: {
+        f: decorator.constrain,
+        title: "Constrain",
+        code: "deocrator.constrain(low)(high)(f)",
+        description:
+          "Any negative values produced by the function lose their negative sign.",
+        parameters: [
+          { label: "low", min: -1, max: 1, defaultValue: 0.0, step: 0.05 },
+          { label: "high", min: -1, max: 1, defaultValue: 1.0, step: 0.05 },
+          {
+            label: "Input Function",
+            defaultValue: bigCenteredSine,
+            options: {
+              "linear - scaleY: 2": doubleLinear,
+              "sine - scaleY: 1.5, shiftY: -0.25": bigCenteredSine,
+            },
+          },
+        ],
+      },
+      constrain01: {
+        f: decorator.constrain01,
+        title: "Constrain01",
+        code: "deocrator.constrain01(f)",
+        description:
+          "Same as constrain but automatically applies 0 and 1 as the range.",
+        parameters: [
+          {
+            label: "Input Function",
+            defaultValue: bigCenteredSine,
+            options: {
+              "linear - scaleY: 2": doubleLinear,
+              "sine - scaleY: 1.5, shiftY: -0.25": bigCenteredSine,
+            },
+          },
+        ],
+      },
       shiftX: {
         f: decorator.shiftX,
         title: "ShiftX",
@@ -438,6 +414,20 @@ const exampleData: [
           },
         ],
       },
+      mirror: {
+        f: decorator.mirror,
+        title: "Mirror",
+        code: "decorator.mirror(f)",
+        description:
+          "Takes a function and creates a mirror image where the right half of the function is a reflection of the left side. The function should play once going forward and once going backward.",
+        parameters: [
+          {
+            label: "Input Function",
+            defaultValue: preset.cubic,
+            includeInGraph: true,
+          },
+        ],
+      },
       sequence: {
         f: (f: EasingFunction) => (g: EasingFunction) => (h: EasingFunction) =>
           decorator.sequence([f, g, h]),
@@ -564,6 +554,150 @@ const exampleData: [
     },
   },
   {
+    title: "Presets",
+    description:
+      "Commonly used easing functions that require no additional parameters. You'll find most of the well-known easing functions here.",
+    examples: {
+      linear: {
+        f: preset.linear,
+        title: "Linear",
+        code: "preset.linear()",
+        description: "TBD",
+      },
+      quadIn: {
+        f: preset.quadIn,
+        title: "Quadratic",
+        code: "preset.quadIn()",
+        description: "TBD",
+        seeAlso: ["Exponential"],
+      },
+      cubicIn: {
+        f: preset.cubicIn,
+        exampleType: "hidden",
+        title: "CubicIn",
+        code: "",
+        description: "alias of cubic",
+      },
+      cubicOut: {
+        f: preset.cubicOut,
+        title: "CubicOut",
+        code: "preset.cubicOut()",
+        description: "TBD",
+      },
+      cubicInOut: {
+        f: preset.cubicInOut,
+        title: "CubicInOut",
+        code: "preset.cubicInOut()",
+        description: "TBD",
+        seeAlso: ["Exponential"],
+      },
+      cubicMiddle: {
+        f: preset.cubicMiddle,
+        title: "CubicMiddle",
+        code: "preset.cubicMiddle()",
+        description: "TBD",
+        seeAlso: ["Exponential"],
+      },
+      quarticIn: {
+        f: preset.quarticIn,
+        title: "QuarticIn",
+        code: "preset.quarticIn()",
+        description: "TBD",
+        seeAlso: ["Exponential"],
+      },
+      quinticIn: {
+        f: preset.quinticIn,
+        title: "QuinticIn",
+        code: "preset.quinticIn()",
+        description: "TBD",
+        seeAlso: ["Exponential"],
+      },
+      sexticIn: {
+        f: preset.sexticIn,
+        title: "SexticIn",
+        code: "preset.sexticIn()",
+        description: "TBD",
+        seeAlso: ["Exponential"],
+      },
+
+      // hidden
+
+      quad: {
+        f: preset.quad,
+        exampleType: "hidden",
+        title: "Quadratic",
+        code: "preset.quad()",
+        description: "TBD",
+        seeAlso: ["Exponential"],
+      },
+      cubic: {
+        f: preset.cubic,
+        exampleType: "hidden",
+        title: "Cubic",
+        code: "preset.cubic()",
+        description: "TBD",
+        seeAlso: ["Exponential"],
+        // aliases: ["cubicIn"],
+      },
+      quartic: {
+        f: preset.quartic,
+        exampleType: "hidden",
+        title: "Quartic",
+        code: "preset.quartic()",
+        description: "TBD",
+        seeAlso: ["Exponential"],
+      },
+      quintic: {
+        f: preset.quintic,
+        exampleType: "hidden",
+        title: "Quintic",
+        code: "preset.quintic()",
+        description: "TBD",
+        seeAlso: ["Exponential"],
+      },
+      sextic: {
+        f: preset.sextic,
+        exampleType: "hidden",
+        title: "Sextic",
+        code: "preset.sextic()",
+        description: "TBD",
+        seeAlso: ["Exponential"],
+      },
+
+      /// waves
+
+      sinWave: {
+        f: preset.sinWave,
+        title: "Sine Wave",
+        code: "preset.sinWave()",
+        description: "TBD",
+      },
+
+      cosWave: {
+        f: preset.cosWave,
+        title: "Cosine Wave",
+        code: "preset.cosWave()",
+        description: "(cos is identical to sin but the phase is +25%)",
+        seeAlso: ["ShiftX"],
+      },
+
+      sawWave: {
+        f: preset.sawWave,
+        title: "Sawtooth Wave",
+        code: "preset.sawWave()",
+        description: "TBD",
+        seeAlso: ["repeat", "linear"],
+      },
+      triWave: {
+        f: preset.triWave,
+        title: "Triangle Wave",
+        code: "preset.triWave()",
+        description: "TBD",
+        seeAlso: ["repeat", "linear", "mirror", "wavify"],
+      },
+    },
+  },
+  {
     title: "Utility",
     description:
       "Additional helper utilities for working with easing functions.",
@@ -581,6 +715,39 @@ const sineResults = util.render(5)(preset.sinWave);
 `,
         description:
           "Takes a number of steps and a function. Generates a range of input values based on steps from 0 to 1 then maps the function over those values to get an array of results. Regardless of steps, the input always includes at least 2 values, [0, 1].",
+      },
+      p: {
+        f: util.p,
+        title: "P",
+        code: "util.p(f)(g)",
+        exampleType: "text",
+        exampleText: `const add1 = x => x + 1;
+const add1ToFunctionResult = util.p(add1);
+const sum = nums => nums.reduce((sum, n) => sum + n, 0);
+const sumPlus1 = add1ToFunctionResult(sum);
+sumPlus1([1,2,3]); // 7
+`,
+        description:
+          "Like ramda's `o` function but with the order reversed. o is to compose as p is to pipe",
+      },
+      constrain: {
+        f: util.constrain,
+        title: "Constrain",
+        code: "util.constrain(low)(high)(x)",
+        exampleType: "text",
+        exampleText: `const constrain01 = constrain(0)(1);
+constrian01(0); // 0
+constrain01(0.5); // 0.5
+constrian01(1.0); // 1.0
+constrian01(1.25); // 0.75 // starts to reflect back towards 0
+constrian01(1.90); // 0.10
+constrian01(2.30); // 0.30 // hits 0 and goes back up towards 1
+constrain01(-0.25); // 0.25 // going below 0 brings it back up
+constrain01(-1.0); // 1.0
+constrain01(-1.25); // 0.75 // if it goes past the high point again, starts going down again.
+`,
+        description:
+          "Can be used to 'wrap' a function around the output of another function. Takes functions f and g and returns a new function h with the same parameters as g. Calling h will apply f to the result of calling g.",
       },
       I: {
         f: util.I,

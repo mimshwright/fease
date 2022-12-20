@@ -1,22 +1,16 @@
-import { pipe } from "ramda";
-import { EasingFunction, EasingFunctionDecorator } from "../types";
+import { multiply, o, pipe, __ } from "ramda";
+import { EasingFunctionDecorator } from "../types";
+import { p } from "../util";
 
 // TODO: aliases
 // scaleX = scaleDuration = 1/scaleFreq
 // scaleY = scaleAmp
 
-export const scaleX =
-  (scale: number): EasingFunctionDecorator =>
-  (f: EasingFunction) =>
-  (x: number) =>
-    scale === 0 ? 0 : f(x / scale);
+export const scaleX = (scale: number): EasingFunctionDecorator =>
+  p((x: number) => (scale === 0 ? 0 : x / scale));
 
-export const scaleY =
-  (scale: number): EasingFunctionDecorator =>
-  (f: EasingFunction) =>
-  // pipe(f, multiply(scale));
-  (x: number) =>
-    f(x) * scale;
+export const scaleY = (scale: number): EasingFunctionDecorator =>
+  o(multiply(scale));
 
 export const scaleXY = (scale: number): EasingFunctionDecorator =>
   pipe(scaleY(scale), scaleX(scale));

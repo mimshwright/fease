@@ -1,7 +1,7 @@
 import { easeInOut, easeMiddle, easeOut } from "./../decorator/ease";
 import { EasingFunction } from "../types";
 import { exp } from "../factory";
-import { I } from "../util";
+import { I } from "../util/fpUtil";
 
 // Exponentials
 export const linear: EasingFunction = I;
