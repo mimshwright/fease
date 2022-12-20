@@ -70,6 +70,7 @@
     "@fontsource/im-fell-french-canon": "^4.5.8",
     "@fontsource/yatra-one": "^4.5.10",
     "@inlet/react-pixi": "^6.8.0",
+    "@mui/icons-material": "^5.11.0",
     "@mui/material": "^5.10.17",
     "@types/jest": "^29.2.3",
     "@types/node": "^18.11.9",

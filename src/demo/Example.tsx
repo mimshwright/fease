@@ -152,8 +152,8 @@ const Example: React.FC<ExampleProps> = ({
           )}
         </div>
 
-        <div className="example">
-          {exampleType === "graph" && isVisible && (
+        {exampleType === "graph" && isVisible && (
+          <div className="example">
             <Stage
               width={400}
               height={400}
@@ -182,8 +182,8 @@ const Example: React.FC<ExampleProps> = ({
                 exampleColor={pallete.exampleColor}
               />
             </Stage>
-          )}
-        </div>
+          </div>
+        )}
       </div>
     </VisibilitySensor>
   );

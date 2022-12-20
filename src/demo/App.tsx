@@ -1,9 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import exampleData from "./exampleData";
 import Example from "./Example";
 import * as pkg from "../../package.json";
 import { EventuallyReturnsAnEasingFunction } from "../types";
-import { Button } from "@mui/material";
+import {
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
+  Button,
+} from "@mui/material";
+import ArrowForwardIosSharpIcon from "@mui/icons-material/ArrowForwardIosSharp";
 
 import "./App.css";
 import { DemoExample } from "./demoTypes";
@@ -17,6 +23,13 @@ const getExamples = <T extends { examples: Record<string, DemoExample> }>(
 ) => Object.values(section.examples) as DemoExample[];
 
 function App() {
+  const [expanded, setExpanded] = useState<string>("");
+
+  const onAccordionExpand =
+    (panel: string) => (_event: React.SyntheticEvent, isExpanded: boolean) => {
+      setExpanded(isExpanded ? panel : "");
+    };
+
   return (
     <div className="App">
       <header>
@@ -40,17 +53,31 @@ function App() {
         </div>
 
         {exampleData.map((section) => (
-          <section key={section.title}>
-            <h2>{section.title}</h2>
-            <p>{section.description}</p>
-            {filterOutHiddenExamples(getExamples(section)).map((props) => (
-              <Example
-                key={props.title}
-                {...props}
-                f={props.f as EventuallyReturnsAnEasingFunction}
-              />
-            ))}
-          </section>
+          <Accordion
+            className="section"
+            key={section.title}
+            expanded={expanded === section.title}
+            onChange={onAccordionExpand(section.title)}
+          >
+            <AccordionSummary
+              className="section-summary"
+              expandIcon={
+                <ArrowForwardIosSharpIcon sx={{ fontSize: "0.9rem" }} />
+              }
+            >
+              <h2>{section.title}</h2>
+              <p>{section.description}</p>
+            </AccordionSummary>
+            <AccordionDetails>
+              {filterOutHiddenExamples(getExamples(section)).map((props) => (
+                <Example
+                  key={props.title}
+                  {...props}
+                  f={props.f as EventuallyReturnsAnEasingFunction}
+                />
+              ))}
+            </AccordionDetails>
+          </Accordion>
         ))}
       </main>
     </div>
