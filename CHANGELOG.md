@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.3](https://github.com/mimshwright/fease/compare/v0.1.2...v0.1.3) (2022-12-20)
+
+### Features
+
+- **style:** added accordion dropdowns to demo ([9a46ac4](https://github.com/mimshwright/fease/commit/9a46ac4cecb7bf0474f48e23d336197606d323f5))
+- **utils:** expanded utils section ([b3b56fc](https://github.com/mimshwright/fease/commit/b3b56fc49836fda22c30a4dbc5eca6e5dd15a6d0))
+- **waves:** added wavify() funciton and used it to create pulse, square and sawtooth waveforms ([085c4c2](https://github.com/mimshwright/fease/commit/085c4c26b14065e75367a0e56912590559dbdf9a))
+
 ### [0.1.2](https://github.com/mimshwright/fease/compare/v0.1.1...v0.1.2) (2022-12-15)
 
 ### Features
