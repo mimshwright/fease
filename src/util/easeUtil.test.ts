@@ -1,7 +1,8 @@
+import { describe, it, expect } from "vitest";
 import { render, constrain } from "./easeUtil";
 import { I } from "./fpUtil";
 
-describe("utils", () => {
+describe.concurrent("utils - easeUtils", () => {
   describe("render()", () => {
     it("Should create an array of values using the function and 0..1 as input", () => {
       expect(render(11)(I)).toEqual([

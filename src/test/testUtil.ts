@@ -1,3 +1,4 @@
+import { expect } from "vitest";
 import { map, pipe, zip, __ } from "ramda";
 import { Unary } from "../types";
 

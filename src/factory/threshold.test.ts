@@ -1,6 +1,7 @@
+import { describe, it, expect } from "vitest";
 import * as threshold from "./threshold";
 
-describe("factory threshold", () => {
+describe.concurrent("factory threshold", () => {
   describe("threshold", () => {
     it("Takes a value for a threshold and creates a function that returns 0 if the input is below the threshold and 1 if the input is above the threshold.", () => {
       const f = threshold.threshold(0.5);

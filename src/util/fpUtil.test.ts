@@ -1,8 +1,9 @@
+import { describe, it, expect } from "vitest";
 import { repeat } from "ramda";
 import { defaultTestRange, expectTestRange } from "../test/testUtil";
 import { I, K, p } from "./fpUtil";
 
-describe("fpUtil", () => {
+describe.concurrent("utils - fpUtil", () => {
   describe("I", () => {
     it("should return the input unchanged", () => {
       expectTestRange(I).toBeUnchanged();

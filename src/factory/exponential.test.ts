@@ -1,8 +1,9 @@
+import { describe, it, expect } from "vitest";
 import { expectTestRange } from "../test/testUtil";
 import { I, K } from "../util/fpUtil";
 import * as exponential from "./exponential";
 
-describe("factories", () => {
+describe.concurrent("factories", () => {
   describe("exp()", () => {
     describe("Returns a function where x is multiplied by itself some number of times.", () => {
       it("Should return a function (n)->n", () => {

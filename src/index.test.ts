@@ -1,6 +1,7 @@
+import { describe, test, expect } from "vitest";
 import * as fease from "./index";
 
-describe("fease library", () => {
+describe.concurrent("fease library", () => {
   test("Index file exports rest of library", () => {
     expect(fease).toHaveProperty("decorator");
     expect(fease).toHaveProperty("factory");

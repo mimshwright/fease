@@ -1,10 +1,11 @@
+import { describe, it, expect } from "vitest";
 import { expectTestRange } from "../test/testUtil";
 import { sinWave, linear } from "../preset";
 import { scaleX, scaleY, scaleXY } from "./scale";
 import { always } from "ramda";
 import { I } from "../util";
 
-describe("decorators - scale", () => {
+describe.concurrent("decorators - scale", () => {
   describe("scaleX()", () => {
     describe("Takes a scalar value and an input function scale an input function on the X axis.", () => {
       const f = linear;

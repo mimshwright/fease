@@ -1,6 +1,7 @@
+import { describe, it, expect } from "vitest";
 import * as wave from "./wave";
 
-describe("waveform factories", () => {
+describe.concurrent("waveform factories", () => {
   it("Should define functions for waveforms", () => {
     expect(wave.sinusoid).toBeInstanceOf(Function);
     expect(wave.triangle).toBeInstanceOf(Function);

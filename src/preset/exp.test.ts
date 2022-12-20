@@ -1,7 +1,8 @@
+import { describe, it, expect, test } from "vitest";
 import { linear, quad } from "./exp";
 import { expectTestRange } from "../test/testUtil";
 
-describe("exponential functions", () => {
+describe.concurrent("exponential functions", () => {
   describe("linear", () => {
     it("should return the input unchanged", () => {
       expectTestRange(linear).toBeUnchanged();
