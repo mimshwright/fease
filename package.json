@@ -45,7 +45,7 @@
     "test": "vitest --watch false",
     "test:watch": "vitest",
     "test:coverage": "run-s 'test -- --coverage'",
-    "test:ui": "run-s 'test -- --ui'",
+    "test:ui": "run-s 'test:watch -- --ui'",
     "lint:typescript": "run-s build:tsc",
     "lint:prettier": "prettier -l .",
     "lint:eslint": "eslint *.{t,j,cj}s{,x} --no-error-on-unmatched-pattern",
