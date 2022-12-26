@@ -16,8 +16,8 @@ export const expectAll =
         zip(outputs),
         map(expectPairToBeCloseTo)
       )(inputs),
-    toMatchFunction: (g: Unary<A, B>) =>
-      expect(map(f, inputs)).toEqual(map(g, inputs)),
+    toMatchFunction: (g: Unary<A, number>) =>
+      map((x: A) => expect(f(x)).toBeCloseTo(g(x)))(inputs),
     toBeUnchanged: () => expect(map(f, inputs)).toEqual(inputs),
   });
 
