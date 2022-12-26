@@ -13,11 +13,22 @@ export type ParameterFunction = Parameter<EasingFunction> & {
   includeInGraph?: boolean;
   options?: FunctionExamples;
 };
-type Parameters = (ParameterNumber | ParameterFunction)[];
+export type ParameterNumberArray = Parameter<number[]> & {
+  options: Record<string, number[]>;
+};
+type Parameters = (
+  | ParameterNumber
+  | ParameterNumberArray
+  | ParameterFunction
+)[];
 
 export const isNumberParameter = (
   p: Parameter<unknown>
 ): p is ParameterNumber => typeof p.defaultValue === "number";
+export const isNumberArrayParameter = (
+  p: Parameter<unknown>
+): p is ParameterNumberArray =>
+  p.defaultValue instanceof Array && typeof p.defaultValue[0] === "number";
 
 export type ExampleType = "hidden" | "text" | "graph";
 

@@ -31,8 +31,15 @@ div {
 .section {
   margin-top: 1rem;
 }
+.MuiPaper-root::before {
+  background-color: transparent !important;
+}
 .MuiAccordionSummary-content {
   flex-flow: column nowrap;
+}
+.MuiAccordionSummary-expandIconWrapper {
+  position: absolute;
+  left: -10px;
 }
 
 .section > p {

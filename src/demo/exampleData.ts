@@ -7,9 +7,21 @@ import * as decorator from "../decorator";
 import * as util from "../util";
 import { EasingFunction } from "../types";
 
-const doubleLinear = decorator.scaleY(2)(preset.linear);
+const doubleLinear = decorator.scaleY(2.5)(preset.linear);
 const bigSine = decorator.shiftY(-0.5)(decorator.scaleY(1.5)(preset.sinWave));
 const bigCenteredSine = decorator.shiftY(-0.25)(decorator.scaleY(1.5)(sinWave));
+
+const discreteOptions = {
+  simple: [0, 0.2, 0.4, 0.6, 0.8, 1],
+  spreadingZigZag: [0, 0.2, 0.1, 0.4, 0.2, 0.6, 0.3, 0.8, 0.4, 1.0],
+  sin: util.render(10)(preset.sinWave),
+  wiggleStages: [
+    0, 0.02, 0, 0.02, 0, 0.1, 0.12, 0.1, 0.12, 0.1, 0.2, 0.22, 0.2, 0.22, 0.2,
+    0.3, 0.32, 0.3, 0.32, 0.3, 0.4, 0.42, 0.4, 0.42, 0.4, 0.5, 0.52, 0.5, 0.52,
+    0.5, 0.6, 0.62, 0.6, 0.62, 0.6, 0.7, 0.72, 0.7, 0.72, 0.7, 0.8, 0.82, 0.8,
+    0.82, 0.8, 0.9, 0.92, 0.9, 0.92, 0.9, 1, 1, 1, 1, 1,
+  ],
+};
 
 // By using the KeyTypeGuard, the demo is forced to create an example for each
 // function exported by the library.
@@ -50,12 +62,71 @@ const exampleData: [
         parameters: [{ label: "exponent", min: -2, max: 6, defaultValue: 3 }],
       },
       poly: {
-        f: factory.poly([2, -1, -2, 2]),
+        f: (a: number) => (b: number) => (c: number) => (d: number) =>
+          factory.poly([a, b, c, d]),
         title: "Polynomial",
         code: "factory.poly([c0,c1,...c(n-1)])",
         description:
           "Creates a polynomial equation using an array that represents the coefficients of each degree starting with x^0 up to x^n-1. For example, `poly([-8,6,-4,2])` would result in the equation `2x^2 - 4x^2 + 6x -8`",
         seeAlso: ["Exponential"],
+        parameters: [
+          {
+            label: "x^0 coefficient",
+            min: -2,
+            max: 2,
+            defaultValue: 0,
+            step: 0.1,
+          },
+          {
+            label: "x^1 coefficient",
+            min: -2,
+            max: 2,
+            defaultValue: -0.5,
+            step: 0.1,
+          },
+          {
+            label: "x^2 coefficient",
+            min: -2,
+            max: 2,
+            defaultValue: 1.2,
+            step: 0.1,
+          },
+          {
+            label: "x^3 coefficient",
+            min: -2,
+            max: 2,
+            defaultValue: 0.3,
+            step: 0.1,
+          },
+        ],
+      },
+      discrete: {
+        f: factory.discrete,
+        title: "Discrete",
+        code: "factory.discrete([a,b,c,...,n])",
+        description:
+          "Given a list of values, returns an easing function that returns those values based on the input to the function as a percentage of the list. Can be combined with util.render to create a function with a fixed number of steps.",
+        parameters: [
+          {
+            label: "Output Values",
+            defaultValue: discreteOptions.simple,
+            options: discreteOptions,
+          },
+        ],
+      },
+      discreteBlend: {
+        f: factory.discreteBlend,
+        title: "DiscreteBlend",
+        code: "factory.discreteBlend([a,b,c,...,n])",
+        description:
+          "Similar to `factory.discrete` except interpolates the position between each value.",
+        parameters: [
+          {
+            label: "Output Values",
+            defaultValue: discreteOptions.simple,
+            options: discreteOptions,
+          },
+        ],
       },
       sinusoid: {
         f: factory.sinusoid,
@@ -163,6 +234,47 @@ const exampleData: [
           "Same as clamp but automatically applies 0 and 1 as the range.",
         parameters: [{ label: "Input Function", defaultValue: preset.cubicIn }],
       },
+      forceStart0: {
+        f: decorator.forceStart0,
+        code: "forceStart0(f)",
+        title: "ForceStart0",
+        description:
+          "Ensures that the function will return 0 if the input value is 0 or less.",
+        parameters: [
+          {
+            label: "Input Function",
+            defaultValue: preset.sinWave,
+            options: { sinWave: preset.sinWave },
+          },
+        ],
+      },
+      forceEnd1: {
+        f: decorator.forceEnd1,
+        code: "forceEnd1(f)",
+        title: "ForceEnd1",
+        description:
+          "Ensures that the function will return 1 if the input value is 1 or more.",
+        parameters: [
+          {
+            label: "Input Function",
+            defaultValue: preset.sinWave,
+            options: { sinWave: preset.sinWave },
+          },
+        ],
+      },
+      forceStart0AndEnd1: {
+        f: decorator.forceStart0AndEnd1,
+        code: "forceStart0AndEnd1(f)",
+        title: "ForceStart0AndEnd1",
+        description: "Combines both forceStart0 and forceEnd1.",
+        parameters: [
+          {
+            label: "Input Function",
+            defaultValue: preset.sinWave,
+            options: { sinWave: preset.sinWave },
+          },
+        ],
+      },
       abs: {
         f: decorator.abs,
         title: "Absolute",
@@ -186,13 +298,13 @@ const exampleData: [
         description:
           "Any negative values produced by the function lose their negative sign.",
         parameters: [
-          { label: "low", min: -1, max: 1, defaultValue: 0.0, step: 0.05 },
-          { label: "high", min: -1, max: 1, defaultValue: 1.0, step: 0.05 },
+          { label: "low", min: -1, max: 1, defaultValue: 0.1, step: 0.05 },
+          { label: "high", min: -1, max: 1, defaultValue: 0.9, step: 0.05 },
           {
             label: "Input Function",
             defaultValue: bigCenteredSine,
             options: {
-              "linear - scaleY: 2": doubleLinear,
+              "linear - scaleY: 2.5": doubleLinear,
               "sine - scaleY: 1.5, shiftY: -0.25": bigCenteredSine,
             },
           },
@@ -209,12 +321,34 @@ const exampleData: [
             label: "Input Function",
             defaultValue: bigCenteredSine,
             options: {
-              "linear - scaleY: 2": doubleLinear,
+              "linear - scaleY: 2.5": doubleLinear,
               "sine - scaleY: 1.5, shiftY: -0.25": bigCenteredSine,
             },
           },
         ],
       },
+      stepped: {
+        f: decorator.stepped,
+        title: "Stepped",
+        code: "decorator.stepped(steps)(f)",
+        description:
+          "Converts the function into one that returns a fixed number of discrete values resulting in a stair-step pattern. The resulting animation is jerky as if there were a low framerate.",
+        parameters: [
+          {
+            label: "steps",
+            min: 2,
+            max: 30,
+            defaultValue: 10,
+            step: 1,
+          },
+          {
+            label: "Input Function",
+            defaultValue: preset.cubic,
+            includeInGraph: true,
+          },
+        ],
+      },
+
       shiftX: {
         f: decorator.shiftX,
         title: "ShiftX",
@@ -516,10 +650,10 @@ const exampleData: [
           },
         ],
       },
-      easeMiddle: {
-        f: decorator.easeMiddle,
-        title: "EaseMiddle",
-        code: "decorator.easeMiddle(f)",
+      easeOutIn: {
+        f: decorator.easeOutIn,
+        title: "EaseOutIn",
+        code: "decorator.easeOutIn(f)",
         description:
           "Takes a function that normally starts slow and ends fast (ease in) and returns a function that starts fast, goes slow, and ends fast (ease out in / ease middle).",
         parameters: [
@@ -529,6 +663,12 @@ const exampleData: [
             includeInGraph: true,
           },
         ],
+      },
+      easeMiddle: {
+        f: decorator.easeMiddle,
+        title: "EaseMiddle",
+        code: "decorator.easeMiddle(f)",
+        exampleType: "hidden",
       },
       wavify: {
         f: decorator.wavify,

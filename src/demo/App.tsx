@@ -14,6 +14,8 @@ import ArrowForwardIosSharpIcon from "@mui/icons-material/ArrowForwardIosSharp";
 import "./App.css";
 import { DemoExample } from "./demoTypes";
 import { filter } from "ramda";
+import color from "./color";
+import { isDarkMode } from "./demoUtil";
 
 const filterOutHiddenExamples = filter(
   ({ exampleType = "graph" }: DemoExample) => exampleType !== "hidden"
@@ -24,6 +26,8 @@ const getExamples = <T extends { examples: Record<string, DemoExample> }>(
 
 function App() {
   const [expanded, setExpanded] = useState<string>("");
+
+  const pallete = isDarkMode() ? color.dark : color.light;
 
   const onAccordionExpand =
     (panel: string) => (_event: React.SyntheticEvent, isExpanded: boolean) => {
@@ -42,7 +46,12 @@ function App() {
           style={{ display: "block" }}
           href="https://github.com/mimshwright/fease"
         >
-          <Button variant="outlined">View On GitHub</Button>
+          <Button
+            variant="outlined"
+            sx={{ fontFamily: "var(--font-headline)" }}
+          >
+            View On GitHub
+          </Button>
         </a>
       </header>
 
@@ -58,11 +67,22 @@ function App() {
             key={section.title}
             expanded={expanded === section.title}
             onChange={onAccordionExpand(section.title)}
+            sx={{
+              background: "transparent",
+              boxShadow: "none",
+              color: "inherit",
+            }}
           >
             <AccordionSummary
               className="section-summary"
               expandIcon={
-                <ArrowForwardIosSharpIcon sx={{ fontSize: "0.9rem" }} />
+                <ArrowForwardIosSharpIcon
+                  sx={{
+                    fontSize: "0.9rem",
+                    transform: "rotate(90deg)",
+                    fill: `#${pallete.foreground.toString(16)}`,
+                  }}
+                />
               }
             >
               <h2>{section.title}</h2>

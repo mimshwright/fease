@@ -1,3 +1,4 @@
+import { ErrorBoundary } from "react-error-boundary";
 import VisibilitySensor from "react-visibility-sensor";
 import { Stage } from "@inlet/react-pixi";
 import { EasingGraphComponent } from "pixi-easing-graph";
@@ -17,12 +18,15 @@ import { EasingFunction, EventuallyReturnsAnEasingFunction } from "../types";
 import {
   ExampleProps,
   isNumberParameter,
+  isNumberArrayParameter,
   Parameter,
   ParameterFunction,
   ParameterNumber,
+  ParameterNumberArray,
 } from "./demoTypes";
 import FunctionSelector from "./FunctionSelector";
 import NumberParameter from "./NumberParameter";
+import NumberArrayParameter from "./NumberArrayParameter";
 import { isDarkMode } from "./demoUtil";
 
 import color from "./color";
@@ -31,10 +35,13 @@ import "highlight.js/styles/shades-of-purple.css";
 
 type Stateful<T> = { value: T; setter: React.Dispatch<SetStateAction<T>> };
 export type StatefulParameterNumber = ParameterNumber & Stateful<number>;
+export type StatefulParameterNumberArray = ParameterNumberArray &
+  Stateful<number[]>;
 export type StatefulParameterFunction = ParameterFunction &
   Stateful<EasingFunction>;
 type StatefulParameters = (
   | StatefulParameterNumber
+  | StatefulParameterNumberArray
   | StatefulParameterFunction
 )[];
 
@@ -47,10 +54,16 @@ const isFunction = (param: unknown): boolean => typeof param === "function";
 const assignStateToParams = map(
   (
     param: Parameter<unknown>
-  ): StatefulParameterNumber | StatefulParameterFunction => {
+  ):
+    | StatefulParameterNumber
+    | StatefulParameterNumberArray
+    | StatefulParameterFunction => {
     if (isNumberParameter(param)) {
       const [value, setter] = useState<number>(() => param.defaultValue);
       return { ...param, value, setter } as StatefulParameterNumber;
+    } else if (isNumberArrayParameter(param)) {
+      const [value, setter] = useState<number[]>(() => param.defaultValue);
+      return { ...param, value, setter } as StatefulParameterNumberArray;
     }
     const [value, setter] = useState<EasingFunction>(
       () => param.defaultValue as EasingFunction
@@ -66,7 +79,7 @@ const extractValues = map(prop("value"));
 // applies the parameters to the function ultimately resulting in a fully-parameterized
 // EasingFunction.
 const applyParametersToFunction = (
-  parameterValues: (number | EasingFunction)[],
+  parameterValues: (number | number[] | EasingFunction)[],
   f: EventuallyReturnsAnEasingFunction
 ) =>
   reduce(
@@ -78,8 +91,8 @@ const applyParametersToFunction = (
         );
       } else {
         return call(
-          f as EventuallyReturnsAnEasingFunction<number>,
-          param as number
+          f as EventuallyReturnsAnEasingFunction<number | number[]>,
+          param as number | number[]
         );
       }
     },
@@ -124,6 +137,7 @@ const Example: React.FC<ExampleProps> = ({
       intervalCheck={true}
       intervalDelay={100}
       partialVisibility={true}
+      offset={{ top: -300, bottom: -300 }}
     >
       <div className="Example">
         <div className="description">
@@ -141,6 +155,10 @@ const Example: React.FC<ExampleProps> = ({
                     <NumberParameter
                       parameter={param as StatefulParameterNumber}
                     />
+                  ) : param.value instanceof Array ? (
+                    <NumberArrayParameter
+                      parameter={param as StatefulParameterNumberArray}
+                    />
                   ) : (
                     <FunctionSelector
                       parameter={param as StatefulParameterFunction}
@@ -154,34 +172,42 @@ const Example: React.FC<ExampleProps> = ({
 
         {exampleType === "graph" && isVisible && (
           <div className="example">
-            <Stage
-              width={400}
-              height={400}
-              options={{
-                resolution: 2,
-                backgroundAlpha: 0,
-              }}
+            <ErrorBoundary
+              FallbackComponent={() => (
+                <div>
+                  An error occurred trying to render a graph of this function.
+                </div>
+              )}
             >
-              <EasingGraphComponent
-                f={fs}
-                width={300}
-                height={300}
-                x={50}
-                y={50}
-                autoPlay={true}
-                loop={true}
-                style="line"
-                showExample={true}
-                exampleSize={15}
-                gridSubdivisions={true}
-                fillAlpha={0.5}
-                background={pallete.background}
-                foreground={pallete.foreground}
-                gridColor={pallete.gridColor}
-                markerColor={pallete.markerColor}
-                exampleColor={pallete.exampleColor}
-              />
-            </Stage>
+              <Stage
+                width={400}
+                height={400}
+                options={{
+                  resolution: 2,
+                  backgroundAlpha: 0,
+                }}
+              >
+                <EasingGraphComponent
+                  f={fs}
+                  width={300}
+                  height={300}
+                  x={50}
+                  y={50}
+                  autoPlay={true}
+                  loop={true}
+                  style="line"
+                  showExample={true}
+                  exampleSize={15}
+                  gridSubdivisions={true}
+                  fillAlpha={0.5}
+                  background={pallete.background}
+                  foreground={pallete.foreground}
+                  gridColor={pallete.gridColor}
+                  markerColor={pallete.markerColor}
+                  exampleColor={pallete.exampleColor}
+                />
+              </Stage>
+            </ErrorBoundary>
           </div>
         )}
       </div>
