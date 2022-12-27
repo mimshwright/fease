@@ -34,6 +34,11 @@ div {
 .MuiPaper-root::before {
   background-color: transparent !important;
 }
+.MuiPaper-root {
+  background: transparent !important;
+  box-shadow: none !important;
+  color: inherit !important;
+}
 .MuiAccordionSummary-content {
   flex-flow: column nowrap;
 }

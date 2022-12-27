@@ -9,9 +9,8 @@ import {
   __,
 } from "ramda";
 import { EasingFunction, Unary } from "../types";
-import { scaleX, scaleY } from "./scale";
-// import { scaleX } from "./scale";
-import { shiftX, shiftY } from "./shift";
+import { scaleX, scaleY } from "../decorator/scale";
+import { shiftX, shiftY } from "../decorator/shift";
 
 export const splitN = (fs: EasingFunction[]) => (x: number) =>
   pipe(

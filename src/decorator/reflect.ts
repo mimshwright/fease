@@ -1,5 +1,5 @@
 import { EasingFunction } from "./../types";
-import { splitScale } from "./split";
+import { splitScale } from "../combinator/split";
 import { pipe } from "ramda";
 import { scaleX, scaleY } from "./scale";
 import { shiftX, shiftY } from "./shift";

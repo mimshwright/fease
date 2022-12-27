@@ -1,4 +1,4 @@
-import { linear, cubic } from "./../preset/exp";
+import { linear, cubic } from "../preset/exp";
 import { describe, it, expect } from "vitest";
 import { expectAll, expectTestRange } from "../test/testUtil";
 import {

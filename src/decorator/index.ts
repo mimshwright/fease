@@ -2,7 +2,6 @@ export * from "./limit";
 export * from "./scale";
 export * from "./shift";
 export * from "./reflect";
-export * from "./split";
 export * from "./stepped";
 export * from "./ease";
 export * from "./wavify";

@@ -45,12 +45,18 @@ export interface ExampleProps {
 
 export type DemoExample = Omit<ExampleProps, "f"> & {
   f: unknown;
+  section: string;
+  subsection: string;
 };
 
 // By using the KeyTypeGuard, the demo is forced to create an example for each
 // function exported by the library.
-export type DemoSection<KeyTypeGuard> = {
+export type DemoSection = {
   title: string;
   description: string;
-  examples: Record<keyof KeyTypeGuard, DemoExample>;
+};
+
+export type DemoCollection<LibraryTypeGuard> = {
+  sections: Record<string, DemoSection>;
+  examples: Record<keyof LibraryTypeGuard, DemoExample>;
 };

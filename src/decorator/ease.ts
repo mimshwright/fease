@@ -1,6 +1,6 @@
 import { EasingFunction } from "../types";
 import { reflectXY } from "./reflect";
-import { sequence } from "./split";
+import { sequence } from "../combinator/split";
 
 export const easeOut = reflectXY;
 export const easeInOut = (f: EasingFunction) => sequence([f, easeOut(f)]);
