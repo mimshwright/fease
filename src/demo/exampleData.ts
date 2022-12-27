@@ -16,11 +16,14 @@ const discreteOptions = {
   spreadingZigZag: [0, 0.2, 0.1, 0.4, 0.2, 0.6, 0.3, 0.8, 0.4, 1.0],
   sin: util.render(10)(preset.sinWave),
   wiggleStages: [
-    0, 0.02, 0, 0.02, 0, 0.1, 0.12, 0.1, 0.12, 0.1, 0.2, 0.22, 0.2, 0.22, 0.2,
-    0.3, 0.32, 0.3, 0.32, 0.3, 0.4, 0.42, 0.4, 0.42, 0.4, 0.5, 0.52, 0.5, 0.52,
-    0.5, 0.6, 0.62, 0.6, 0.62, 0.6, 0.7, 0.72, 0.7, 0.72, 0.7, 0.8, 0.82, 0.8,
-    0.82, 0.8, 0.9, 0.92, 0.9, 0.92, 0.9, 1, 1, 1, 1, 1,
+    0, 0.05, 0, 0.02, 0, 0.2, 0.25, 0.2, 0.22, 0.2, 0.4, 0.45, 0.4, 0.42, 0.4,
+    0.6, 0.65, 0.6, 0.62, 0.6, 0.8, 0.85, 0.8, 0.82, 0.8, 1, 1, 1, 1, 1,
   ],
+};
+const oversizedOptions = {
+  "big linear": doubleLinear,
+  "big sine": bigCenteredSine,
+  "shifted linear": decorator.shiftY(0.3)(preset.linear),
 };
 
 // By using the KeyTypeGuard, the demo is forced to create an example for each
@@ -194,8 +197,12 @@ const exampleData: [
         code: "min(n)(f)",
         description: "Sets a minimum output value for the function.",
         parameters: [
-          { label: "lo", defaultValue: 0, min: -0.5, max: 1.5, step: 0.05 },
-          { label: "Input Function", defaultValue: preset.cubicIn },
+          { label: "lo", defaultValue: 0.2, min: -0.5, max: 1.5, step: 0.05 },
+          {
+            label: "Input Function",
+            defaultValue: preset.cubicIn,
+            includeInGraph: true,
+          },
         ],
       },
       max: {
@@ -204,8 +211,12 @@ const exampleData: [
         code: "max(hi)(f)",
         description: "Sets a maximum output value for the function.",
         parameters: [
-          { label: "hi", defaultValue: 1, min: -0.5, max: 1.5, step: 0.05 },
-          { label: "Input Function", defaultValue: preset.cubicIn },
+          { label: "hi", defaultValue: 0.7, min: -0.5, max: 1.5, step: 0.05 },
+          {
+            label: "Input Function",
+            defaultValue: preset.cubicIn,
+            includeInGraph: true,
+          },
         ],
       },
       clamp: {
@@ -215,15 +226,19 @@ const exampleData: [
         description:
           "Sets a minimum and maximum output value for the function.",
         parameters: [
-          { label: "low", defaultValue: 0.15, min: -0.5, max: 1.5, step: 0.05 },
+          { label: "low", defaultValue: 0.1, min: -0.5, max: 1.5, step: 0.05 },
           {
             label: "high",
-            defaultValue: 0.85,
+            defaultValue: 0.9,
             min: -0.5,
             max: 1.5,
             step: 0.05,
           },
-          { label: "Input Function", defaultValue: preset.sinWave },
+          {
+            label: "Input Function",
+            defaultValue: preset.sinWave,
+            includeInGraph: true,
+          },
         ],
       },
       clamp01: {
@@ -232,7 +247,14 @@ const exampleData: [
         code: "clamp(f)",
         description:
           "Same as clamp but automatically applies 0 and 1 as the range.",
-        parameters: [{ label: "Input Function", defaultValue: preset.cubicIn }],
+        parameters: [
+          {
+            label: "Input Function",
+            defaultValue: oversizedOptions["big linear"],
+            options: oversizedOptions,
+            includeInGraph: true,
+          },
+        ],
       },
       forceStart0: {
         f: decorator.forceStart0,
@@ -288,6 +310,7 @@ const exampleData: [
             options: {
               "sine - scaleY: 1.5, shiftY: -0.5": bigSine,
             },
+            includeInGraph: true,
           },
         ],
       },
@@ -307,6 +330,7 @@ const exampleData: [
               "linear - scaleY: 2.5": doubleLinear,
               "sine - scaleY: 1.5, shiftY: -0.25": bigCenteredSine,
             },
+            includeInGraph: true,
           },
         ],
       },
@@ -324,6 +348,7 @@ const exampleData: [
               "linear - scaleY: 2.5": doubleLinear,
               "sine - scaleY: 1.5, shiftY: -0.25": bigCenteredSine,
             },
+            includeInGraph: true,
           },
         ],
       },
@@ -337,7 +362,7 @@ const exampleData: [
           {
             label: "steps",
             min: 2,
-            max: 30,
+            max: 50,
             defaultValue: 10,
             step: 1,
           },
