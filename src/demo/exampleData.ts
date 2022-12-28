@@ -8,6 +8,22 @@ const doubleLinear = fease.scaleY(2.5)(fease.linear);
 const bigSine = fease.shiftY(-0.5)(fease.scaleY(1.5)(fease.sinWave));
 const bigCenteredSine = fease.shiftY(-0.25)(fease.scaleY(1.5)(sinWave));
 
+const optionsAlt = {
+  linear: fease.linear,
+  cos: fease.cosWave,
+  "fast cos": fease.scaleX(0.1)(fease.cosWave),
+  cubicIn: fease.cubicIn,
+  cubicOut: fease.cubicOut,
+};
+
+const optionsMerge = {
+  quadIn: fease.quadIn,
+  cubicIn: fease.cubicIn,
+  quarticIn: fease.quarticIn,
+  quinticIn: fease.quinticIn,
+  cubicOut: fease.cubicOut,
+};
+
 const discreteOptions = {
   simple: [0, 0.2, 0.4, 0.6, 0.8, 1],
   spreadingZigZag: [0, 0.2, 0.1, 0.4, 0.2, 0.6, 0.3, 0.8, 0.4, 1.0],
@@ -62,7 +78,7 @@ const exampleData: DemoCollection<typeof fease> = {
     threshold: {
       f: fease.threshold,
       section: "factory",
-      subsection: "",
+      subsection: "fundamental",
       title: "Threshold",
       code: "factory.threshold(breakpoint)",
       description:
@@ -81,7 +97,7 @@ const exampleData: DemoCollection<typeof fease> = {
     exp: {
       f: fease.exp,
       section: "factory",
-      subsection: "",
+      subsection: "fundamental",
       title: "Exponential",
       code: "factory.exp(exponent)",
       description: "Creates an exponential function with a given exponent.",
@@ -92,7 +108,7 @@ const exampleData: DemoCollection<typeof fease> = {
       f: (a: number) => (b: number) => (c: number) => (d: number) =>
         fease.poly([a, b, c, d]),
       section: "factory",
-      subsection: "",
+      subsection: "fundamental",
       title: "Polynomial",
       code: "factory.poly([c0,c1,...c(n-1)])",
       description:
@@ -305,6 +321,7 @@ const exampleData: DemoCollection<typeof fease> = {
           label: "Input Function",
           defaultValue: fease.sinWave,
           options: { sinWave: fease.sinWave },
+          includeInGraph: false,
         },
       ],
     },
@@ -321,6 +338,7 @@ const exampleData: DemoCollection<typeof fease> = {
           label: "Input Function",
           defaultValue: fease.sinWave,
           options: { sinWave: fease.sinWave },
+          includeInGraph: false,
         },
       ],
     },
@@ -336,6 +354,7 @@ const exampleData: DemoCollection<typeof fease> = {
           label: "Input Function",
           defaultValue: fease.sinWave,
           options: { sinWave: fease.sinWave },
+          includeInGraph: false,
         },
       ],
     },
@@ -627,11 +646,12 @@ const exampleData: DemoCollection<typeof fease> = {
       subsection: "ease",
       code: "decorator.easeOut(f)",
       description:
-        "Takes a function that normally starts slow and ends fast (ease in) and returns a function that starts fast and ends slow (ease out).",
+        "Takes a function that normally starts slow and ends fast (ease in) and returns a function that starts fast and ends slow (ease out). (Also, if you start with an easeOut function it will become an easeIn)",
       parameters: [
         {
           label: "Input Function",
-          defaultValue: fease.cubic,
+          defaultValue: optionsMerge.cubicIn,
+          options: optionsMerge,
           includeInGraph: true,
         },
       ],
@@ -647,13 +667,9 @@ const exampleData: DemoCollection<typeof fease> = {
       parameters: [
         {
           label: "Input Function",
-          defaultValue: fease.cubic,
+          defaultValue: optionsMerge.cubicIn,
+          options: optionsMerge,
           includeInGraph: true,
-          options: {
-            quadIn: fease.quadIn,
-            cubicIn: fease.cubicIn,
-            cubicOut: fease.cubicOut,
-          },
         },
       ],
     },
@@ -668,7 +684,8 @@ const exampleData: DemoCollection<typeof fease> = {
       parameters: [
         {
           label: "Input Function",
-          defaultValue: fease.cubic,
+          defaultValue: optionsMerge.cubicIn,
+          options: optionsMerge,
           includeInGraph: true,
         },
       ],
@@ -700,6 +717,25 @@ const exampleData: DemoCollection<typeof fease> = {
         {
           label: "Input Function",
           defaultValue: fease.cubic,
+          includeInGraph: true,
+        },
+      ],
+    },
+    wobblify: {
+      f: fease.wobblify,
+      title: "Wobblify",
+      section: "decorator",
+      subsection: "wavify",
+      description:
+        "Adds a sinusoid wobble effect to any function! Frequency is the number of oscillation in the input range of 0 and 1. Intensity is a number between 0 and 1 where 0 is no effect and 1 is only the waveform.",
+      code: "wobblify(freq)(intensity)(f)",
+      seeAlso: ["sinusoid", "mergeWithControl"],
+      parameters: [
+        { label: "frequency", defaultValue: 10, min: 0.3, max: 50, step: 0.1 },
+        { label: "intensity", defaultValue: 0.1, min: 0, max: 1, step: 0.01 },
+        {
+          label: "Input function",
+          defaultValue: fease.linear,
           includeInGraph: true,
         },
       ],
@@ -787,25 +823,218 @@ const exampleData: DemoCollection<typeof fease> = {
       f: (f: EasingFunction) => (g: EasingFunction) => (h: EasingFunction) =>
         fease.sequence([f, g, h]),
       section: "combinator",
-      subsection: "split",
+      subsection: "sequence",
       title: "Sequence",
       code: "decorator.sequence([f,g,h])",
       description:
         "Same as splitScale() except sequence scales each function to start at the end of the last one.",
       parameters: [
         {
-          label: "Input Function 1",
+          label: "Input Function f",
           defaultValue: fease.cubic,
           includeInGraph: true,
         },
         {
-          label: "Input Function 2",
+          label: "Input Function g",
           defaultValue: fease.linear,
           includeInGraph: true,
         },
         {
-          label: "Input Function 3",
+          label: "Input Function h",
           defaultValue: fease.cubic,
+          includeInGraph: true,
+        },
+      ],
+    },
+    transition: {
+      f: fease.transition,
+      section: "combinator",
+      subsection: "transition",
+      title: "Transition",
+      code: "transition(f)(g)",
+      description:
+        "Combines two funcitons and transitions between them based on the value of x.",
+      parameters: [
+        {
+          label: "Input function f",
+          defaultValue: optionsAlt.linear,
+          options: optionsAlt,
+          includeInGraph: true,
+        },
+        {
+          label: "Input function g",
+          defaultValue: optionsAlt.cos,
+          options: optionsAlt,
+          includeInGraph: true,
+        },
+      ],
+    },
+    transitionWithControl: {
+      f: fease.transitionWithControl,
+      section: "combinator",
+      subsection: "transition",
+      title: "Transition With Control Function",
+      code: "transitionWithControl(c)(f)(g)",
+      description:
+        "Combines two funcitons and transitions between them based on the value of x using a third function to control the mix.",
+      parameters: [
+        {
+          label: "Control function c",
+          defaultValue: fease.linear,
+          options: {
+            linear: fease.linear,
+            cubic: fease.cubic,
+            quintic: fease.quintic,
+            inverted: fease.reflectX(fease.linear),
+          },
+          includeInGraph: true,
+        },
+        {
+          label: "Input function f",
+          defaultValue: optionsAlt.linear,
+          options: optionsAlt,
+          includeInGraph: true,
+        },
+        {
+          label: "Input function g",
+          defaultValue: optionsAlt["fast cos"],
+          options: optionsAlt,
+          includeInGraph: true,
+        },
+      ],
+    },
+    add: {
+      f: fease.add,
+      section: "combinator",
+      subsection: "add",
+      title: "Add",
+      code: "add(f)(g)",
+      description:
+        "Combines two funcitons into one by adding their results. Note, the result may exceed the range of 0 and 1",
+      parameters: [
+        {
+          label: "Input function f",
+          defaultValue: optionsAlt.linear,
+          options: optionsAlt,
+          includeInGraph: true,
+        },
+        {
+          label: "Input function g",
+          defaultValue: optionsAlt["fast cos"],
+          options: optionsAlt,
+          includeInGraph: true,
+        },
+      ],
+    },
+    addN: {
+      f: (f: EasingFunction) => (g: EasingFunction) => (h: EasingFunction) =>
+        fease.addN([f, g, h]),
+      section: "combinator",
+      subsection: "add",
+      title: "AddN",
+      code: "addN([f,g,h])",
+      description:
+        "Combines any number of funcitons into one by adding their results. Note, the result may exceed the range of 0 and 1",
+      parameters: [
+        {
+          label: "Input function f",
+          defaultValue: optionsAlt.linear,
+          options: optionsAlt,
+          includeInGraph: true,
+        },
+        {
+          label: "Input function g",
+          defaultValue: optionsAlt.cubicIn,
+          options: optionsAlt,
+          includeInGraph: true,
+        },
+        {
+          label: "Input function h",
+          defaultValue: optionsAlt.cubicOut,
+          options: optionsAlt,
+          includeInGraph: true,
+        },
+      ],
+    },
+    merge: {
+      f: fease.merge,
+      section: "combinator",
+      subsection: "add",
+      title: "Merge",
+      code: "merge(f)(g)",
+      description:
+        "Combines two funcitons into one by adding their results. The output will be scaled so it stays within the normal range.",
+      parameters: [
+        {
+          label: "Input function f",
+          defaultValue: optionsAlt.linear,
+          options: optionsAlt,
+          includeInGraph: true,
+        },
+        {
+          label: "Input function g",
+          defaultValue: optionsAlt["fast cos"],
+          options: optionsAlt,
+          includeInGraph: true,
+        },
+      ],
+    },
+    mergeN: {
+      f: (f: EasingFunction) => (g: EasingFunction) => (h: EasingFunction) =>
+        fease.mergeN([f, g, h]),
+      section: "combinator",
+      subsection: "add",
+      title: "MergeN",
+      code: "mergeN([f,g,h])",
+      description:
+        "Combines any number of funcitons into one by adding their results. The output will be scaled so it stays within the normal range.",
+      parameters: [
+        {
+          label: "Input function f",
+          defaultValue: optionsAlt.linear,
+          options: optionsAlt,
+          includeInGraph: true,
+        },
+        {
+          label: "Input function g",
+          defaultValue: optionsAlt["fast cos"],
+          options: optionsAlt,
+          includeInGraph: true,
+        },
+        {
+          label: "Input function h",
+          defaultValue: optionsAlt.cos,
+          options: optionsAlt,
+          includeInGraph: true,
+        },
+      ],
+    },
+    mergeWithControl: {
+      f: fease.mergeWithControl,
+      section: "combinator",
+      subsection: "add",
+      title: "Merge with Control",
+      code: "mergeWithControl(c)(f)(g)",
+      description:
+        "Uses a control value to merge two functions into one. If the control value is closer to 0, f will be favored, if it's closer to 1, g will be favored. If it's exactly 0.5, this is equivalent to merge.",
+      parameters: [
+        {
+          label: "Control: f <-> g",
+          defaultValue: 0.1,
+          step: 0.01,
+          min: 0,
+          max: 1,
+        },
+        {
+          label: "Input function f",
+          defaultValue: optionsAlt.linear,
+          options: optionsAlt,
+          includeInGraph: true,
+        },
+        {
+          label: "Input function g",
+          defaultValue: optionsAlt["fast cos"],
+          options: optionsAlt,
           includeInGraph: true,
         },
       ],

@@ -1,8 +1,8 @@
 import { EasingFunction } from "./../types";
-import { splitScale } from "../combinator/split";
-import { pipe } from "ramda";
 import { scaleX, scaleY } from "./scale";
 import { shiftX, shiftY } from "./shift";
+import { pipe } from "ramda";
+import { splitScale } from "../combinator/split";
 
 export const reflectX = pipe(scaleX(-1), shiftX(1));
 // todo: alias reverse

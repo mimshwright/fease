@@ -1,15 +1,9 @@
 import { linear, cubic } from "../preset/exp";
 import { describe, it, expect } from "vitest";
-import { expectAll, expectTestRange } from "../test/testUtil";
-import {
-  repeat,
-  repeatSequence,
-  sequence,
-  split,
-  splitN,
-  splitScale,
-} from "./split";
-describe("Decorator - split", () => {
+import { expectAll } from "../test/testUtil";
+import { sequence, split, splitN, splitScale } from "./split";
+
+describe.concurrent("Decorator - split", () => {
   describe("splitN", () => {
     it("Should take an array of n easing funcitons and return a single funciton that switches between them over time.", () => {
       const splitEx = splitN([linear, cubic, linear]);
@@ -48,20 +42,6 @@ describe("Decorator - split", () => {
       expect(sequenceEx(0.5)).toBeCloseTo(cubic(0.5) / 3 + 1 / 3);
       expect(sequenceEx(5 / 6)).toBeCloseTo(5 / 6);
       expect(sequenceEx(6 / 6)).toBeCloseTo(6 / 6);
-    });
-  });
-  describe("repeat", () => {
-    it("Should repeat the same funciton multiple times similar to splitScale.", () => {
-      const repeatEx = repeat(3)(cubic);
-      const splitScaleEx = splitScale([cubic, cubic, cubic]);
-      expectTestRange(repeatEx).toMatchFunction(splitScaleEx);
-    });
-  });
-  describe("repeatSequence", () => {
-    it("Should repeat the same funciton multiple times similar to sequence.", () => {
-      const repeatSequenceEx = repeatSequence(3)(cubic);
-      const sequenceEx = sequence([cubic, cubic, cubic]);
-      expectTestRange(repeatSequenceEx).toMatchFunction(sequenceEx);
     });
   });
 });

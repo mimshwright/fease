@@ -36,6 +36,7 @@ function App() {
   const onAccordionExpand =
     (panel: string) => (_event: React.SyntheticEvent, isExpanded: boolean) => {
       setExpanded(isExpanded ? panel : "");
+      setExpandedSub("");
     };
   const onAccordionExpandSub =
     (panel: string) => (_event: React.SyntheticEvent, isExpanded: boolean) => {
@@ -104,7 +105,7 @@ function App() {
 
                   return (
                     <Accordion
-                      key={`${section}-${sub}`}
+                      key={`${section.title}-${subcategory}`}
                       className="section"
                       expanded={expandedSub === subcategory}
                       onChange={onAccordionExpandSub(subcategory)}
@@ -113,13 +114,14 @@ function App() {
                         className="section-summary"
                         expandIcon={Arrow()}
                       >
-                        <h4>{subcategory}</h4>
+                        <h3>{subcategory}</h3>
                       </AccordionSummary>
                       <AccordionDetails>
                         {sub.map((props) => (
                           <Example
                             key={props.title}
                             {...props}
+                            isVisible={expandedSub === subcategory}
                             f={props.f as EventuallyReturnsAnEasingFunction}
                           />
                         ))}

@@ -10,7 +10,7 @@ export type ParameterNumber = Parameter<number> & {
   step?: number;
 };
 export type ParameterFunction = Parameter<EasingFunction> & {
-  includeInGraph?: boolean;
+  includeInGraph: boolean;
   options?: FunctionExamples;
 };
 export type ParameterNumberArray = Parameter<number[]> & {
@@ -41,6 +41,7 @@ export interface ExampleProps {
   parameters?: Parameters;
   exampleType?: ExampleType;
   exampleText?: string;
+  isVisible?: boolean;
 }
 
 export type DemoExample = Omit<ExampleProps, "f"> & {
