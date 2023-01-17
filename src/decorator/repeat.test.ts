@@ -1,4 +1,4 @@
-import { describe } from "vitest";
+import { describe, it } from "vitest";
 import { sequence, splitScale } from "../combinator";
 import { cubic } from "../preset";
 import { expectTestRange } from "../test/testUtil";

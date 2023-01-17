@@ -108,6 +108,7 @@ const Example: React.FC<ExampleProps> = ({
   parameters = [],
   exampleType = "graph",
   exampleText = "",
+  alias = "",
   isVisible = false,
 }) => {
   // const [isVisible, setIsVisible] = useState(false);
@@ -141,9 +142,19 @@ const Example: React.FC<ExampleProps> = ({
     // >
     <div className="Example">
       <div className="description">
-        <h3>{title}</h3>
+        <h3>
+          {title}{" "}
+          <a href={"#" + title} style={{ fontSize: "10px" }}>
+            ⚓️
+          </a>
+        </h3>
         <p>{description}</p>
         <code>{code}</code>
+        {alias && (
+          <p>
+            Alias: <code>{alias}</code>
+          </p>
+        )}
         {exampleType === "text" && exampleText !== "" && (
           <Highlight className="javascript">{exampleText}</Highlight>
         )}
@@ -172,6 +183,7 @@ const Example: React.FC<ExampleProps> = ({
 
       {exampleType === "graph" && isVisible && (
         <div className="example">
+          <a id={title} />
           <ErrorBoundary
             FallbackComponent={() => (
               <div>
@@ -189,10 +201,10 @@ const Example: React.FC<ExampleProps> = ({
             >
               <EasingGraphComponent
                 f={fs}
-                width={300}
-                height={300}
+                width={150}
+                height={150}
                 x={50}
-                y={50}
+                y={150}
                 autoPlay={true}
                 loop={true}
                 style="line"

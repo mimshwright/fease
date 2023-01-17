@@ -11,7 +11,9 @@ const NumberParameter: React.FC<NumberParameterProps> = ({
   return (
     <div className="NumberParameter">
       <label>
-        {label}: <code>{value}</code>
+        <code>
+          {label}: {value}
+        </code>
       </label>
       <Slider
         value={value}

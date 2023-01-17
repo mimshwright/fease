@@ -27,20 +27,30 @@ const collectBySubsection = (list: DemoExample[]) =>
   collectBy(prop("subsection"), list);
 const examplesBySection = collectBySection(filterOutHiddenExamples(examples));
 
-function App() {
-  const [expanded, setExpanded] = useState<string>("");
-  const [expandedSub, setExpandedSub] = useState<string>("");
+interface Props {
+  category?: string;
+  subcategory?: string;
+}
 
+function App({ category = "", subcategory = "" }: Props) {
   const pallete = isDarkMode() ? color.dark : color.light;
+
+  const [expanded, setExpanded] = useState<string>(category);
+  const [expandedSub, setExpandedSub] = useState<string>(subcategory);
+
+  const setHistory = (cat: string, subcat: string) =>
+    window.history.pushState({ cat, subcat }, "", `/${cat}/${subcat}`);
 
   const onAccordionExpand =
     (panel: string) => (_event: React.SyntheticEvent, isExpanded: boolean) => {
       setExpanded(isExpanded ? panel : "");
       setExpandedSub("");
+      setHistory(panel, "");
     };
   const onAccordionExpandSub =
     (panel: string) => (_event: React.SyntheticEvent, isExpanded: boolean) => {
       setExpandedSub(isExpanded ? panel : "");
+      setHistory(expanded, panel);
     };
 
   const Arrow = () => (
@@ -77,7 +87,7 @@ function App() {
       <main>
         <div>
           <p className="libraryDescription">Library Description TBD.</p>
-          <p>Note: this project is in 🚧early pre-alpha!🚧</p>
+          <p>Note: this project is in 🚧early alpha!🚧</p>
         </div>
 
         {examplesBySection.map((examplesForSection) => {

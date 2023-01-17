@@ -1,6 +1,7 @@
 import { addIndex, identity, map, min, nth, pipe } from "ramda";
 import { Combinator2, CombinatorMany, EasingFunction } from "../types";
-import { scaleX, scaleY, shiftX, shiftY } from "../decorator";
+import { scaleX, scaleY } from "../decorator/scale";
+import { shiftX, shiftY } from "../decorator/shift";
 
 export const splitN: CombinatorMany = (fs) => (x: number) =>
   pipe(

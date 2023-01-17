@@ -41,6 +41,7 @@ export interface ExampleProps {
   parameters?: Parameters;
   exampleType?: ExampleType;
   exampleText?: string;
+  alias?: string;
   isVisible?: boolean;
 }
 

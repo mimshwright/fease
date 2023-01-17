@@ -1,8 +1,9 @@
 import * as fease from "../index";
 import { sinWave } from "./../preset/waveform";
-import { DemoCollection, DemoSection } from "./demoTypes";
+import { DemoCollection, DemoSection, DemoExample as D } from "./demoTypes";
 
 import { EasingFunction } from "../types";
+import { createPolyPresetListingSet } from "./exampleDataHelper";
 
 const doubleLinear = fease.scaleY(2.5)(fease.linear);
 const bigSine = fease.shiftY(-0.5)(fease.scaleY(1.5)(fease.sinWave));
@@ -230,6 +231,18 @@ const exampleData: DemoCollection<typeof fease> = {
       parameters: [
         { label: "shape", min: 0.0, max: 1, step: 0.01, defaultValue: 0.7 },
         { label: "frequency", min: 0.25, max: 20, defaultValue: 2 },
+      ],
+    },
+    overshoot: {
+      f: fease.overshoot,
+      section: "factory",
+      subsection: "overshoot",
+      title: "Overshoot",
+      code: "factory.overshoot(magnitude)",
+      description:
+        "A funciton that goes beyond the end point of 1.0, then comes back to rest at 1.0",
+      parameters: [
+        { label: "magnitude", min: 0, max: 1, step: 0.01, defaultValue: 0.5 },
       ],
     },
 
@@ -1045,136 +1058,53 @@ const exampleData: DemoCollection<typeof fease> = {
     linear: {
       f: fease.linear,
       section: "preset",
-      subsection: "polynomial",
+      subsection: "linear",
       title: "Linear",
       code: "preset.linear()",
       description: "TBD",
     },
-    quadIn: {
-      f: fease.quadIn,
-      section: "preset",
-      subsection: "polynomial",
-      title: "Quadratic",
-      code: "preset.quadIn()",
-      description: "TBD",
-      seeAlso: ["Exponential"],
-    },
-    cubicIn: {
-      f: fease.cubicIn,
-      section: "preset",
-      subsection: "polynomial",
-      exampleType: "hidden",
-      title: "CubicIn",
-      code: "",
-      description: "alias of cubic",
-    },
-    cubicOut: {
-      f: fease.cubicOut,
-      section: "preset",
-      subsection: "polynomial",
-      title: "CubicOut",
-      code: "preset.cubicOut()",
-      description: "TBD",
-    },
-    cubicInOut: {
-      f: fease.cubicInOut,
-      section: "preset",
-      subsection: "polynomial",
-      title: "CubicInOut",
-      code: "preset.cubicInOut()",
-      description: "TBD",
-      seeAlso: ["Exponential"],
-    },
-    cubicMiddle: {
-      f: fease.cubicMiddle,
-      section: "preset",
-      subsection: "polynomial",
-      title: "CubicMiddle",
-      code: "preset.cubicMiddle()",
-      description: "TBD",
-      seeAlso: ["Exponential"],
-    },
-    quarticIn: {
-      f: fease.quarticIn,
-      section: "preset",
-      subsection: "polynomial",
-      title: "QuarticIn",
-      code: "preset.quarticIn()",
-      description: "TBD",
-      seeAlso: ["Exponential"],
-    },
-    quinticIn: {
-      f: fease.quinticIn,
-      section: "preset",
-      subsection: "polynomial",
-      title: "QuinticIn",
-      code: "preset.quinticIn()",
-      description: "TBD",
-      seeAlso: ["Exponential"],
-    },
-    sexticIn: {
-      f: fease.sexticIn,
-      section: "preset",
-      subsection: "polynomial",
-      title: "SexticIn",
-      code: "preset.sexticIn()",
-      description: "TBD",
-      seeAlso: ["Exponential"],
-    },
 
-    // hidden
-
-    quad: {
-      f: fease.quad,
-      section: "preset",
-      subsection: "polynomial",
-      exampleType: "hidden",
-      title: "Quadratic",
-      code: "preset.quad()",
-      description: "TBD",
-      seeAlso: ["Exponential"],
-    },
-    cubic: {
-      f: fease.cubic,
-      section: "preset",
-      subsection: "polynomial",
-      exampleType: "hidden",
-      title: "Cubic",
-      code: "preset.cubic()",
-      description: "TBD",
-      seeAlso: ["Exponential"],
-      // aliases: ["cubicIn"],
-    },
-    quartic: {
-      f: fease.quartic,
-      section: "preset",
-      subsection: "polynomial",
-      exampleType: "hidden",
-      title: "Quartic",
-      code: "preset.quartic()",
-      description: "TBD",
-      seeAlso: ["Exponential"],
-    },
-    quintic: {
-      f: fease.quintic,
-      section: "preset",
-      subsection: "polynomial",
-      exampleType: "hidden",
-      title: "Quintic",
-      code: "preset.quintic()",
-      description: "TBD",
-      seeAlso: ["Exponential"],
-    },
-    sextic: {
-      f: fease.sextic,
-      section: "preset",
-      subsection: "polynomial",
-      exampleType: "hidden",
-      title: "Sextic",
-      code: "preset.sextic()",
-      description: "TBD",
-      seeAlso: ["Exponential"],
-    },
+    ...(createPolyPresetListingSet("quad", 2) as {
+      // To satisfy type checker which checks that all functions are documented.
+      quad: D;
+      quadIn: D;
+      quadOut: D;
+      quadInOut: D;
+      quadOutIn: D;
+      quadMiddle: D;
+    }),
+    ...(createPolyPresetListingSet("cubic", 3) as {
+      cubic: D;
+      cubicIn: D;
+      cubicOut: D;
+      cubicInOut: D;
+      cubicOutIn: D;
+      cubicMiddle: D;
+    }),
+    ...(createPolyPresetListingSet("quartic", 4) as {
+      quartic: D;
+      quarticIn: D;
+      quarticOut: D;
+      quarticInOut: D;
+      quarticOutIn: D;
+      quarticMiddle: D;
+    }),
+    ...(createPolyPresetListingSet("quintic", 5) as {
+      quintic: D;
+      quinticIn: D;
+      quinticOut: D;
+      quinticInOut: D;
+      quinticOutIn: D;
+      quinticMiddle: D;
+    }),
+    ...(createPolyPresetListingSet("sextic", 6) as {
+      sextic: D;
+      sexticIn: D;
+      sexticOut: D;
+      sexticInOut: D;
+      sexticOutIn: D;
+      sexticMiddle: D;
+    }),
 
     /// waves
 
