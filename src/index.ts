@@ -1,4 +1,5 @@
-export * as decorator from "./decorator";
-export * as factory from "./factory";
-export * as preset from "./preset";
-export * as util from "./util";
+export * from "./util";
+export * from "./decorator";
+export * from "./combinator";
+export * from "./factory";
+export * from "./preset";

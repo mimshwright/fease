@@ -10,7 +10,7 @@ export type ParameterNumber = Parameter<number> & {
   step?: number;
 };
 export type ParameterFunction = Parameter<EasingFunction> & {
-  includeInGraph?: boolean;
+  includeInGraph: boolean;
   options?: FunctionExamples;
 };
 export type ParameterNumberArray = Parameter<number[]> & {
@@ -41,16 +41,24 @@ export interface ExampleProps {
   parameters?: Parameters;
   exampleType?: ExampleType;
   exampleText?: string;
+  alias?: string;
+  isVisible?: boolean;
 }
 
 export type DemoExample = Omit<ExampleProps, "f"> & {
   f: unknown;
+  section: string;
+  subsection: string;
 };
 
 // By using the KeyTypeGuard, the demo is forced to create an example for each
 // function exported by the library.
-export type DemoSection<KeyTypeGuard> = {
+export type DemoSection = {
   title: string;
   description: string;
-  examples: Record<keyof KeyTypeGuard, DemoExample>;
+};
+
+export type DemoCollection<LibraryTypeGuard> = {
+  sections: Record<string, DemoSection>;
+  examples: Record<keyof LibraryTypeGuard, DemoExample>;
 };

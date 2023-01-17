@@ -1,5 +1,5 @@
 import { ErrorBoundary } from "react-error-boundary";
-import VisibilitySensor from "react-visibility-sensor";
+// import VisibilitySensor from "react-visibility-sensor";
 import { Stage } from "@inlet/react-pixi";
 import { EasingGraphComponent } from "pixi-easing-graph";
 import {
@@ -108,9 +108,11 @@ const Example: React.FC<ExampleProps> = ({
   parameters = [],
   exampleType = "graph",
   exampleText = "",
+  alias = "",
+  isVisible = false,
 }) => {
-  const [isVisible, setIsVisible] = useState(false);
-  const onVisibilityChange = (visible: boolean) => setIsVisible(visible);
+  // const [isVisible, setIsVisible] = useState(false);
+  // const onVisibilityChange = (visible: boolean) => setIsVisible(visible);
 
   const pallete = isDarkMode() ? color.dark : color.light;
   const paramsWithState = assignStateToParams(parameters) as StatefulParameters;
@@ -132,86 +134,96 @@ const Example: React.FC<ExampleProps> = ({
   ];
 
   return (
-    <VisibilitySensor
-      onChange={onVisibilityChange}
-      intervalCheck={true}
-      intervalDelay={100}
-      partialVisibility={true}
-      offset={{ top: -300, bottom: -300 }}
-    >
-      <div className="Example">
-        <div className="description">
-          <h3>{title}</h3>
-          <p>{description}</p>
-          <code>{code}</code>
-          {exampleType === "text" && exampleText !== "" && (
-            <Highlight className="javascript">{exampleText}</Highlight>
-          )}
-          {parameters.length > 0 && (
-            <div className="params">
-              {paramsWithState.map((param, i) => (
-                <div key={i}>
-                  {typeof param.value === "number" ? (
-                    <NumberParameter
-                      parameter={param as StatefulParameterNumber}
-                    />
-                  ) : param.value instanceof Array ? (
-                    <NumberArrayParameter
-                      parameter={param as StatefulParameterNumberArray}
-                    />
-                  ) : (
-                    <FunctionSelector
-                      parameter={param as StatefulParameterFunction}
-                    />
-                  )}
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
-
-        {exampleType === "graph" && isVisible && (
-          <div className="example">
-            <ErrorBoundary
-              FallbackComponent={() => (
-                <div>
-                  An error occurred trying to render a graph of this function.
-                </div>
-              )}
-            >
-              <Stage
-                width={400}
-                height={400}
-                options={{
-                  resolution: 2,
-                  backgroundAlpha: 0,
-                }}
-              >
-                <EasingGraphComponent
-                  f={fs}
-                  width={300}
-                  height={300}
-                  x={50}
-                  y={50}
-                  autoPlay={true}
-                  loop={true}
-                  style="line"
-                  showExample={true}
-                  exampleSize={15}
-                  gridSubdivisions={true}
-                  fillAlpha={0.5}
-                  background={pallete.background}
-                  foreground={pallete.foreground}
-                  gridColor={pallete.gridColor}
-                  markerColor={pallete.markerColor}
-                  exampleColor={pallete.exampleColor}
-                />
-              </Stage>
-            </ErrorBoundary>
+    // <VisibilitySensor
+    //   onChange={onVisibilityChange}
+    //   intervalCheck={true}
+    //   intervalDelay={100}
+    //   partialVisibility={true}
+    // >
+    <div className="Example">
+      <div className="description">
+        <h3>
+          {title}{" "}
+          <a href={"#" + title} style={{ fontSize: "10px" }}>
+            ⚓️
+          </a>
+        </h3>
+        <p>{description}</p>
+        <code>{code}</code>
+        {alias && (
+          <p>
+            Alias: <code>{alias}</code>
+          </p>
+        )}
+        {exampleType === "text" && exampleText !== "" && (
+          <Highlight className="javascript">{exampleText}</Highlight>
+        )}
+        {parameters.length > 0 && (
+          <div className="params">
+            {paramsWithState.map((param, i) => (
+              <div key={i}>
+                {typeof param.value === "number" ? (
+                  <NumberParameter
+                    parameter={param as StatefulParameterNumber}
+                  />
+                ) : param.value instanceof Array ? (
+                  <NumberArrayParameter
+                    parameter={param as StatefulParameterNumberArray}
+                  />
+                ) : (
+                  <FunctionSelector
+                    parameter={param as StatefulParameterFunction}
+                  />
+                )}
+              </div>
+            ))}
           </div>
         )}
       </div>
-    </VisibilitySensor>
+
+      {exampleType === "graph" && isVisible && (
+        <div className="example">
+          <a id={title} />
+          <ErrorBoundary
+            FallbackComponent={() => (
+              <div>
+                An error occurred trying to render a graph of this function.
+              </div>
+            )}
+          >
+            <Stage
+              width={400}
+              height={400}
+              options={{
+                resolution: 2,
+                backgroundAlpha: 0,
+              }}
+            >
+              <EasingGraphComponent
+                f={fs}
+                width={150}
+                height={150}
+                x={50}
+                y={150}
+                autoPlay={true}
+                loop={true}
+                style="line"
+                showExample={true}
+                exampleSize={15}
+                gridSubdivisions={true}
+                fillAlpha={0.5}
+                background={pallete.background}
+                foreground={pallete.foreground}
+                gridColor={pallete.gridColor}
+                markerColor={pallete.markerColor}
+                exampleColor={pallete.exampleColor}
+              />
+            </Stage>
+          </ErrorBoundary>
+        </div>
+      )}
+    </div>
+    // </VisibilitySensor>
   );
 };
 

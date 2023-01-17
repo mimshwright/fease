@@ -1,22 +1,49 @@
+import { pipe } from "ramda";
 import { easeInOut, easeMiddle, easeOut } from "./../decorator/ease";
-import { EasingFunction } from "../types";
+import { EasingFunction as EF } from "../types";
 import { exp } from "../factory";
 import { I } from "../util/fpUtil";
 
-// Exponentials
-export const linear: EasingFunction = I;
-export const quad = exp(2);
-export const cubic = exp(3);
-export const cubicOut = easeOut(cubic);
-export const cubicInOut = easeInOut(cubic);
-export const cubicMiddle = easeMiddle(cubic);
-export const quartic = exp(4);
-export const quintic = exp(5);
-export const sextic = exp(6);
+type ExpoSet = [EF, EF, EF, EF];
+type ExpoSetWithAliases = [EF, EF, EF, EF, EF, EF];
+const makeAliases = (array: ExpoSet): ExpoSetWithAliases => [
+  array[0],
+  ...array,
+  array[3],
+];
+const createExpoSet = pipe(
+  exp,
+  (f: EF) => [f, easeOut(f), easeInOut(f), easeMiddle(f)] as ExpoSet,
+  makeAliases
+);
 
-// Aliases
-export const quadIn = quad;
-export const cubicIn = cubic;
-export const quarticIn = quartic;
-export const quinticIn = quintic;
-export const sexticIn = sextic;
+// Exponentials
+export const linear: EF = I;
+export const [quad, quadIn, quadOut, quadInOut, quadOutIn, quadMiddle] =
+  createExpoSet(2);
+export const [cubic, cubicIn, cubicOut, cubicInOut, cubicOutIn, cubicMiddle] =
+  createExpoSet(3);
+export const [
+  quartic,
+  quarticIn,
+  quarticOut,
+  quarticInOut,
+  quarticOutIn,
+  quarticMiddle,
+] = createExpoSet(4);
+export const [
+  quintic,
+  quinticIn,
+  quinticOut,
+  quinticInOut,
+  quinticOutIn,
+  quinticMiddle,
+] = createExpoSet(5);
+export const [
+  sextic,
+  sexticIn,
+  sexticOut,
+  sexticInOut,
+  sexticOutIn,
+  sexticMiddle,
+] = createExpoSet(6);

@@ -8,4 +8,10 @@ export type EventuallyReturnsAnEasingFunction<T = unknown> =
 
 // export type TakesNumber<R> = Unary<number, R>;
 export type EasingFunctionDecorator = Unary<EasingFunction, EasingFunction>;
+export type Combinator2 = Unary<
+  EasingFunction,
+  Unary<EasingFunction, EasingFunction>
+>;
+export type CombinatorMany = Unary<EasingFunction[], EasingFunction>;
+
 export type ReturnsEasingFunction<P = unknown> = Unary<P, EasingFunction>;

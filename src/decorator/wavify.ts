@@ -1,4 +1,6 @@
-import { EasingFunction } from "../types";
+import { mergeWithControl } from "./../combinator/add";
+import { EasingFunction, EasingFunctionDecorator } from "../types";
+import { sinusoid } from "../factory";
 
 const isCloseTo = (a: number) => (b: number) => Math.abs(a - b) < 0.0001;
 
@@ -11,3 +13,9 @@ export const wavify =
 
     return f(proc);
   };
+
+export const wobblify =
+  (frequency: number) =>
+  (intensity: number): EasingFunctionDecorator =>
+  (f) =>
+    mergeWithControl(intensity)(f)(sinusoid(frequency));
