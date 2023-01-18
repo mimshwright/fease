@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.3.1](https://github.com/mimshwright/fease/compare/v0.3.0...v0.3.1) (2023-01-18)
+
+### Bug Fixes
+
+- **demo:** fix issue with deeplings on gh pages ([63aa92b](https://github.com/mimshwright/fease/commit/63aa92bad00e9fabb4f474ae12fba6f7eea2ea74)), closes [#8](https://github.com/mimshwright/fease/issues/8)
+
 ## [0.3.0](https://github.com/mimshwright/fease/compare/v0.2.2...v0.3.0) (2023-01-17)
 
 ### [0.2.2](https://github.com/mimshwright/fease/compare/v0.2.1...v0.2.2) (2022-12-27)
