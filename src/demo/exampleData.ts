@@ -42,27 +42,27 @@ const oversizedOptions = {
 
 const sections: Record<string, DemoSection> = {
   factory: {
-    title: "Factories",
+    title: "factory",
     description:
       "Factories are functions that create a new type of Easing Funciton. They may take 1 or more parameters.",
   },
   decorator: {
-    title: "Decorators",
+    title: "decorator",
     description:
       "Decorators take an Easing Function, and often 1 or more additional parameters, as input and return a modified function.",
   },
   combinator: {
-    title: "Combninator",
+    title: "combninator",
     description:
       "Combinators combine 2 or more easing functions to create, and often 1 or more additional parameters, as input and return a combined function.",
   },
   preset: {
-    title: "Presets",
+    title: "preset",
     description:
       "Commonly used easing functions that require no additional parameters. You'll find most of the well-known easing functions here.",
   },
   util: {
-    title: "Utility",
+    title: "util",
     description:
       "Additional helper utilities for working with easing functions.",
   },

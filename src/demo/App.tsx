@@ -39,7 +39,7 @@ function App({ category = "", subcategory = "" }: Props) {
   const [expandedSub, setExpandedSub] = useState<string>(subcategory);
 
   const setHistory = (cat: string, subcat: string) =>
-    window.history.pushState({ cat, subcat }, "", `/${cat}/${subcat}`);
+    window.history.pushState({ cat, subcat }, "", `#/${cat}/${subcat}`);
 
   const onAccordionExpand =
     (panel: string) => (_event: React.SyntheticEvent, isExpanded: boolean) => {

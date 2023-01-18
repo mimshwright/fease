@@ -104,6 +104,8 @@ const Example: React.FC<ExampleProps> = ({
   f,
   title,
   code,
+  section,
+  subsection,
   description = "",
   parameters = [],
   exampleType = "graph",
@@ -128,6 +130,8 @@ const Example: React.FC<ExampleProps> = ({
     map(assoc("f", __, { foreground: pallete.secondFunction }))
   )(paramsWithState) as EasingFunctionOptions[];
 
+  const link = `#/${section}/${subsection}/${title}`;
+
   const fs = [
     easingFunctionWithParametersApplied,
     ...additionalFunctionsToRender,
@@ -142,9 +146,10 @@ const Example: React.FC<ExampleProps> = ({
     // >
     <div className="Example">
       <div className="description">
+        <a id={link} />
         <h3>
           {title}{" "}
-          <a href={"#" + title} style={{ fontSize: "10px" }}>
+          <a href={link} style={{ fontSize: "10px" }}>
             ⚓️
           </a>
         </h3>
@@ -183,7 +188,6 @@ const Example: React.FC<ExampleProps> = ({
 
       {exampleType === "graph" && isVisible && (
         <div className="example">
-          <a id={title} />
           <ErrorBoundary
             FallbackComponent={() => (
               <div>

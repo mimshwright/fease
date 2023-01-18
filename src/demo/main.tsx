@@ -6,8 +6,8 @@ import "@fontsource/im-fell-french-canon";
 import "@fontsource/im-fell-french-canon/400-italic.css";
 import "./main.css";
 
-const path = window.location.pathname.slice(1);
-const [category, subcategory] = path.split("/");
+const path = window.location.hash;
+const [, category, subcategory] = path.split("/");
 
 render(
   <React.StrictMode>
