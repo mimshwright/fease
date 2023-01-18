@@ -43,12 +43,12 @@ export interface ExampleProps {
   exampleText?: string;
   alias?: string;
   isVisible?: boolean;
+  section: string;
+  subsection: string;
 }
 
 export type DemoExample = Omit<ExampleProps, "f"> & {
   f: unknown;
-  section: string;
-  subsection: string;
 };
 
 // By using the KeyTypeGuard, the demo is forced to create an example for each
