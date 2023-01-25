@@ -4,6 +4,8 @@ import { mirror } from "../decorator/reflect";
 import { wavify } from "../decorator/wavify";
 import { applyTo, pipe } from "ramda";
 import { threshold } from "./threshold";
+import { circular } from "./circular";
+import { easeInOut } from "../decorator/ease";
 
 const FULL_ROTATION_IN_RADIANS = Math.PI * 2;
 const wavifyFunction = (f: EasingFunction) => pipe(wavify, applyTo(f));
@@ -19,3 +21,8 @@ export const triangle: ReturnsEasingFunction<number> = wavifyFunction(
 );
 export const pulse = (offset: number) => wavifyFunction(threshold(offset));
 export const square = pulse(0.5);
+
+const circEaseInOut = easeInOut(circular());
+export const circle: ReturnsEasingFunction<number> = wavifyFunction(
+  mirror(circEaseInOut)
+);

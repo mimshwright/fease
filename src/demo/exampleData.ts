@@ -146,6 +146,15 @@ const exampleData: DemoCollection<typeof fease> = {
         },
       ],
     },
+    circular: {
+      f: fease.circular(),
+      section: "factory",
+      subsection: "circular",
+      title: "Circular",
+      code: "factory.circular()",
+      description:
+        "Creates a function that returns a path in the shape of a quarter circle.",
+    },
     discrete: {
       f: fease.discrete,
       section: "factory",
@@ -187,6 +196,16 @@ const exampleData: DemoCollection<typeof fease> = {
       description:
         "Creates a sine wave funciton with frequency as a number of in full oscillations between 0 and 1 input.",
       parameters: [{ label: "frequency", min: 0.25, max: 20, defaultValue: 1 }],
+    },
+    circle: {
+      f: fease.circle,
+      section: "factory",
+      subsection: "wave",
+      title: "Circle",
+      code: "factory.circle(freq)",
+      description:
+        "Creates a circular-shaped wave funciton with frequency as a number of in full oscillations between 0 and 1 input.",
+      parameters: [{ label: "frequency", min: 0.25, max: 20, defaultValue: 2 }],
     },
     sawtooth: {
       f: fease.sawtooth,
@@ -233,6 +252,7 @@ const exampleData: DemoCollection<typeof fease> = {
         { label: "frequency", min: 0.25, max: 20, defaultValue: 2 },
       ],
     },
+
     overshoot: {
       f: fease.overshoot,
       section: "factory",
@@ -1106,6 +1126,40 @@ const exampleData: DemoCollection<typeof fease> = {
       sexticMiddle: D;
     }),
 
+    /// circ
+    circ: {
+      f: fease.circ,
+      section: "preset",
+      subsection: "circular",
+      title: "Circular In",
+      code: "preset.circ()",
+      description: "Motion that follows the curve of a circle.",
+    },
+    circOut: {
+      f: fease.circOut,
+      section: "preset",
+      subsection: "circular",
+      title: "Circular Out",
+      code: "preset.circOut()",
+      description: "Motion that follows the curve of a circle.",
+    },
+    circInOut: {
+      f: fease.circInOut,
+      section: "preset",
+      subsection: "circular",
+      title: "Circular In Out",
+      code: "preset.circInOut()",
+      description: "Motion that follows the curve of a circle.",
+    },
+    circOutIn: {
+      f: fease.circOutIn,
+      section: "preset",
+      subsection: "circular",
+      title: "Circular Out In",
+      code: "preset.circOutIn()",
+      description: "Motion that follows the curve of a circle.",
+    },
+
     /// waves
 
     sinWave: {
@@ -1145,6 +1199,14 @@ const exampleData: DemoCollection<typeof fease> = {
       description: "TBD",
       seeAlso: ["repeat", "linear", "mirror", "wavify"],
     },
+    circWave: {
+      f: fease.circWave,
+      section: "preset",
+      subsection: "wave",
+      title: "Circle wave",
+      code: "preset.circWave()",
+      description: "TBD",
+    },
     render: {
       f: fease.render,
       section: "util",
@@ -1171,7 +1233,7 @@ const sineResults = util.render(5)(preset.sinWave);
       subsection: "functional",
       title: "P",
       code: "util.p(f)(g)",
-      exampleType: "text",
+      exampleType: "hidden",
       exampleText: `const add1 = x => x + 1;
 const add1ToFunctionResult = util.p(add1);
 const sum = nums => nums.reduce((sum, n) => sum + n, 0);
