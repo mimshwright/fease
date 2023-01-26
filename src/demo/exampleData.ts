@@ -76,6 +76,23 @@ const exampleData: DemoCollection<typeof fease> = {
     /////////////
     // FACTORY //
     /////////////
+    constant: {
+      f: fease.constant,
+      section: "factory",
+      subsection: "fundamental",
+      title: "Constant",
+      code: "factory.constant(value)",
+      description: "Creates a function that always returns a constant value.",
+      parameters: [
+        {
+          label: "value",
+          min: -1,
+          max: 2,
+          step: 0.01,
+          defaultValue: 0.5,
+        },
+      ],
+    },
     threshold: {
       f: fease.threshold,
       section: "factory",
@@ -263,6 +280,41 @@ const exampleData: DemoCollection<typeof fease> = {
         "A funciton that goes beyond the end point of 1.0, then comes back to rest at 1.0",
       parameters: [
         { label: "magnitude", min: 0, max: 1, step: 0.01, defaultValue: 0.5 },
+      ],
+    },
+
+    elastic: {
+      f: fease.elastic,
+      section: "factory",
+      subsection: "elastic",
+      title: "Elastic",
+      code: "factory.elastic(frequency)(energy)(stiffness)",
+      description: `Simulates a spring motion. The object will overshoot the endpoint and oscillate around the 1.0 mark before coming to rest.
+Frequency: sets how many full oscillations will occur in the course of 0 to 1. 
+Energy: the intensity of the wobbling. A value of 1 means it will oscillate between approx +/- 0.5 from the endpoint (or between 1.5 and 0.5) before settling at 1. 
+Stiffness: determines how fast the object comes to rest. 1 is roughly linear decay. Above 1 it will decay exponentially. Below 1, it will not fully decay and at 0 it doesn't decay at all.`,
+      parameters: [
+        {
+          label: "frequency",
+          min: 0.1,
+          max: 20,
+          step: 0.1,
+          defaultValue: 10,
+        },
+        {
+          label: "energy",
+          min: 0,
+          max: 5,
+          step: 0.1,
+          defaultValue: 1,
+        },
+        {
+          label: "stiffness",
+          min: 0,
+          max: 10,
+          step: 0.1,
+          defaultValue: 3,
+        },
       ],
     },
 
