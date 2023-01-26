@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.3.2](https://github.com/mimshwright/fease/compare/v0.3.1...v0.3.2) (2023-01-26)
+
+### Features
+
+- **circ:** added circle functions ([d8ffc9d](https://github.com/mimshwright/fease/commit/d8ffc9d0039dde64e5a263447a60faabf414f037))
+- **elastic:** added elastic factory ([cdaf349](https://github.com/mimshwright/fease/commit/cdaf349923536f43a804eb1c7f2adfeb5660163d))
+
 ### [0.3.1](https://github.com/mimshwright/fease/compare/v0.3.0...v0.3.1) (2023-01-18)
 
 ### Bug Fixes
