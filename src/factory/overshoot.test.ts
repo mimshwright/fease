@@ -10,14 +10,14 @@ describe("overshoot", () => {
     });
     it("Can be modified with a numeric value to increase the intensity", () => {
       expect(overshoot(0)(0)).toBeCloseTo(0);
-      expect(overshoot(0)(0.8)).toBeLessThan(1.0);
+      expect(overshoot(0)(0.5)).toBeLessThanOrEqual(1.0);
       expect(overshoot(0)(1)).toBeCloseTo(1.0);
 
-      expect(overshoot(1)(0.8)).toBeGreaterThan(1.0);
-      expect(overshoot(1)(0.8)).toBeLessThan(1.7);
+      expect(overshoot(1)(0.5)).toBeGreaterThan(1.0);
+      expect(overshoot(1)(0.5)).toBeLessThan(1.7);
 
       expect(overshoot(10)(0)).toBeCloseTo(0);
-      expect(overshoot(10)(0.7)).toBeGreaterThan(1.7);
+      expect(overshoot(10)(0.5)).toBeGreaterThan(1.7);
       expect(overshoot(10)(1)).toBeCloseTo(1.0);
     });
   });

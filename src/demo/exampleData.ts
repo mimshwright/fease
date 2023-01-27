@@ -270,19 +270,6 @@ const exampleData: DemoCollection<typeof fease> = {
       ],
     },
 
-    overshoot: {
-      f: fease.overshoot,
-      section: "factory",
-      subsection: "overshoot",
-      title: "Overshoot",
-      code: "factory.overshoot(magnitude)",
-      description:
-        "A funciton that goes beyond the end point of 1.0, then comes back to rest at 1.0",
-      parameters: [
-        { label: "magnitude", min: 0, max: 1, step: 0.01, defaultValue: 0.5 },
-      ],
-    },
-
     elastic: {
       f: fease.elastic,
       section: "factory",
@@ -315,6 +302,18 @@ Stiffness: determines how fast the object comes to rest. 1 is roughly linear dec
           step: 0.1,
           defaultValue: 3,
         },
+      ],
+    },
+    overshoot: {
+      f: fease.overshoot,
+      section: "factory",
+      subsection: "overshoot",
+      title: "Overshoot",
+      code: "factory.overshoot(magnitude)",
+      description:
+        "A funciton that goes beyond the end point of 1.0, then comes back to rest at 1.0",
+      parameters: [
+        { label: "magnitude", min: 0, max: 5, step: 0.01, defaultValue: 1 },
       ],
     },
 
