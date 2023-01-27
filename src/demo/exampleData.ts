@@ -52,7 +52,7 @@ const sections: Record<string, DemoSection> = {
       "Decorators take an Easing Function, and often 1 or more additional parameters, as input and return a modified function.",
   },
   combinator: {
-    title: "combninator",
+    title: "combinator",
     description:
       "Combinators combine 2 or more easing functions to create, and often 1 or more additional parameters, as input and return a combined function.",
   },
