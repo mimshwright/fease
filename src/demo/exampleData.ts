@@ -857,19 +857,24 @@ Stiffness: determines how fast the object comes to rest. 1 is roughly linear dec
       subsection: "wavify",
       code: "decorator.wavify(f)",
       description:
-        "Turns a function into a repeating waveform with a number for frequency for how many times it should repeat between the input values of 0 and 1.",
+        "Turns any function into a repeating waveform with a number for frequency for how many times it should repeat between the input values of 0 and 1. These functions will repeat when you use the scale decorators.",
       parameters: [
         {
           label: "Frequency",
-          defaultValue: 1,
+          defaultValue: 2,
           min: 0.2,
           max: 10,
           step: 0.1,
         },
         {
           label: "Input Function",
-          defaultValue: fease.cubic,
+          defaultValue: fease.cubicInOut,
           includeInGraph: true,
+          options: {
+            linear: fease.linear,
+            cubicInOut: fease.cubicInOut,
+            clamped: fease.clamp(0.2)(0.8)(fease.linear),
+          },
         },
       ],
     },
@@ -877,13 +882,31 @@ Stiffness: determines how fast the object comes to rest. 1 is roughly linear dec
       f: fease.wobblify,
       title: "Wobblify",
       section: "decorator",
-      subsection: "wavify",
+      subsection: "effects",
       description:
         "Adds a sinusoid wobble effect to any function! Frequency is the number of oscillation in the input range of 0 and 1. Intensity is a number between 0 and 1 where 0 is no effect and 1 is only the waveform.",
       code: "wobblify(freq)(intensity)(f)",
       seeAlso: ["sinusoid", "mergeWithControl"],
       parameters: [
         { label: "frequency", defaultValue: 10, min: 0.3, max: 50, step: 0.1 },
+        { label: "intensity", defaultValue: 0.1, min: 0, max: 1, step: 0.01 },
+        {
+          label: "Input function",
+          defaultValue: fease.linear,
+          includeInGraph: true,
+        },
+      ],
+    },
+    jitter: {
+      f: fease.jitter,
+      title: "Jitter",
+      section: "decorator",
+      subsection: "effects",
+      description:
+        "Adds a random jitter effect to any function. Intensity is a number between 0 and 1 where 0 is no effect and 1 is only the randomness.",
+      code: "jitter(intensity)(f)",
+      seeAlso: ["random", "mergeWithControl"],
+      parameters: [
         { label: "intensity", defaultValue: 0.1, min: 0, max: 1, step: 0.01 },
         {
           label: "Input function",

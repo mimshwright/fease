@@ -6,3 +6,4 @@ export * from "./stepped";
 export * from "./ease";
 export * from "./wavify";
 export * from "./repeat";
+export * from "./effects";
