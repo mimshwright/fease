@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.3.5](https://github.com/mimshwright/fease/compare/v0.3.4...v0.3.5) (2023-01-28)
+
+### Features
+
+- **jitter:** added jitter ([ae373d3](https://github.com/mimshwright/fease/commit/ae373d31905233bb3f769d4418211f0721bdd327))
+- **random:** Added random functions ([17363fa](https://github.com/mimshwright/fease/commit/17363fab7fdfe2013da7815005cd80c656bc236b))
+
+### Bug Fixes
+
+- **typo:** fixed typo in section name ([b985fcf](https://github.com/mimshwright/fease/commit/b985fcf1b74f0dc944ca84e0601e255eabc5d17f))
+
 ### [0.3.4](https://github.com/mimshwright/fease/compare/v0.3.3...v0.3.4) (2023-01-27)
 
 ### [0.3.3](https://github.com/mimshwright/fease/compare/v0.3.2...v0.3.3) (2023-01-27)

@@ -1,6 +1,6 @@
 {
   "name": "fease",
-  "version": "0.3.4",
+  "version": "0.3.5",
   "license": "mit",
   "private": false,
   "description": "A functional programming library for creating composable easing functions for animation.",
