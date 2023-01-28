@@ -1,3 +1,4 @@
+import { defaultExampleFunctions } from "./exampleFunctions";
 import * as fease from "../index";
 import { sinWave } from "./../preset/waveform";
 import { DemoCollection, DemoSection, DemoExample as D } from "./demoTypes";
@@ -9,6 +10,11 @@ const doubleLinear = fease.scaleY(2.5)(fease.linear);
 const bigSine = fease.shiftY(-0.5)(fease.scaleY(1.5)(fease.sinWave));
 const bigCenteredSine = fease.shiftY(-0.25)(fease.scaleY(1.5)(sinWave));
 
+const options = defaultExampleFunctions;
+const optionsWithRandom = {
+  ...options,
+  smoothRandom: fease.smoothRandom(1)(20),
+};
 const optionsAlt = {
   linear: fease.linear,
   cos: fease.cosWave,
@@ -109,6 +115,67 @@ const exampleData: DemoCollection<typeof fease> = {
           max: 1,
           step: 0.01,
           defaultValue: 0.5,
+        },
+      ],
+    },
+    random: {
+      f: fease.random,
+      section: "factory",
+      subsection: "random",
+      title: "Random",
+      code: "factory.random(seed)",
+      description:
+        "Creates a random number generator in the range of 0 and 1. The (optional) seed value allows you create consistent results that repeat the same random pattern every time. Subsequent calls to your random easing function will create new random results. Note, if the input value is 0, the result will always be 0 and input 1 will always return 1.",
+      parameters: [
+        {
+          label: "Seed",
+          min: 1,
+          max: 5,
+          step: 1,
+          defaultValue: 3,
+        },
+      ],
+    },
+    fixedRandom: {
+      f: fease.fixedRandom,
+      section: "factory",
+      subsection: "random",
+      title: "Fixed Random",
+      code: "factory.fixedRandom(seed)",
+      description:
+        "Like random, but should always return the same results (for each seed) each time you use the random function the same way.",
+      parameters: [
+        {
+          label: "Seed",
+          min: 1,
+          max: 5,
+          step: 1,
+          defaultValue: 3,
+        },
+      ],
+    },
+    smoothRandom: {
+      f: fease.smoothRandom,
+      section: "factory",
+      subsection: "random",
+      title: "Smooth Random",
+      code: "factory.smoothRandom(seed)(steps)",
+      description:
+        "Like random, but should always return the same results (for each seed) each time you use the random function the same way.",
+      parameters: [
+        {
+          label: "Seed",
+          min: 1,
+          max: 5,
+          step: 1,
+          defaultValue: 3,
+        },
+        {
+          label: "Steps",
+          min: 2,
+          max: 30,
+          step: 1,
+          defaultValue: 15,
         },
       ],
     },
@@ -516,13 +583,14 @@ Stiffness: determines how fast the object comes to rest. 1 is roughly linear dec
           label: "steps",
           min: 2,
           max: 50,
-          defaultValue: 10,
+          defaultValue: 20,
           step: 1,
         },
         {
           label: "Input Function",
           defaultValue: fease.cubic,
           includeInGraph: true,
+          options: optionsWithRandom,
         },
       ],
     },

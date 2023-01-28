@@ -117,6 +117,7 @@
     "vitest": "^0.26.1"
   },
   "dependencies": {
+    "alea": "^1.0.1",
     "ramda": "^0.28.0"
   }
 }
