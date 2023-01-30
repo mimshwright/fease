@@ -8,7 +8,6 @@ export * from "./overshoot";
 export * from "./circular";
 export * from "./elastic";
 
-// constant
 // tan
-// random
+// bounce
 // physics?

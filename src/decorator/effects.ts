@@ -1,14 +1,17 @@
 import { mergeWithControl } from "./../combinator/add";
 import { EasingFunctionDecorator } from "../types";
-import { random, sinusoid } from "../factory";
+import { random, sine } from "../factory";
 
 export const wobblify =
   (frequency: number) =>
   (intensity: number): EasingFunctionDecorator =>
   (f) =>
-    mergeWithControl(intensity)(f)(sinusoid(frequency));
+    mergeWithControl(intensity)(f)(sine(frequency));
 
 export const jitter =
   (intensity: number): EasingFunctionDecorator =>
   (f) =>
+    // TODO: replace with smooth random
     mergeWithControl(intensity)(f)(random());
+
+// TODO: scoot? merge with repeatSequenced (cubic)

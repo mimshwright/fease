@@ -5,17 +5,44 @@ import * as wave from "./wave";
 
 describe.concurrent("waveform factories", () => {
   describe("sinusoid()", () => {
+    it("Should generate a sine-like wave with phase and freqency.", () => {
+      expectAll([0, 1 / 4, 1 / 2, 1])(wave.sinusoid(0)(3)).toMatchFunction(
+        wave.sine(3)
+      );
+      expectAll([0, 1 / 4, 1 / 2, 1])(wave.sinusoid(0.25)(3)).toMatchFunction(
+        wave.cosine(3)
+      );
+      expectAll([0, 1 / 4, 1 / 2, 1])(wave.sinusoid(0.5)(3)).toMatchFunction(
+        (x: number) => 1 - wave.sine(3)(x)
+      );
+    });
+  });
+  describe("sine()", () => {
     it("Should generate a sine wave with input scaled by 2π so every 1 of input is a full rotation", () => {
-      const sin1 = wave.sinusoid(1);
+      const sin1 = wave.sine(1);
       expectAll([0, 1 / 4, 1 / 2, 1, 5 / 4, -1 / 4])(sin1).toBeCloseTo([
         0.5, 1, 0.5, 0.5, 1, 0,
       ]);
     });
     it("Should scale to complete `frequency` loops per 1 of input.", () => {
-      const sin4 = wave.sinusoid(4);
+      const sin4 = wave.sine(4);
       expectAll([0, 1 / 4 / 4, 1 / 2 / 4, 1 / 4, 5 / 4 / 4, -1 / 4 / 4])(
         sin4
       ).toBeCloseTo([0.5, 1, 0.5, 0.5, 1, 0]);
+    });
+  });
+  describe("cosine()", () => {
+    it("Should generate a cosine wave with input scaled by 2π so every 1 of input is a full rotation", () => {
+      const cos1 = wave.cosine(1);
+      expectAll([0, 1 / 4, 1 / 2, 1, 5 / 4, -1 / 4])(cos1).toBeCloseTo([
+        1, 0.5, 0, 1, 0.5, 0.5,
+      ]);
+    });
+    it("Should scale to complete `frequency` loops per 1 of input.", () => {
+      const cos4 = wave.cosine(4);
+      expectAll([0, 1 / 4 / 4, 1 / 2 / 4, 1 / 4, 5 / 4 / 4, -1 / 4 / 4])(
+        cos4
+      ).toBeCloseTo([1, 0.5, 0, 1, 0.5, 0.5]);
     });
   });
   describe("triangle()", () => {

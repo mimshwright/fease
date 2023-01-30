@@ -278,7 +278,30 @@ const exampleData: DemoCollection<typeof fease> = {
       title: "Sinusoid",
       code: "factory.sinusoid(freq)",
       description:
-        "Creates a sine wave funciton with frequency as a number of in full oscillations between 0 and 1 input.",
+        "Creates a sinusoid wave funciton with phase as a decimal number and frequency as a number of in full oscillations between 0 and 1 input.",
+      parameters: [
+        { label: "phase", min: -1, max: 1, defaultValue: 0, step: 0.01 },
+        { label: "frequency", min: 0.25, max: 20, defaultValue: 1 },
+      ],
+    },
+    sine: {
+      f: fease.sine,
+      section: "factory",
+      subsection: "wave",
+      title: "Sine",
+      code: "factory.sine(freq)",
+      description:
+        "Creates a sine wave funciton with frequency as a number of in full oscillations between 0 and 1 input. (Same as sinusoid but locks phase at 0)",
+      parameters: [{ label: "frequency", min: 0.25, max: 20, defaultValue: 1 }],
+    },
+    cosine: {
+      f: fease.cosine,
+      section: "factory",
+      subsection: "wave",
+      title: "Cosine",
+      code: "factory.cosine(freq)",
+      description:
+        "Creates a cosine wave funciton with frequency as a number of in full oscillations between 0 and 1 input. (Same as sinusoid but locks phase at 0.25)",
       parameters: [{ label: "frequency", min: 0.25, max: 20, defaultValue: 1 }],
     },
     circle: {

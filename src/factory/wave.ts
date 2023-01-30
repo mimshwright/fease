@@ -1,3 +1,4 @@
+import { shiftX } from "./../decorator/shift";
 import { EasingFunction, ReturnsEasingFunction } from "../types";
 import { I } from "../util/fpUtil";
 import { mirror } from "../decorator/reflect";
@@ -10,11 +11,17 @@ import { easeInOut } from "../decorator/ease";
 const FULL_ROTATION_IN_RADIANS = Math.PI * 2;
 const wavifyFunction = (f: EasingFunction) => pipe(wavify, applyTo(f));
 
-export const sinusoid: ReturnsEasingFunction<number> =
+export const sinusoid =
+  (phase: number): ReturnsEasingFunction<number> =>
   (frequency = 1) =>
-  (x: number) =>
-    Math.sin(x * frequency * FULL_ROTATION_IN_RADIANS) / 2 + 0.5;
+    shiftX(-phase / frequency)(
+      (x: number) =>
+        Math.sin(x * frequency * FULL_ROTATION_IN_RADIANS) / 2 + 0.5
+    );
 
+export const sine = sinusoid(0);
+
+export const cosine = sinusoid(0.25);
 export const sawtooth: ReturnsEasingFunction<number> = wavifyFunction(I);
 export const triangle: ReturnsEasingFunction<number> = wavifyFunction(
   mirror(I)
