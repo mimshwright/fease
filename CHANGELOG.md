@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.3.6](https://github.com/mimshwright/fease/compare/v0.3.5...v0.3.6) (2023-02-01)
+
+### Features
+
+- **bounce:** added a bounce factory ([e79f490](https://github.com/mimshwright/fease/commit/e79f490b80cc5931b06a6d25d520b34a81bc6f1e))
+- **limit:** added forceSmoothEnd function ([9488ec1](https://github.com/mimshwright/fease/commit/9488ec119dbf796cbfd7fdb33243d9a84f77dbc5))
+- **wave:** added phase to sinusoid and added cos generator ([648f934](https://github.com/mimshwright/fease/commit/648f9349e469eeb5fe3e2192d633cf6ac5566b4e))
+
 ### [0.3.5](https://github.com/mimshwright/fease/compare/v0.3.4...v0.3.5) (2023-01-28)
 
 ### Features
