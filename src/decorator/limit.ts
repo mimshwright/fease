@@ -1,4 +1,3 @@
-import { EasingFunctionDecorator } from "./../types";
 import {
   min as _min,
   max as _max,
@@ -11,7 +10,10 @@ import {
   lte,
   add,
 } from "ramda";
-import { EasingFunction } from "../types";
+import { EasingFunctionDecorator, EasingFunction } from "../types";
+import { exp } from "../factory/exponential";
+import { constant } from "../factory/constant";
+import { transitionWithControl } from "../combinator/transition";
 
 export const min = (minValue: number) => o(_max(minValue));
 export const max = (maxValue: number) => o(_min(maxValue));
@@ -47,3 +49,6 @@ export const constrain = (low: number) => (high: number) => {
   );
 };
 export const constrain01 = constrain(0)(1);
+
+export const forceSmoothEnd = (startPoint: number) => (f: EasingFunction) =>
+  transitionWithControl(exp(startPoint * 20))(f)(constant(1));

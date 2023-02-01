@@ -31,6 +31,12 @@ const optionsMerge = {
   cubicOut: fease.cubicOut,
 };
 
+const forceSmoothEndOptions = {
+  "slow linear": fease.scaleY(0.5)(fease.linear),
+  sinWave: fease.sinWave,
+  bounce: fease.bounce(2.5)(0.8),
+};
+
 const discreteOptions = {
   simple: [0, 0.2, 0.4, 0.6, 0.8, 1],
   spreadingZigZag: [0, 0.2, 0.1, 0.4, 0.2, 0.6, 0.3, 0.8, 0.4, 1.0],
@@ -548,6 +554,25 @@ Stiffness: determines how fast the object comes to rest. 1 is roughly linear dec
           defaultValue: fease.sinWave,
           options: { sinWave: fease.sinWave },
           includeInGraph: false,
+        },
+      ],
+    },
+    forceSmoothEnd: {
+      f: fease.forceSmoothEnd,
+      section: "decorator",
+      subsection: "limit",
+      title: "Force Smooth End",
+      code: "decorator.forceSmoothEnd(transitionPoint)(f)",
+      seeAlso: ["transitionWithControl"],
+      description:
+        "Causes the function to end on 1 but with a smooth transition.",
+      parameters: [
+        { label: "transitionPoint", defaultValue: 0.3, min: 0, max: 1 },
+        {
+          label: "Input Function",
+          defaultValue: forceSmoothEndOptions["slow linear"],
+          options: forceSmoothEndOptions,
+          includeInGraph: true,
         },
       ],
     },
