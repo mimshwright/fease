@@ -406,6 +406,25 @@ Stiffness: determines how fast the object comes to rest. 1 is roughly linear dec
         { label: "magnitude", min: 0, max: 5, step: 0.01, defaultValue: 1 },
       ],
     },
+    bounce: {
+      f: fease.bounce,
+      section: "factory",
+      subsection: "bounce",
+      title: "Bounce",
+      code: "factory.bounce(gravity)(bounciness)",
+      description:
+        "Simulates the physics of bouncing at the endpoint and coming to rest.",
+      parameters: [
+        { label: "gravity", min: 0, max: 25, step: 0.1, defaultValue: 10 },
+        {
+          label: "bounciness",
+          min: 0,
+          max: 1.1,
+          step: 0.01,
+          defaultValue: 0.75,
+        },
+      ],
+    },
 
     ///////////////
     // DECORATOR //
