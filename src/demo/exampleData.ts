@@ -1388,6 +1388,40 @@ Stiffness: determines how fast the object comes to rest. 1 is roughly linear dec
       description: "Motion that follows the curve of a circle.",
     },
 
+    // elastic
+    elasticIn: {
+      f: fease.elasticIn,
+      section: "preset",
+      subsection: "elastic",
+      title: "Elastic In",
+      code: "preset.elasticIn()",
+      description: "TBD",
+    },
+    elasticOut: {
+      f: fease.elasticOut,
+      section: "preset",
+      subsection: "elastic",
+      title: "Elastic Out",
+      code: "preset.elasticOut()",
+      description: "TBD",
+    },
+    elasticInOut: {
+      f: fease.elasticInOut,
+      section: "preset",
+      subsection: "elastic",
+      title: "Elastic In Out",
+      code: "preset.elasticInOut()",
+      description: "TBD",
+    },
+    elasticOutIn: {
+      f: fease.elasticOutIn,
+      section: "preset",
+      subsection: "elastic",
+      title: "Elastic Out In",
+      code: "preset.elasticOutIn()",
+      description: "TBD",
+    },
+
     // bounce
     bounceIn: {
       f: fease.bounceIn,

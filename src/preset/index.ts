@@ -1,6 +1,7 @@
 export * from "./exp";
 export * from "./waveform";
 export * from "./circ";
+export * from "./elastic";
 export * from "./bounce";
 
 /*
