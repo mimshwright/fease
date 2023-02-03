@@ -1,6 +1,7 @@
 export * from "./exp";
 export * from "./waveform";
 export * from "./circ";
+export * from "./bounce";
 
 /*
 Standard (Penner) Eases
@@ -32,7 +33,7 @@ Standard (Penner) Eases
 [ ] easeInElastic
 [ ] easeOutElastic
 [ ] easeInOutElastic
-[ ] easeInBounce
-[ ] easeOutBounce
-[ ] easeInOutBounce
+[x] easeInBounce
+[x] easeOutBounce
+[x] easeInOutBounce
 */

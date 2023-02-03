@@ -52,3 +52,7 @@ export const constrain01 = constrain(0)(1);
 
 export const forceSmoothEnd = (startPoint: number) => (f: EasingFunction) =>
   transitionWithControl(exp(startPoint * 20))(f)(constant(1));
+
+// Maybe leave this out for now. Not sure it works that well and not sure when it would be used.
+// export const forceSmoothStart = (startPoint: number) => (f: EasingFunction) =>
+// transitionWithControl(exp(1 / (startPoint * 20)))(constant(0))(f);

@@ -576,6 +576,25 @@ Stiffness: determines how fast the object comes to rest. 1 is roughly linear dec
         },
       ],
     },
+    // forceSmoothStart: {
+    //   f: fease.forceSmoothStart,
+    //   section: "decorator",
+    //   subsection: "limit",
+    //   title: "Force Smooth Start",
+    //   code: "decorator.forceSmoothStart(transitionPoint)(f)",
+    //   seeAlso: ["transitionWithControl"],
+    //   description:
+    //     "Causes the function to always start on 0 but with a smooth transition.",
+    //   parameters: [
+    //     { label: "transitionPoint", defaultValue: 0.3, min: 0, max: 1 },
+    //     {
+    //       label: "Input Function",
+    //       defaultValue: forceSmoothEndOptions["slow linear"],
+    //       options: forceSmoothEndOptions,
+    //       includeInGraph: true,
+    //     },
+    //   ],
+    // },
     abs: {
       f: fease.abs,
       section: "decorator",
@@ -1367,6 +1386,40 @@ Stiffness: determines how fast the object comes to rest. 1 is roughly linear dec
       title: "Circular Out In",
       code: "preset.circOutIn()",
       description: "Motion that follows the curve of a circle.",
+    },
+
+    // bounce
+    bounceIn: {
+      f: fease.bounceIn,
+      section: "preset",
+      subsection: "bounce",
+      title: "Bounce In",
+      code: "preset.bounceIn()",
+      description: "TBD",
+    },
+    bounceOut: {
+      f: fease.bounceOut,
+      section: "preset",
+      subsection: "bounce",
+      title: "Bounce Out",
+      code: "preset.bounceOut()",
+      description: "TBD",
+    },
+    bounceInOut: {
+      f: fease.bounceInOut,
+      section: "preset",
+      subsection: "bounce",
+      title: "Bounce In Out",
+      code: "preset.bounceInOut()",
+      description: "TBD",
+    },
+    bounceOutIn: {
+      f: fease.bounceOutIn,
+      section: "preset",
+      subsection: "bounce",
+      title: "Bounce Out In",
+      code: "preset.bounceOutIn()",
+      description: "TBD",
     },
 
     /// waves
