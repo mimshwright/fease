@@ -1422,6 +1422,40 @@ Stiffness: determines how fast the object comes to rest. 1 is roughly linear dec
       description: "TBD",
     },
 
+    // back
+    backIn: {
+      f: fease.backIn,
+      section: "preset",
+      subsection: "back",
+      title: "Back In",
+      code: "preset.backIn()",
+      description: "TBD",
+    },
+    backOut: {
+      f: fease.backOut,
+      section: "preset",
+      subsection: "back",
+      title: "Back Out",
+      code: "preset.backOut()",
+      description: "TBD",
+    },
+    backInOut: {
+      f: fease.backInOut,
+      section: "preset",
+      subsection: "back",
+      title: "Back In Out",
+      code: "preset.backInOut()",
+      description: "TBD",
+    },
+    backOutIn: {
+      f: fease.backOutIn,
+      section: "preset",
+      subsection: "back",
+      title: "Back Out In",
+      code: "preset.backOutIn()",
+      description: "TBD",
+    },
+
     // bounce
     bounceIn: {
       f: fease.bounceIn,
