@@ -1,7 +1,7 @@
-import { easeInOut, easeMiddle, easeOut } from "../decorator/ease";
+import { createEaseSet } from "../util";
 import { bounce as bounceFactory } from "./../factory/bounce";
 
-export const bounceOut = bounceFactory(2.5)(0.55);
-export const bounceIn = easeOut(bounceOut);
-export const bounceInOut = easeInOut(bounceIn);
-export const bounceOutIn = easeMiddle(bounceIn);
+export const [bounceIn, bounceOut, bounceInOut, bounceOutIn] = createEaseSet(
+  bounceFactory(2.5)(0.55),
+  true
+);

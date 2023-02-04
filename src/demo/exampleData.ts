@@ -1355,12 +1355,12 @@ Stiffness: determines how fast the object comes to rest. 1 is roughly linear dec
     }),
 
     /// circ
-    circ: {
-      f: fease.circ,
+    circIn: {
+      f: fease.circIn,
       section: "preset",
       subsection: "circular",
       title: "Circular In",
-      code: "preset.circ()",
+      code: "preset.circIn()",
       description: "Motion that follows the curve of a circle.",
     },
     circOut: {
@@ -1537,6 +1537,13 @@ Stiffness: determines how fast the object comes to rest. 1 is roughly linear dec
       code: "preset.circWave()",
       description: "TBD",
     },
+
+    /////////////
+    // UTILITY //
+    /////////////
+
+    // easing
+
     render: {
       f: fease.render,
       section: "util",
@@ -1553,10 +1560,29 @@ const sineResults = util.render(5)(preset.sinWave);
       description:
         "Takes a number of steps and a function. Generates a range of input values based on steps from 0 to 1 then maps the function over those values to get an array of results. Regardless of steps, the input always includes at least 2 values, [0, 1].",
     },
+    createEaseSet: {
+      f: fease.createEaseSet,
+      section: "util",
+      subsection: "easing",
+      title: "Create Ease Set",
+      code: "util.createEaseSet(easeInFunction, useEaseOut?)",
+      description:
+        "Takes an easeIn function and creates an in, out, in-out, and out-in version of a function. The results are returned as a 4-tuple (array). If `useEaseOut` is true, the input value should be easeOut instead of easeIn.",
+      exampleType: "text",
+      exampleText: `// quad is an ease in
+const quad = (x)=> x ** 2;
+const [quadIn, quadOut, quadInOut, quadOutIn] = util.createEaseSet(quad);
 
-    /////////////
-    // UTILITY //
-    /////////////
+// or
+
+// el is an ease out
+const el = elastic(3)(2)(2.5); 
+// Set second parameter to true to convert an easeOut
+const [elasticIn, elasticOut, elasticInOut, elasticOutIn] = util.createEaseSet(el, true);`,
+    },
+
+    // functional
+
     p: {
       f: fease.p,
       section: "util",

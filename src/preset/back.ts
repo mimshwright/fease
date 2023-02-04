@@ -1,7 +1,7 @@
-import { easeInOut, easeMiddle, easeOut } from "../decorator/ease";
+import { createEaseSet } from "./../util/easeUtil";
 import { overshoot as backFactory } from "./../factory/overshoot";
 
-export const backOut = backFactory(1);
-export const backIn = easeOut(backOut);
-export const backInOut = easeInOut(backIn);
-export const backOutIn = easeMiddle(backIn);
+export const [backIn, backOut, backInOut, backOutIn] = createEaseSet(
+  backFactory(1),
+  true
+);

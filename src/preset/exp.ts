@@ -1,24 +1,21 @@
 import { pipe } from "ramda";
-import { easeInOut, easeMiddle, easeOut } from "./../decorator/ease";
-import { EasingFunction as EF } from "../types";
+import {
+  EasingFunction,
+  EasingFunctionSet,
+  EasingFunctionSetWithAliases,
+} from "../types";
 import { exp } from "../factory";
 import { I } from "../util/fpUtil";
+import { createEaseSet } from "../util";
 
-type ExpoSet = [EF, EF, EF, EF];
-type ExpoSetWithAliases = [EF, EF, EF, EF, EF, EF];
-const makeAliases = (array: ExpoSet): ExpoSetWithAliases => [
-  array[0],
-  ...array,
-  array[3],
-];
-const createExpoSet = pipe(
-  exp,
-  (f: EF) => [f, easeOut(f), easeInOut(f), easeMiddle(f)] as ExpoSet,
-  makeAliases
-);
+const makeAliases = (
+  array: EasingFunctionSet
+): EasingFunctionSetWithAliases => [array[0], ...array, array[3]];
+
+const createExpoSet = pipe(exp, createEaseSet, makeAliases);
 
 // Exponentials
-export const linear: EF = I;
+export const linear: EasingFunction = I;
 export const [quad, quadIn, quadOut, quadInOut, quadOutIn, quadMiddle] =
   createExpoSet(2);
 export const [cubic, cubicIn, cubicOut, cubicInOut, cubicOutIn, cubicMiddle] =
