@@ -1,6 +1,6 @@
 import { multiply, o, pipe, __ } from "ramda";
 import { EasingFunctionDecorator } from "../types";
-import { p } from "../util";
+import { p } from "../util/fpUtil";
 
 // TODO: aliases
 // scaleX = scaleDuration = 1/scaleFreq

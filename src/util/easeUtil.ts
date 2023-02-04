@@ -1,5 +1,5 @@
 import { times, max } from "ramda";
-import { easeInOut, easeMiddle, easeOut } from "../decorator";
+import { easeInOut, easeMiddle, easeOut } from "../decorator/ease";
 import { EasingFunction, EasingFunctionSet } from "../types";
 
 export const render = (steps: number) => (f: EasingFunction) =>

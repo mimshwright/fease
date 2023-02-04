@@ -1,6 +1,6 @@
 import { describe, it } from "vitest";
-import { sequence, splitScale } from "../combinator";
-import { cubic } from "../preset";
+import { sequence, splitScale } from "../combinator/split";
+import { cubic } from "../preset/exp";
 import { expectTestRange } from "../test/testUtil";
 import { repeat, repeatSequence } from "./repeat";
 
