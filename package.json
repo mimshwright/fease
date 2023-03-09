@@ -73,7 +73,6 @@
     "@inlet/react-pixi": "^6.8.0",
     "@mui/icons-material": "^5.11.0",
     "@mui/material": "^5.10.17",
-    "@types/jest": "^29.2.3",
     "@types/node": "^18.11.9",
     "@types/ramda": "^0.28.20",
     "@types/react": "^18.0.26",
