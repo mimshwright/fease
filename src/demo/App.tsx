@@ -36,12 +36,14 @@ type Props = {
   deepLink?: string;
 };
 
-const App: React.FC<Props> = ({ deepLink = "exp" }) => {
+const App: React.FC<Props> = ({ deepLink = "" }) => {
   const themeColors = isDarkMode() ? color.dark : color.light;
 
   const initialDemo =
-    (exampleData.examples as Record<string, DemoExample>)[deepLink] ??
-    exampleData.examples.exp;
+    Object.values(exampleData.examples as Record<string, DemoExample>).filter(
+      (example: DemoExample) => example.title === deepLink
+    )[0] ?? exampleData.examples.exp;
+
   const [currentDemo, setCurrentDemo] = useState<DemoExample>(initialDemo);
   const [sortBy, setSortBy] = useState<"section" | "alpha">("section");
   const library =
