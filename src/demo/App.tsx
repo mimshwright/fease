@@ -42,7 +42,7 @@ const App: React.FC<Props> = ({ deepLink = "" }) => {
   const initialDemo =
     Object.values(exampleData.examples as Record<string, DemoExample>).filter(
       (example: DemoExample) => example.title === deepLink
-    )[0] ?? exampleData.examples.exp;
+    )[0] ?? exampleData.examples.bounce;
 
   const [currentDemo, setCurrentDemo] = useState<DemoExample>(initialDemo);
   const [sortBy, setSortBy] = useState<"section" | "alpha">("section");
