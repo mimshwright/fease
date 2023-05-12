@@ -26,6 +26,7 @@
   grid-area: description;
   padding-left: 50px;
   width: 90%;
+  max-width: 480px;
 }
 
 .Example .description p {
