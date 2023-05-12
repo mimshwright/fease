@@ -1,7 +1,7 @@
 #root {
   max-width: 100%;
   margin: 0 auto;
-  padding: 4rem 2rem;
+  padding: 0rem 2rem 0rem;
 }
 
 .App {
@@ -21,9 +21,7 @@ header {
   justify-content: space-between;
   align-items: baseline;
   grid-auto-columns: auto;
-  grid-template-areas:
-    "title github"
-    "description description";
+  grid-template-areas: "title description github";
 }
 
 header h1 {
@@ -73,6 +71,9 @@ div {
   display: grid;
   grid-template-rows: auto 1fr;
 }
+.library .sort {
+  font-size: 0.8rem;
+}
 .library .functionList {
   overflow-y: auto;
   overflow-x: hidden;
@@ -86,7 +87,7 @@ div {
 } */
 
 .section-summary > p {
-  font-size: 1.5em;
+  font-size: 1rem;
 }
 
 /* .section-list {
