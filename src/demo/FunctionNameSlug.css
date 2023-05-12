@@ -1,0 +1,18 @@
+.FunctionNameSlug {
+  display: inline-block;
+  padding: 0.1rem 0.5rem;
+}
+.FunctionNameSlug:hover {
+  background: var(--color-alt);
+  color: var(--color-fg-2);
+  cursor: pointer;
+}
+.FunctionNameSlug.selected {
+  background: var(--color-alt);
+  color: var(--color-fg-selected);
+  cursor: default;
+}
+.FunctionNameSlug {
+  background: inherit;
+  color: inherit;
+}

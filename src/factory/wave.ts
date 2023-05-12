@@ -20,7 +20,6 @@ export const sinusoid =
     );
 
 export const sine = sinusoid(0);
-
 export const cosine = sinusoid(0.25);
 export const sawtooth: ReturnsEasingFunction<number> = wavifyFunction(I);
 export const triangle: ReturnsEasingFunction<number> = wavifyFunction(

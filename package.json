@@ -68,7 +68,6 @@
   "devDependencies": {
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
-    "@fontsource/im-fell-french-canon": "^4.5.8",
     "@fontsource/yatra-one": "^4.5.10",
     "@inlet/react-pixi": "^6.8.0",
     "@mui/icons-material": "^5.11.0",
@@ -116,6 +115,7 @@
     "vitest": "^0.26.1"
   },
   "dependencies": {
+    "@fontsource/noto-serif": "^4.5.11",
     "alea": "^1.0.1",
     "ramda": "^0.28.0"
   }

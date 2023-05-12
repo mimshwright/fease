@@ -1,7 +1,26 @@
-import { ErrorBoundary } from "react-error-boundary";
-// import VisibilitySensor from "react-visibility-sensor";
-import { Stage } from "@inlet/react-pixi";
-import { EasingGraphComponent } from "pixi-easing-graph";
+import React, { useState, SetStateAction } from "react";
+import FunctionSelector from "./FunctionSelector";
+import NumberParameter from "./NumberParameter";
+import NumberArrayParameter from "./NumberArrayParameter";
+// import Graph from "./Graph";
+import Highlight from "react-highlight";
+
+import "highlight.js/styles/shades-of-purple.css";
+import "./Example.css";
+
+import { EasingFunctionOptions } from "pixi-easing-graph/dist/EasingGraph";
+import { EasingFunction, EventuallyReturnsAnEasingFunction } from "../types";
+import {
+  ExampleProps,
+  isNumberParameter,
+  isNumberArrayParameter,
+  Parameter,
+  ParameterFunction,
+  ParameterNumber,
+  ParameterNumberArray,
+  ThemeColors,
+} from "./demoTypes";
+
 import {
   assoc,
   call,
@@ -13,25 +32,9 @@ import {
   reduce,
   __,
 } from "ramda";
-import React, { useState, SetStateAction } from "react";
-import { EasingFunction, EventuallyReturnsAnEasingFunction } from "../types";
-import {
-  ExampleProps,
-  isNumberParameter,
-  isNumberArrayParameter,
-  Parameter,
-  ParameterFunction,
-  ParameterNumber,
-  ParameterNumberArray,
-} from "./demoTypes";
-import FunctionSelector from "./FunctionSelector";
-import NumberParameter from "./NumberParameter";
-import NumberArrayParameter from "./NumberArrayParameter";
-import { isDarkMode } from "./demoUtil";
 
-import color from "./color";
-import Highlight from "react-highlight";
-import "highlight.js/styles/shades-of-purple.css";
+import Graph from "./Graph";
+import { Button } from "@mui/material";
 
 type Stateful<T> = { value: T; setter: React.Dispatch<SetStateAction<T>> };
 export type StatefulParameterNumber = ParameterNumber & Stateful<number>;
@@ -44,9 +47,6 @@ type StatefulParameters = (
   | StatefulParameterNumberArray
   | StatefulParameterFunction
 )[];
-
-import "./Example.css";
-import { EasingFunctionOptions } from "pixi-easing-graph/dist/EasingGraph";
 
 const isFunction = (param: unknown): boolean => typeof param === "function";
 
@@ -100,23 +100,29 @@ const applyParametersToFunction = (
     parameterValues
   ) as EasingFunction;
 
-const Example: React.FC<ExampleProps> = ({
-  f,
-  title,
-  code,
-  section,
-  subsection,
-  description = "",
-  parameters = [],
-  exampleType = "graph",
-  exampleText = "",
-  alias = "",
-  isVisible = false,
-}) => {
-  // const [isVisible, setIsVisible] = useState(false);
-  // const onVisibilityChange = (visible: boolean) => setIsVisible(visible);
+type Props = ExampleProps & { themeColors: ThemeColors } & {
+  onNext: () => void;
+  onPrev: () => void;
+};
 
-  const pallete = isDarkMode() ? color.dark : color.light;
+const Example: React.FC<Props> = (props) => {
+  const {
+    f,
+    title,
+    code,
+    section,
+    subsection,
+    description = "",
+    parameters = [],
+    exampleType = "graph",
+    exampleText = "",
+    alias = "",
+    themeColors,
+    // isVisible = false,
+    onNext,
+    onPrev,
+  } = props;
+
   const paramsWithState = assignStateToParams(parameters) as StatefulParameters;
   const parameterValues = extractValues(paramsWithState) as (
     | number
@@ -127,10 +133,10 @@ const Example: React.FC<ExampleProps> = ({
   const additionalFunctionsToRender: EasingFunctionOptions[] = pipe(
     filter(propEq("includeInGraph", true)),
     map(prop("value")),
-    map(assoc("f", __, { foreground: pallete.secondFunction }))
+    map(assoc("f", __, { foreground: themeColors.secondFunction }))
   )(paramsWithState) as EasingFunctionOptions[];
 
-  const link = `#/${section}/${subsection}/${title}`;
+  const link = `#${title}`;
 
   const fs = [
     easingFunctionWithParametersApplied,
@@ -138,23 +144,28 @@ const Example: React.FC<ExampleProps> = ({
   ];
 
   return (
-    // <VisibilitySensor
-    //   onChange={onVisibilityChange}
-    //   intervalCheck={true}
-    //   intervalDelay={100}
-    //   partialVisibility={true}
-    // >
     <div className="Example">
+      {exampleType === "graph" && <Graph fs={fs} themeColors={themeColors} />}
       <div className="description">
+        <h2 className="sections">
+          {section} • {subsection} •
+        </h2>
         <a id={link} />
-        <h3>
-          {title}{" "}
-          <a href={link} style={{ fontSize: "10px" }}>
-            ⚓️
-          </a>
-        </h3>
+        <div className="title">
+          <h3>
+            {title}{" "}
+            <a href={link} style={{ fontSize: "10px" }}>
+              ⚓️
+            </a>
+          </h3>
+          <div className="nextPrev">
+            <Button onClick={() => onPrev()}>« Prev</Button>
+            {" | "}
+            <Button onClick={() => onNext()}>Next »</Button>
+          </div>
+        </div>
         <p>{description}</p>
-        <code>{code}</code>
+        <Highlight className="javascript">{code}</Highlight>
         {alias && (
           <p>
             Alias: <code>{alias}</code>
@@ -185,49 +196,7 @@ const Example: React.FC<ExampleProps> = ({
           </div>
         )}
       </div>
-
-      {exampleType === "graph" && isVisible && (
-        <div className="example">
-          <ErrorBoundary
-            FallbackComponent={() => (
-              <div>
-                An error occurred trying to render a graph of this function.
-              </div>
-            )}
-          >
-            <Stage
-              width={400}
-              height={400}
-              options={{
-                resolution: 2,
-                backgroundAlpha: 0,
-              }}
-            >
-              <EasingGraphComponent
-                f={fs}
-                width={150}
-                height={150}
-                x={50}
-                y={150}
-                autoPlay={true}
-                loop={true}
-                style="line"
-                showExample={true}
-                exampleSize={15}
-                gridSubdivisions={true}
-                fillAlpha={0.5}
-                background={pallete.background}
-                foreground={pallete.foreground}
-                gridColor={pallete.gridColor}
-                markerColor={pallete.markerColor}
-                exampleColor={pallete.exampleColor}
-              />
-            </Stage>
-          </ErrorBoundary>
-        </div>
-      )}
     </div>
-    // </VisibilitySensor>
   );
 };
 

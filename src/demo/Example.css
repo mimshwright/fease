@@ -1,29 +1,63 @@
 .Example {
   display: grid;
-  grid-template-columns: auto 400px;
-  grid-template-areas: "description example";
+  grid-template-areas:
+    "example"
+    "description";
   text-align: left;
+
+  padding: 1rem;
+}
+.Example.selected {
+  background: var(--color-alt);
+}
+.Example .title {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  justify-content: space-between;
+  align-items: baseline;
+}
+.Example .title .MuiButton-root {
+  font-size: 1rem;
+}
+.Example .description .sections {
+  font-size: 1rem;
+}
+.Example .description {
+  grid-area: description;
+  padding-left: 50px;
+  width: 90%;
 }
 
-.description p {
+.Example .description p {
   margin-top: 0;
 }
-.description > code {
-  display: block;
-  font-size: 1.5em;
-  margin-bottom: 1em;
+.Example .description .hljs {
+  padding: 1rem;
 }
-/* .MuiSlider-root {
-} */
 
-.description {
-  grid-area: description;
+.Graph {
+  width: 100%;
+  align-items: center;
+  display: grid;
+  grid-template-areas:
+    "graph"
+    "controls";
+  grid-template-columns: auto 1fr;
+  justify-content: space-between;
+  align-items: start;
 }
-.example {
-  text-align: center;
-  grid-area: example;
-  margin-top: 3rem;
-  min-height: 400px;
+.Graph .controls {
+  text-align: right;
+  padding: 100px 0 0 50px;
+}
+.Graph .controls .MuiAccordionSummary-root,
+.Graph .controls .MuiAccordionSummary-content {
+  padding-left: 0 !important;
+  margin: 0;
+  min-height: 0;
+}
+.Graph .controls .MuiAccordionDetails-root {
+  padding: 1rem 0 0 0;
 }
 
 @media (max-width: 768px) {

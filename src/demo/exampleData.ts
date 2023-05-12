@@ -52,6 +52,11 @@ const oversizedOptions = {
   "shifted linear": fease.shiftY(0.3)(fease.linear),
 };
 
+const forceEndOptions = {
+  sinWave: fease.sinWave,
+  "Linear * 1/2": fease.scaleY(0.5)(fease.linear),
+};
+
 const sections: Record<string, DemoSection> = {
   factory: {
     title: "factory",
@@ -88,6 +93,57 @@ const exampleData: DemoCollection<typeof fease> = {
     /////////////
     // FACTORY //
     /////////////
+    exp: {
+      f: fease.exp,
+      section: "factory",
+      subsection: "fundamental",
+      title: "Exponential",
+      code: "factory.exp(exponent)",
+      description: "Creates an exponential function with a given exponent.",
+      seeAlso: ["Polynomial"],
+      parameters: [{ label: "exponent", min: -2, max: 6, defaultValue: 3 }],
+    },
+    poly: {
+      f: (a: number) => (b: number) => (c: number) => (d: number) =>
+        fease.poly([a, b, c, d]),
+      section: "factory",
+      subsection: "fundamental",
+      title: "Polynomial",
+      code: "factory.poly([c0,c1,...c(n-1)])",
+      description:
+        "Creates a polynomial equation using an array that represents the coefficients of each degree starting with x^0 up to x^n-1. For example, `poly([-8,6,-4,2])` would result in the equation `2x^2 - 4x^2 + 6x -8`",
+      seeAlso: ["Exponential"],
+      parameters: [
+        {
+          label: "x^0 coefficient",
+          min: -2,
+          max: 2,
+          defaultValue: 0,
+          step: 0.1,
+        },
+        {
+          label: "x^1 coefficient",
+          min: -2,
+          max: 2,
+          defaultValue: -0.5,
+          step: 0.1,
+        },
+        {
+          label: "x^2 coefficient",
+          min: -2,
+          max: 2,
+          defaultValue: 1.2,
+          step: 0.1,
+        },
+        {
+          label: "x^3 coefficient",
+          min: -2,
+          max: 2,
+          defaultValue: 0.3,
+          step: 0.1,
+        },
+      ],
+    },
     constant: {
       f: fease.constant,
       section: "factory",
@@ -182,57 +238,6 @@ const exampleData: DemoCollection<typeof fease> = {
           max: 30,
           step: 1,
           defaultValue: 15,
-        },
-      ],
-    },
-    exp: {
-      f: fease.exp,
-      section: "factory",
-      subsection: "fundamental",
-      title: "Exponential",
-      code: "factory.exp(exponent)",
-      description: "Creates an exponential function with a given exponent.",
-      seeAlso: ["Polynomial"],
-      parameters: [{ label: "exponent", min: -2, max: 6, defaultValue: 3 }],
-    },
-    poly: {
-      f: (a: number) => (b: number) => (c: number) => (d: number) =>
-        fease.poly([a, b, c, d]),
-      section: "factory",
-      subsection: "fundamental",
-      title: "Polynomial",
-      code: "factory.poly([c0,c1,...c(n-1)])",
-      description:
-        "Creates a polynomial equation using an array that represents the coefficients of each degree starting with x^0 up to x^n-1. For example, `poly([-8,6,-4,2])` would result in the equation `2x^2 - 4x^2 + 6x -8`",
-      seeAlso: ["Exponential"],
-      parameters: [
-        {
-          label: "x^0 coefficient",
-          min: -2,
-          max: 2,
-          defaultValue: 0,
-          step: 0.1,
-        },
-        {
-          label: "x^1 coefficient",
-          min: -2,
-          max: 2,
-          defaultValue: -0.5,
-          step: 0.1,
-        },
-        {
-          label: "x^2 coefficient",
-          min: -2,
-          max: 2,
-          defaultValue: 1.2,
-          step: 0.1,
-        },
-        {
-          label: "x^3 coefficient",
-          min: -2,
-          max: 2,
-          defaultValue: 0.3,
-          step: 0.1,
         },
       ],
     },
@@ -424,7 +429,7 @@ Stiffness: determines how fast the object comes to rest. 1 is roughly linear dec
         { label: "gravity", min: 0, max: 25, step: 0.1, defaultValue: 10 },
         {
           label: "bounciness",
-          min: 0,
+          min: -1,
           max: 1.1,
           step: 0.01,
           defaultValue: 0.75,
@@ -519,7 +524,7 @@ Stiffness: determines how fast the object comes to rest. 1 is roughly linear dec
         {
           label: "Input Function",
           defaultValue: fease.sinWave,
-          options: { sinWave: fease.sinWave },
+          options: forceEndOptions,
           includeInGraph: false,
         },
       ],
@@ -536,7 +541,7 @@ Stiffness: determines how fast the object comes to rest. 1 is roughly linear dec
         {
           label: "Input Function",
           defaultValue: fease.sinWave,
-          options: { sinWave: fease.sinWave },
+          options: forceEndOptions,
           includeInGraph: false,
         },
       ],
@@ -552,7 +557,7 @@ Stiffness: determines how fast the object comes to rest. 1 is roughly linear dec
         {
           label: "Input Function",
           defaultValue: fease.sinWave,
-          options: { sinWave: fease.sinWave },
+          options: forceEndOptions,
           includeInGraph: false,
         },
       ],
