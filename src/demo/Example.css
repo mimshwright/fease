@@ -4,8 +4,6 @@
     "example"
     "description";
   text-align: left;
-
-  padding: 1rem;
 }
 .Example.selected {
   background: var(--color-alt);
@@ -40,9 +38,7 @@
   width: 100%;
   align-items: center;
   display: grid;
-  grid-template-areas:
-    "graph"
-    "controls";
+  grid-template-areas: "graph controls";
   grid-template-columns: auto 1fr;
   justify-content: space-between;
   align-items: start;
@@ -50,6 +46,7 @@
 .Graph .controls {
   text-align: right;
   padding: 100px 0 0 50px;
+  grid-area: controls;
 }
 .Graph .controls .MuiAccordionSummary-root,
 .Graph .controls .MuiAccordionSummary-content {
@@ -63,11 +60,40 @@
 
 @media (max-width: 768px) {
   .Example {
-    grid-template-areas: "description" "example";
     grid-template-columns: 1fr;
     grid-template-rows: auto 1fr;
   }
-  .example {
-    margin-top: 0;
+  .Example .description {
+    padding-left: 0;
+    max-width: 100%;
+  }
+  .Example .title {
+    grid-template-columns: auto;
+    grid-template-rows: auto auto;
+  }
+  .nextPrev .MuiButton-root {
+    border: 1px solid var(--color-alt);
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+  .nextPrev .separator {
+    visibility: hidden;
+  }
+  .Graph {
+    grid-template-areas:
+      "graph"
+      "controls";
+    grid-template-columns: auto;
+    grid-template-rows: auto auto;
+  }
+  .Graph .controls {
+    text-align: left;
+    padding: 0;
+  }
+  .Graph canvas {
+    pointer-events: none;
+    max-width: 100%;
+    height: auto !important;
+    aspect-ratio: 8/9;
   }
 }

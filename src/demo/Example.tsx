@@ -160,7 +160,7 @@ const Example: React.FC<Props> = (props) => {
           </h3>
           <div className="nextPrev">
             <Button onClick={() => onPrev()}>« Prev</Button>
-            {" | "}
+            <span className="separator">{" | "}</span>
             <Button onClick={() => onNext()}>Next »</Button>
           </div>
         </div>

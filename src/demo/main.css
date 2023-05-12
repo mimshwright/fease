@@ -1,3 +1,9 @@
+:root,
+:root,
+:root * {
+  box-sizing: border-box;
+}
+
 :root {
   --font-headline: "Yatra One", Inter, Helvetica, arial, sans-serif;
   --font-body: "Noto Serif", georgia, serif;
@@ -117,4 +123,16 @@ label {
 .MuiButtonBase-root.Mui-selected {
   color: var(--color-bg) !important;
   background-color: var(--color-primary) !important;
+}
+
+@media (max-width: 768px) {
+  body {
+    max-width: 100%;
+    min-width: 320px;
+  }
+  #root {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 1rem;
+  }
 }
