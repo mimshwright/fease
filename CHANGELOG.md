@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.3.7](https://github.com/mimshwright/fease/compare/v0.3.6...v0.3.7) (2023-05-12)
+
+### Features
+
+- **preset:** added bounce presets ([03caf6e](https://github.com/mimshwright/fease/commit/03caf6e6241bfaa81f7896300d8a01ba47d01f9e))
+- **preset:** Added presets for back ([d22b743](https://github.com/mimshwright/fease/commit/d22b74325d29b0a8fb23b41ac373b89969ea230e))
+- **preset:** Added presets for elastic ([f213e83](https://github.com/mimshwright/fease/commit/f213e837f97e338e868a59f1a7ee5c2aad80e50b))
+
+### Bug Fixes
+
+- **depenencies:** Fixed an issue with circular dependencies. ([f28679d](https://github.com/mimshwright/fease/commit/f28679d6d510488b3e29d1f75a346c1f25e2b153))
+
 ### [0.3.6](https://github.com/mimshwright/fease/compare/v0.3.5...v0.3.6) (2023-02-01)
 
 ### Features
