@@ -15,12 +15,22 @@ const optionsWithRandom = {
   ...options,
   smoothRandom: fease.smoothRandom(1)(20),
 };
+
 const optionsAlt = {
   linear: fease.linear,
   cos: fease.cosWave,
   "fast cos": fease.scaleX(0.1)(fease.cosWave),
   cubicIn: fease.cubicIn,
   cubicOut: fease.cubicOut,
+};
+
+const optionsMinMaxDiff = {
+  linear: fease.linear,
+  cubicIn: fease.cubicIn,
+  cubicInOut: fease.cubicInOut,
+  sin: fease.sinWave,
+  sin2: fease.scaleX(2)(fease.sinWave),
+  cos: fease.cosWave,
 };
 
 const optionsMerge = {
@@ -626,10 +636,10 @@ Stiffness: determines how fast the object comes to rest. 1 is roughly linear dec
       title: "Constrain",
       code: "deocrator.constrain(low)(high)(f)",
       description:
-        "Any negative values produced by the function lose their negative sign.",
+        "If the value goes outside the range, it'll be reversed, as if bouncing off the ceiling or floor. Note that if 'low' is >= 'high' you'll get an error.",
       parameters: [
-        { label: "low", min: -1, max: 1, defaultValue: 0.1, step: 0.05 },
-        { label: "high", min: -1, max: 1, defaultValue: 0.9, step: 0.05 },
+        { label: "low", min: -0.5, max: 1, defaultValue: 0.1, step: 0.05 },
+        { label: "high", min: 0, max: 1.5, defaultValue: 0.9, step: 0.05 },
         {
           label: "Input Function",
           defaultValue: bigCenteredSine,
@@ -1305,6 +1315,76 @@ Stiffness: determines how fast the object comes to rest. 1 is roughly linear dec
         },
       ],
     },
+    takeMin: {
+      f: (f: EasingFunction) => (g: EasingFunction) => fease.takeMin([f, g]),
+      section: "combinator",
+      subsection: "Min/Max",
+      title: "Take Minimum",
+      code: "takeMin([f,g,h])",
+      description:
+        "Takes multiple easing functions and returns a new one that give the lowest value produced by applying the functions.",
+      parameters: [
+        {
+          label: "Input function f",
+          defaultValue: optionsMinMaxDiff.linear,
+          options: optionsMinMaxDiff,
+          includeInGraph: true,
+        },
+        {
+          label: "Input function g",
+          defaultValue: optionsMinMaxDiff.cubicInOut,
+          options: optionsMinMaxDiff,
+          includeInGraph: true,
+        },
+      ],
+    },
+    takeMax: {
+      f: (f: EasingFunction) => (g: EasingFunction) => fease.takeMax([f, g]),
+      section: "combinator",
+      subsection: "Min/Max",
+      title: "Take Maximum",
+      code: "takeMax([f,g,h])",
+      description:
+        "Takes multiple easing functions and returns a new one that give the highest value produced by applying the functions.",
+      parameters: [
+        {
+          label: "Input function f",
+          defaultValue: optionsMinMaxDiff.linear,
+          options: optionsMinMaxDiff,
+          includeInGraph: true,
+        },
+        {
+          label: "Input function g",
+          defaultValue: optionsMinMaxDiff.cubicInOut,
+          options: optionsMinMaxDiff,
+          includeInGraph: true,
+        },
+      ],
+    },
+    difference: {
+      f: fease.difference,
+      section: "combinator",
+      subsection: "Difference",
+      title: "Difference",
+      code: "difference(f)(g)",
+      description:
+        "Takes two functions and returns a new one that is the difference between the two.",
+      parameters: [
+        {
+          label: "Input function f",
+          defaultValue: optionsMinMaxDiff.cubicIn,
+          options: optionsMinMaxDiff,
+          includeInGraph: true,
+        },
+        {
+          label: "Input function g",
+          defaultValue: optionsMinMaxDiff.cubicInOut,
+          options: optionsMinMaxDiff,
+          includeInGraph: true,
+        },
+      ],
+    },
+
     ////////////
     // Preset //
     ////////////
