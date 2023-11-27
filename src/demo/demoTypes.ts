@@ -1,7 +1,10 @@
+import { EasingFunctionOptions } from "pixi-easing-graph/dist/EasingGraph";
 // Only used for demo and documentation
 
 import { EasingFunction, EventuallyReturnsAnEasingFunction } from "../types";
+import color from "./color";
 
+export type GraphFunctions = (EasingFunction | EasingFunctionOptions)[];
 export type FunctionExamples = Record<string, EasingFunction>;
 export type Parameter<T> = { label: string; defaultValue: T };
 export type ParameterNumber = Parameter<number> & {
@@ -62,3 +65,5 @@ export type DemoCollection<LibraryTypeGuard> = {
   sections: Record<string, DemoSection>;
   examples: Record<keyof LibraryTypeGuard, DemoExample>;
 };
+
+export type ThemeColors = typeof color.light | typeof color.dark;

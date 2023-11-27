@@ -1,3 +1,5 @@
+import color from "./demo/color";
+
 export type Unary<P, R> = (param: P) => R;
 export type Variadic<P, R> = (...params: P[]) => R;
 export type EasingFunction = Unary<number, number>;
@@ -33,3 +35,5 @@ export type Combinator2 = Unary<
 export type CombinatorMany = Unary<EasingFunction[], EasingFunction>;
 
 export type ReturnsEasingFunction<P = unknown> = Unary<P, EasingFunction>;
+
+export type Pallete = typeof color.light | typeof color.dark;

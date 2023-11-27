@@ -1,36 +1,97 @@
 #root {
   max-width: 100%;
   margin: 0 auto;
-  padding: 4rem 2rem;
+  padding: 0rem 2rem 0rem;
+}
+
+.App {
+  display: grid;
+  grid-template-areas:
+    "header header"
+    "library example";
+  grid-template-rows: auto 1fr;
+  grid-template-columns: 1fr 2fr;
+  gap: 1rem;
 }
 
 header {
-  display: flex;
-  flex-flow: row wrap;
+  grid-area: header;
+
+  display: grid;
   justify-content: space-between;
   align-items: baseline;
+  grid-auto-columns: auto;
+  grid-template-areas:
+    "title github"
+    "description description";
 }
 
-.version {
+header h1 {
+  grid-area: title;
+}
+header .version {
   font-size: 1rem;
   font-family: var(--font-body);
   font-weight: normal;
   color: var(--color-fg);
+}
+header .github {
+  grid-area: github;
+}
+header .libraryDescription {
+  grid-area: description;
+  color: var(--color-fg-2);
+  font-style: normal;
+  font-size: 1.5em;
 }
 
 div {
   margin-bottom: 0.5rem;
 }
 
-.libraryDescription {
-  color: var(--color-fg-2);
-  font-style: normal;
-  font-size: 1.5em;
+.example {
+  text-align: center;
+  margin: 0;
+  margin-top: -100px;
+  min-height: 400px;
+  grid-area: example;
+}
+.example .Example {
+  padding: 3rem 0 2rem 0;
+  margin: 0;
+
+  overflow-y: auto;
 }
 
-.section {
-  margin-top: 1rem;
+.library {
+  grid-area: library;
+  max-height: 80vh;
+
+  display: grid;
+  grid-template-rows: auto 1fr;
 }
+.library .sort {
+  font-size: 0.8rem;
+}
+.library .functionList {
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.library .section {
+  margin-bottom: 1rem;
+}
+
+/* .section-summary {
+} */
+
+.section-summary > p {
+  font-size: 1rem;
+}
+
+/* .section-list {
+} */
+
 .MuiPaper-root::before {
   background-color: transparent !important;
 }
@@ -47,10 +108,49 @@ div {
   left: -10px;
 }
 
-.section > p {
-  font-size: 1.5em;
-}
-
 pre code.hljs {
   padding: 2rem;
+}
+
+.copyright {
+  font-size: small;
+  opacity: 0.5;
+}
+
+@media (max-width: 768px) {
+  .App {
+    padding: 0;
+    position: relative;
+    grid-template-rows: auto 1fr;
+    grid-template-areas:
+      "header"
+      "library"
+      "example";
+    grid-template-rows: 5rem 17rem auto;
+    grid-template-columns: 100%;
+  }
+  header {
+    width: 100%;
+    justify-content: flex-start;
+    column-gap: 1rem;
+  }
+  .library {
+    border: 1px solid var(--color-alt);
+    border-width: 1px 0 1px 0;
+    padding-bottom: 0;
+    padding-top: 0.5rem;
+  }
+  .example {
+    margin-top: 0;
+    max-width: 100%;
+  }
+  .example .Example {
+    /* position: sticky; */
+    /* z-index: 1; */
+    /* top: 0; */
+    padding: 0;
+    margin: 0;
+
+    overflow-y: auto;
+  }
 }

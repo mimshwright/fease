@@ -15,12 +15,22 @@ const optionsWithRandom = {
   ...options,
   smoothRandom: fease.smoothRandom(1)(20),
 };
+
 const optionsAlt = {
   linear: fease.linear,
   cos: fease.cosWave,
   "fast cos": fease.scaleX(0.1)(fease.cosWave),
   cubicIn: fease.cubicIn,
   cubicOut: fease.cubicOut,
+};
+
+const optionsMinMaxDiff = {
+  linear: fease.linear,
+  cubicIn: fease.cubicIn,
+  cubicInOut: fease.cubicInOut,
+  sin: fease.sinWave,
+  sin2: fease.scaleX(2)(fease.sinWave),
+  cos: fease.cosWave,
 };
 
 const optionsMerge = {
@@ -50,6 +60,11 @@ const oversizedOptions = {
   "big linear": doubleLinear,
   "big sine": bigCenteredSine,
   "shifted linear": fease.shiftY(0.3)(fease.linear),
+};
+
+const forceEndOptions = {
+  sinWave: fease.sinWave,
+  "Linear * 1/2": fease.scaleY(0.5)(fease.linear),
 };
 
 const sections: Record<string, DemoSection> = {
@@ -88,6 +103,57 @@ const exampleData: DemoCollection<typeof fease> = {
     /////////////
     // FACTORY //
     /////////////
+    exp: {
+      f: fease.exp,
+      section: "factory",
+      subsection: "fundamental",
+      title: "Exponential",
+      code: "factory.exp(exponent)",
+      description: "Creates an exponential function with a given exponent.",
+      seeAlso: ["Polynomial"],
+      parameters: [{ label: "exponent", min: -2, max: 6, defaultValue: 3 }],
+    },
+    poly: {
+      f: (a: number) => (b: number) => (c: number) => (d: number) =>
+        fease.poly([a, b, c, d]),
+      section: "factory",
+      subsection: "fundamental",
+      title: "Polynomial",
+      code: "factory.poly([c0,c1,...c(n-1)])",
+      description:
+        "Creates a polynomial equation using an array that represents the coefficients of each degree starting with x^0 up to x^n-1. For example, `poly([-8,6,-4,2])` would result in the equation `2x^2 - 4x^2 + 6x -8`",
+      seeAlso: ["Exponential"],
+      parameters: [
+        {
+          label: "x^0 coefficient",
+          min: -2,
+          max: 2,
+          defaultValue: 0,
+          step: 0.1,
+        },
+        {
+          label: "x^1 coefficient",
+          min: -2,
+          max: 2,
+          defaultValue: -0.5,
+          step: 0.1,
+        },
+        {
+          label: "x^2 coefficient",
+          min: -2,
+          max: 2,
+          defaultValue: 1.2,
+          step: 0.1,
+        },
+        {
+          label: "x^3 coefficient",
+          min: -2,
+          max: 2,
+          defaultValue: 0.3,
+          step: 0.1,
+        },
+      ],
+    },
     constant: {
       f: fease.constant,
       section: "factory",
@@ -182,57 +248,6 @@ const exampleData: DemoCollection<typeof fease> = {
           max: 30,
           step: 1,
           defaultValue: 15,
-        },
-      ],
-    },
-    exp: {
-      f: fease.exp,
-      section: "factory",
-      subsection: "fundamental",
-      title: "Exponential",
-      code: "factory.exp(exponent)",
-      description: "Creates an exponential function with a given exponent.",
-      seeAlso: ["Polynomial"],
-      parameters: [{ label: "exponent", min: -2, max: 6, defaultValue: 3 }],
-    },
-    poly: {
-      f: (a: number) => (b: number) => (c: number) => (d: number) =>
-        fease.poly([a, b, c, d]),
-      section: "factory",
-      subsection: "fundamental",
-      title: "Polynomial",
-      code: "factory.poly([c0,c1,...c(n-1)])",
-      description:
-        "Creates a polynomial equation using an array that represents the coefficients of each degree starting with x^0 up to x^n-1. For example, `poly([-8,6,-4,2])` would result in the equation `2x^2 - 4x^2 + 6x -8`",
-      seeAlso: ["Exponential"],
-      parameters: [
-        {
-          label: "x^0 coefficient",
-          min: -2,
-          max: 2,
-          defaultValue: 0,
-          step: 0.1,
-        },
-        {
-          label: "x^1 coefficient",
-          min: -2,
-          max: 2,
-          defaultValue: -0.5,
-          step: 0.1,
-        },
-        {
-          label: "x^2 coefficient",
-          min: -2,
-          max: 2,
-          defaultValue: 1.2,
-          step: 0.1,
-        },
-        {
-          label: "x^3 coefficient",
-          min: -2,
-          max: 2,
-          defaultValue: 0.3,
-          step: 0.1,
         },
       ],
     },
@@ -424,7 +439,7 @@ Stiffness: determines how fast the object comes to rest. 1 is roughly linear dec
         { label: "gravity", min: 0, max: 25, step: 0.1, defaultValue: 10 },
         {
           label: "bounciness",
-          min: 0,
+          min: -1,
           max: 1.1,
           step: 0.01,
           defaultValue: 0.75,
@@ -519,7 +534,7 @@ Stiffness: determines how fast the object comes to rest. 1 is roughly linear dec
         {
           label: "Input Function",
           defaultValue: fease.sinWave,
-          options: { sinWave: fease.sinWave },
+          options: forceEndOptions,
           includeInGraph: false,
         },
       ],
@@ -536,7 +551,7 @@ Stiffness: determines how fast the object comes to rest. 1 is roughly linear dec
         {
           label: "Input Function",
           defaultValue: fease.sinWave,
-          options: { sinWave: fease.sinWave },
+          options: forceEndOptions,
           includeInGraph: false,
         },
       ],
@@ -552,7 +567,7 @@ Stiffness: determines how fast the object comes to rest. 1 is roughly linear dec
         {
           label: "Input Function",
           defaultValue: fease.sinWave,
-          options: { sinWave: fease.sinWave },
+          options: forceEndOptions,
           includeInGraph: false,
         },
       ],
@@ -621,10 +636,10 @@ Stiffness: determines how fast the object comes to rest. 1 is roughly linear dec
       title: "Constrain",
       code: "deocrator.constrain(low)(high)(f)",
       description:
-        "Any negative values produced by the function lose their negative sign.",
+        "If the value goes outside the range, it'll be reversed, as if bouncing off the ceiling or floor. Note that if 'low' is >= 'high' you'll get an error.",
       parameters: [
-        { label: "low", min: -1, max: 1, defaultValue: 0.1, step: 0.05 },
-        { label: "high", min: -1, max: 1, defaultValue: 0.9, step: 0.05 },
+        { label: "low", min: -0.5, max: 1, defaultValue: 0.1, step: 0.05 },
+        { label: "high", min: 0, max: 1.5, defaultValue: 0.9, step: 0.05 },
         {
           label: "Input Function",
           defaultValue: bigCenteredSine,
@@ -1300,6 +1315,76 @@ Stiffness: determines how fast the object comes to rest. 1 is roughly linear dec
         },
       ],
     },
+    takeMin: {
+      f: (f: EasingFunction) => (g: EasingFunction) => fease.takeMin([f, g]),
+      section: "combinator",
+      subsection: "Min/Max",
+      title: "Take Minimum",
+      code: "takeMin([f,g,h])",
+      description:
+        "Takes multiple easing functions and returns a new one that give the lowest value produced by applying the functions.",
+      parameters: [
+        {
+          label: "Input function f",
+          defaultValue: optionsMinMaxDiff.linear,
+          options: optionsMinMaxDiff,
+          includeInGraph: true,
+        },
+        {
+          label: "Input function g",
+          defaultValue: optionsMinMaxDiff.cubicInOut,
+          options: optionsMinMaxDiff,
+          includeInGraph: true,
+        },
+      ],
+    },
+    takeMax: {
+      f: (f: EasingFunction) => (g: EasingFunction) => fease.takeMax([f, g]),
+      section: "combinator",
+      subsection: "Min/Max",
+      title: "Take Maximum",
+      code: "takeMax([f,g,h])",
+      description:
+        "Takes multiple easing functions and returns a new one that give the highest value produced by applying the functions.",
+      parameters: [
+        {
+          label: "Input function f",
+          defaultValue: optionsMinMaxDiff.linear,
+          options: optionsMinMaxDiff,
+          includeInGraph: true,
+        },
+        {
+          label: "Input function g",
+          defaultValue: optionsMinMaxDiff.cubicInOut,
+          options: optionsMinMaxDiff,
+          includeInGraph: true,
+        },
+      ],
+    },
+    difference: {
+      f: fease.difference,
+      section: "combinator",
+      subsection: "difference",
+      title: "Difference",
+      code: "difference(f)(g)",
+      description:
+        "Takes two functions and returns a new one that is the difference between the two.",
+      parameters: [
+        {
+          label: "Input function f",
+          defaultValue: optionsMinMaxDiff.cubicIn,
+          options: optionsMinMaxDiff,
+          includeInGraph: true,
+        },
+        {
+          label: "Input function g",
+          defaultValue: optionsMinMaxDiff.cubicInOut,
+          options: optionsMinMaxDiff,
+          includeInGraph: true,
+        },
+      ],
+    },
+
     ////////////
     // Preset //
     ////////////

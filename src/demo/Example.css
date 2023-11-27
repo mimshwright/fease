@@ -1,38 +1,99 @@
 .Example {
   display: grid;
-  grid-template-columns: auto 400px;
-  grid-template-areas: "description example";
+  grid-template-areas:
+    "example"
+    "description";
   text-align: left;
 }
+.Example.selected {
+  background: var(--color-alt);
+}
+.Example .title {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  justify-content: space-between;
+  align-items: baseline;
+}
+.Example .title .MuiButton-root {
+  font-size: 1rem;
+}
+.Example .description .sections {
+  font-size: 1rem;
+}
+.Example .description {
+  grid-area: description;
+  padding-left: 50px;
+  width: 90%;
+  max-width: 480px;
+}
 
-.description p {
+.Example .description p {
   margin-top: 0;
 }
-.description > code {
-  display: block;
-  font-size: 1.5em;
-  margin-bottom: 1em;
+.Example .description .hljs {
+  padding: 1rem;
 }
-/* .MuiSlider-root {
-} */
 
-.description {
-  grid-area: description;
+.Graph {
+  width: 100%;
+  align-items: center;
+  display: grid;
+  grid-template-areas: "graph controls";
+  grid-template-columns: auto 1fr;
+  justify-content: space-between;
+  align-items: start;
 }
-.example {
-  text-align: center;
-  grid-area: example;
-  margin-top: 3rem;
-  min-height: 400px;
+.Graph .controls {
+  text-align: right;
+  padding: 100px 0 0 50px;
+  grid-area: controls;
+}
+.Graph .controls .MuiAccordionSummary-root,
+.Graph .controls .MuiAccordionSummary-content {
+  padding-left: 0 !important;
+  margin: 0;
+  min-height: 0;
+}
+.Graph .controls .MuiAccordionDetails-root {
+  padding: 1rem 0 0 0;
 }
 
 @media (max-width: 768px) {
   .Example {
-    grid-template-areas: "description" "example";
     grid-template-columns: 1fr;
     grid-template-rows: auto 1fr;
   }
-  .example {
-    margin-top: 0;
+  .Example .description {
+    padding-left: 0;
+    max-width: 100%;
+  }
+  .Example .title {
+    grid-template-columns: auto;
+    grid-template-rows: auto auto;
+  }
+  .nextPrev .MuiButton-root {
+    border: 1px solid var(--color-alt);
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+  .nextPrev .separator {
+    visibility: hidden;
+  }
+  .Graph {
+    grid-template-areas:
+      "graph"
+      "controls";
+    grid-template-columns: auto;
+    grid-template-rows: auto auto;
+  }
+  .Graph .controls {
+    text-align: left;
+    padding: 0;
+  }
+  .Graph canvas {
+    pointer-events: none;
+    max-width: 100%;
+    height: auto !important;
+    aspect-ratio: 8/9;
   }
 }
