@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.3.8](https://github.com/mimshwright/fease/compare/v0.3.7...v0.3.8) (2023-11-27)
+
+### Features
+
+- **combinators:** added takeMin, takeMax, and difference combinators ([f14b0a6](https://github.com/mimshwright/fease/commit/f14b0a6bdc82d95a6a97d2aac9a9a3abd4224109))
+
 ### [0.3.7](https://github.com/mimshwright/fease/compare/v0.3.6...v0.3.7) (2023-05-12)
 
 ### Features
