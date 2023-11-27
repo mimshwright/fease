@@ -1364,7 +1364,7 @@ Stiffness: determines how fast the object comes to rest. 1 is roughly linear dec
     difference: {
       f: fease.difference,
       section: "combinator",
-      subsection: "Difference",
+      subsection: "difference",
       title: "Difference",
       code: "difference(f)(g)",
       description:
