@@ -998,6 +998,25 @@ Stiffness: determines how fast the object comes to rest. 1 is roughly linear dec
         },
       ],
     },
+    scoot: {
+      f: fease.scoot,
+      title: "Scoot",
+      section: "decorator",
+      subsection: "effects",
+      description:
+        "Adds a scooting effect to any function! Frequency is the number of scoots in the input range of 0 and 1. Intensity is a number between 0 and 1 where 0 is no effect and 1 is only the effect.",
+      code: "scoot(freq)(intensity)(f)",
+      seeAlso: ["repeatSequence", "mergeWithControl"],
+      parameters: [
+        { label: "frequency", defaultValue: 10, min: 1, max: 50, step: 1 },
+        { label: "intensity", defaultValue: 1, min: 0, max: 3, step: 0.01 },
+        {
+          label: "Input function",
+          defaultValue: fease.linear,
+          includeInGraph: true,
+        },
+      ],
+    },
     jitter: {
       f: fease.jitter,
       title: "Jitter",
@@ -1651,8 +1670,7 @@ const sineResults = util.render(5)(preset.sinWave);
       subsection: "easing",
       title: "Create Ease Set",
       code: "util.createEaseSet(easeInFunction, useEaseOut?)",
-      description:
-        "Takes an easeIn function and creates an in, out, in-out, and out-in version of a function. The results are returned as a 4-tuple (array). If `useEaseOut` is true, the input value should be easeOut instead of easeIn.",
+      description: `Takes an easeIn function and creates an in, out, in-out, and out-in version of a function. The results are returned as a 4-tuple (array). If \`useEaseOut\` is true, the input value should be easeOut instead of easeIn.`,
       exampleType: "text",
       exampleText: `// quad is an ease in
 const quad = (x)=> x ** 2;
@@ -1664,6 +1682,38 @@ const [quadIn, quadOut, quadInOut, quadOutIn] = util.createEaseSet(quad);
 const el = elastic(3)(2)(2.5); 
 // Set second parameter to true to convert an easeOut
 const [elasticIn, elasticOut, elasticInOut, elasticOutIn] = util.createEaseSet(el, true);`,
+    },
+    lerp: {
+      f: fease.lerp,
+      section: "util",
+      subsection: "easing",
+      title: "Lerp",
+      code: "util.lerp(start)(end)(transition)",
+      description:
+        "Takes a start and end value and a transition value between 0 and 1 and returns a value between start and end. This is a linear interpolation function.",
+      exampleType: "text",
+      exampleText: `
+const lerp = util.lerp(30)(70);
+lerp(0); // 30
+lerp(0.5); // 50
+lerp(1); // 70
+`,
+    },
+    easingLerp: {
+      f: fease.easingLerp,
+      section: "util",
+      subsection: "easing",
+      title: "Easing Lerp",
+      code: "util.easingLerp(easingFunction)(start)(end)(transition)",
+      description: "Creates a lerp from an easing function.",
+      exampleType: "text",
+      exampleText: `
+const sinLerp = util.easingLerp(preset.sinWave);
+const lerp = sinLerp(30)(70);
+lerp(0); // 50
+lerp(0.25); // 70
+lerp(0.75); // 30
+`,
     },
 
     // functional

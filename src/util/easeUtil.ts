@@ -19,3 +19,13 @@ export const createEaseSet = (easeIn: EasingFunction, useEaseOut = false) =>
         easeInOut(easeIn),
         easeMiddle(easeIn),
       ]) as EasingFunctionSet;
+
+export const lerp = (start: number) => (end: number) => (percent: number) =>
+  start + percent * (end - start);
+
+export const easingLerp =
+  (f: EasingFunction) =>
+  (start: number) =>
+  (end: number) =>
+  (percent: number) =>
+    lerp(start)(end)(f(percent));
