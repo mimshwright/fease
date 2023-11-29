@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.3.9](https://github.com/mimshwright/fease/compare/v0.3.8...v0.3.9) (2023-11-29)
+
+### Features
+
+- **effects:** added a scoot effect ([87af56e](https://github.com/mimshwright/fease/commit/87af56eab85b363cea09b7d937db5e23e1ae4fa3))
+
 ### [0.3.8](https://github.com/mimshwright/fease/compare/v0.3.7...v0.3.8) (2023-11-27)
 
 ### Features
