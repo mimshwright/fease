@@ -679,15 +679,15 @@
   resolved "https://registry.yarnpkg.com/@floating-ui/utils/-/utils-0.1.6.tgz#22958c042e10b67463997bd6ea7115fe28cbcaf9"
   integrity sha512-OfX7E2oUDYxtBvsuS4e/jSn4Q9Qb6DzgeYtsAdkPZ47znpoNsMgZw0+tVijiv3uGNR6dgNlty6r9rzIzHjtd/A==
 
-"@fontsource/noto-serif@^4.5.11":
-  version "4.5.11"
-  resolved "https://registry.yarnpkg.com/@fontsource/noto-serif/-/noto-serif-4.5.11.tgz#b8c2a531e1d47e5d069138617a4c5f55b9eb106d"
-  integrity sha512-Cq7M8oD0eNQbsQUJ6RVAi78Iw7DiVHrDKHkNyAW78jJ4UvIPNASApBsrhYvaExa9eD+Efd/kwhm+CWSImo5GtQ==
+"@fontsource/noto-serif@^5.0.17":
+  version "5.0.17"
+  resolved "https://registry.yarnpkg.com/@fontsource/noto-serif/-/noto-serif-5.0.17.tgz#304b63a14d6aab20a5b96c551eb2c69c263e546f"
+  integrity sha512-gaFOVKjm5PkdPXPJamO+gqAKPXph7NDmsaqxX8vj6AnDHBnXExoqd03Z7KBM1EI6e2ime14jxX2SvrD0eOrMWw==
 
-"@fontsource/yatra-one@^4.5.10":
-  version "4.5.10"
-  resolved "https://registry.yarnpkg.com/@fontsource/yatra-one/-/yatra-one-4.5.10.tgz#d7ad92c962453e0cade14b105ab105bac00dad7d"
-  integrity sha512-MEIesVPOV4AC4522nnz2gXrq85Y4EvSGfhtXfctKc7ULwpmAQmvCQ/PwXJ+ONsxp9ZA7feaWvEjgPN4o+wUpuw==
+"@fontsource/yatra-one@^5.0.8":
+  version "5.0.8"
+  resolved "https://registry.yarnpkg.com/@fontsource/yatra-one/-/yatra-one-5.0.8.tgz#7e5848fb9fd93b5cbeaceee4314343a5092a23ad"
+  integrity sha512-0BQl8KaP6kXFSZ/WQ2Ciy51XUlSLCihMsVschFo19jwvmcVMpzJcWSd80cI5FbpEshdTzyqnYBe+jsZxj1McCg==
 
 "@humanwhocodes/config-array@^0.11.13":
   version "0.11.13"
