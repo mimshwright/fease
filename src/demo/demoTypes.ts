@@ -26,10 +26,10 @@ type Parameters = (
 )[];
 
 export const isNumberParameter = (
-  p: Parameter<unknown>
+  p: Parameter<unknown>,
 ): p is ParameterNumber => typeof p.defaultValue === "number";
 export const isNumberArrayParameter = (
-  p: Parameter<unknown>
+  p: Parameter<unknown>,
 ): p is ParameterNumberArray =>
   p.defaultValue instanceof Array && typeof p.defaultValue[0] === "number";
 

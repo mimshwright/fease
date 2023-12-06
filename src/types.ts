@@ -1,24 +1,23 @@
 export type Unary<P, R> = (param: P) => R;
-export type Variadic<P, R> = (...params: P[]) => R;
+export type Variadic<P, R> = (...params: readonly P[]) => R;
 export type EasingFunction = Unary<number, number>;
 
+export type EasingFunctionList = EasingFunction[];
+
 // easeIn, easeOut, easeInOut, easeOutIn
-export type EasingFunctionSet = [
-  EasingFunction,
-  EasingFunction,
-  EasingFunction,
-  EasingFunction
-];
+export type EasingFunctionSet = EasingFunctionList &
+  [EasingFunction, EasingFunction, EasingFunction, EasingFunction];
 
 // ease, easeIn, easeOut, easeInOut, easeOutIn, easeMiddle
-export type EasingFunctionSetWithAliases = [
-  EasingFunction,
-  EasingFunction,
-  EasingFunction,
-  EasingFunction,
-  EasingFunction,
-  EasingFunction
-];
+export type EasingFunctionSetWithAliases = EasingFunctionList &
+  [
+    EasingFunction,
+    EasingFunction,
+    EasingFunction,
+    EasingFunction,
+    EasingFunction,
+    EasingFunction,
+  ];
 
 export type EventuallyReturnsAnEasingFunction<T = unknown> =
   | ((p: T) => EventuallyReturnsAnEasingFunction<unknown> | EasingFunction)

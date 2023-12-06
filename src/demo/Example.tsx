@@ -53,7 +53,7 @@ const isFunction = (param: unknown): boolean => typeof param === "function";
 // Takes a list of parameters and uses `useState` to give them `value` and `setter`.
 const assignStateToParams = map(
   (
-    param: Parameter<unknown>
+    param: Readonly<Parameter<unknown>>,
   ):
     | StatefulParameterNumber
     | StatefulParameterNumberArray
@@ -66,10 +66,10 @@ const assignStateToParams = map(
       return { ...param, value, setter } as StatefulParameterNumberArray;
     }
     const [value, setter] = useState<EasingFunction>(
-      () => param.defaultValue as EasingFunction
+      () => param.defaultValue as EasingFunction,
     );
     return { ...param, value, setter } as StatefulParameterFunction;
-  }
+  },
 );
 
 // Creates an array of just the current values of the parameters
@@ -79,29 +79,31 @@ const extractValues = map(prop("value"));
 // applies the parameters to the function ultimately resulting in a fully-parameterized
 // EasingFunction.
 const applyParametersToFunction = (
-  parameterValues: (number | number[] | EasingFunction)[],
-  f: EventuallyReturnsAnEasingFunction
+  parameterValues: readonly (number | readonly number[] | EasingFunction)[],
+  f: EventuallyReturnsAnEasingFunction,
 ) =>
   reduce(
     (f: unknown, param: unknown) => {
       if (isFunction(param)) {
         return call(
           f as EventuallyReturnsAnEasingFunction<EasingFunction>,
-          param as EasingFunction
+          param as EasingFunction,
         );
       } else {
         return call(
           f as EventuallyReturnsAnEasingFunction<number | number[]>,
-          param as number | number[]
+          param as number | number[],
         );
       }
     },
     f,
-    parameterValues
+    parameterValues,
   ) as EasingFunction;
 
 type Props = ExampleProps & { themeColors: ThemeColors } & {
+  // eslint-disable-next-line functional/no-return-void
   onNext: () => void;
+  // eslint-disable-next-line functional/no-return-void
   onPrev: () => void;
 };
 
@@ -133,7 +135,7 @@ const Example: React.FC<Props> = (props) => {
   const additionalFunctionsToRender: EasingFunctionOptions[] = pipe(
     filter(propEq("includeInGraph", true)),
     map(prop("value")),
-    map(assoc("f", __, { foreground: themeColors.secondFunction }))
+    map(assoc("f", __, { foreground: themeColors.secondFunction })),
   )(paramsWithState) as EasingFunctionOptions[];
 
   const link = `#${title}`;
@@ -159,9 +161,9 @@ const Example: React.FC<Props> = (props) => {
             </a>
           </h3>
           <div className="nextPrev">
-            <Button onClick={() => onPrev()}>« Prev</Button>
+            <Button onClick={onPrev}>« Prev</Button>
             <span className="separator">{" | "}</span>
-            <Button onClick={() => onNext()}>Next »</Button>
+            <Button onClick={onNext}>Next »</Button>
           </div>
         </div>
         <p>{description}</p>

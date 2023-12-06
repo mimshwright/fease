@@ -8,9 +8,8 @@ import { exp } from "../factory";
 import { I } from "../util/fpUtil";
 import { createEaseSet } from "../util";
 
-const makeAliases = (
-  array: EasingFunctionSet
-): EasingFunctionSetWithAliases => [array[0], ...array, array[3]];
+const makeAliases = (array: EasingFunctionSet): EasingFunctionSetWithAliases =>
+  [array[0], ...array, array[3]] as EasingFunctionSetWithAliases;
 
 const createExpoSet = pipe(exp, createEaseSet, makeAliases);
 

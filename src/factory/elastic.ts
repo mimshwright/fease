@@ -31,5 +31,5 @@ export const elastic =
       dampen(stiffness)(1),
       // Transition between starting point (0) and 1 based on the frequency of the wave
       rampUpWaveFromZero(frequency),
-      forceStart0AndEnd1
+      forceStart0AndEnd1,
     )();

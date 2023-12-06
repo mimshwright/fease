@@ -7,13 +7,13 @@ describe.concurrent("waveform factories", () => {
   describe("sinusoid()", () => {
     it("Should generate a sine-like wave with phase and freqency.", () => {
       expectAll([0, 1 / 4, 1 / 2, 1])(wave.sinusoid(0)(3)).toMatchFunction(
-        wave.sine(3)
+        wave.sine(3),
       );
       expectAll([0, 1 / 4, 1 / 2, 1])(wave.sinusoid(0.25)(3)).toMatchFunction(
-        wave.cosine(3)
+        wave.cosine(3),
       );
       expectAll([0, 1 / 4, 1 / 2, 1])(wave.sinusoid(0.5)(3)).toMatchFunction(
-        (x: number) => 1 - wave.sine(3)(x)
+        (x: number) => 1 - wave.sine(3)(x),
       );
     });
   });
@@ -27,7 +27,7 @@ describe.concurrent("waveform factories", () => {
     it("Should scale to complete `frequency` loops per 1 of input.", () => {
       const sin4 = wave.sine(4);
       expectAll([0, 1 / 4 / 4, 1 / 2 / 4, 1 / 4, 5 / 4 / 4, -1 / 4 / 4])(
-        sin4
+        sin4,
       ).toBeCloseTo([0.5, 1, 0.5, 0.5, 1, 0]);
     });
   });
@@ -41,7 +41,7 @@ describe.concurrent("waveform factories", () => {
     it("Should scale to complete `frequency` loops per 1 of input.", () => {
       const cos4 = wave.cosine(4);
       expectAll([0, 1 / 4 / 4, 1 / 2 / 4, 1 / 4, 5 / 4 / 4, -1 / 4 / 4])(
-        cos4
+        cos4,
       ).toBeCloseTo([1, 0.5, 0, 1, 0.5, 0.5]);
     });
   });
@@ -64,7 +64,7 @@ describe.concurrent("waveform factories", () => {
     });
     it("At 0.5 frequency (half a triangle), it looks a lot like a normal linear function.", () => {
       expectAll([0, 0.01, 0.123, 0.25, 0.5, 0.75, 0.999, 1.0])(
-        tri05
+        tri05,
       ).toMatchFunction(linear);
       expectAll([-0.1, 1.1])(tri05).toBeCloseTo([0.1, 0.9]);
     });

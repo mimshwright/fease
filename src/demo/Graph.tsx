@@ -91,7 +91,7 @@ const Graph: React.FC<Props> = ({ fs, themeColors }) => {
             <ToggleButtonGroup
               exclusive
               value={speed}
-              onChange={(_target, speed) => setSpeed(speed)}
+              onChange={(_target, speed: Speed) => setSpeed(speed)}
             >
               <ToggleButton value="slow">slow</ToggleButton>
               <ToggleButton value="medium">medium</ToggleButton>
@@ -103,7 +103,7 @@ const Graph: React.FC<Props> = ({ fs, themeColors }) => {
             <ToggleButtonGroup
               exclusive
               value={style}
-              onChange={(_target, style) => setStyle(style)}
+              onChange={(_target, style: Style) => setStyle(style)}
             >
               <ToggleButton value="line">line</ToggleButton>
               <ToggleButton value="fill">fill</ToggleButton>

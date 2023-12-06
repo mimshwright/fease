@@ -20,7 +20,7 @@ describe.concurrent("utils - fpUtil", () => {
       it("Should compose in reverse order", () => {
         expect(p((x: number) => x ** 2)((x: number) => x + 1)(7)).toBe(50);
         expect(p((s: string) => s.length)((x: number) => x * 2)("hello")).toBe(
-          10
+          10,
         );
       });
     });
