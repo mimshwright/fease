@@ -9,7 +9,7 @@ interface FunctionSelectorProps {
   parameter: StatefulParameterFunction;
 }
 
-const SelectorItem = ({ label }: { label: string }) => (
+const SelectorItem = ({ label }: Readonly<{ label: string }>) => (
   <FormControlLabel value={label} label={label} control={<Radio />} />
 );
 
@@ -29,7 +29,7 @@ const FunctionSelector: React.FC<FunctionSelectorProps> = ({
         onChange={(_, val: string) => setter(() => options[val])}
       >
         {map((label: string) => <SelectorItem label={label} key={label} />)(
-          Object.keys(options)
+          Object.keys(options),
         )}
       </RadioGroup>
     </div>

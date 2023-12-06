@@ -7,7 +7,7 @@ export const splitN: CombinatorMany = (fs) => (x: number) =>
   pipe(
     (x) => Math.floor(x * fs.length),
     min<number>(fs.length - 1),
-    (index: number) => (nth(index, fs) ?? fs[0])(x)
+    (index: number) => (nth(index, fs) ?? fs[0])(x),
   )(x);
 
 export const split: Combinator2 = (f) => (g) => splitN([f, g]);
@@ -25,10 +25,10 @@ const splitScaleBase = (isSequenced: boolean): CombinatorMany =>
     mapIndex((f, i, { length }) =>
       pipe(
         scaleAndShiftX(i, length),
-        isSequenced ? scaleAndShiftY(i, length) : identity
-      )(f)
+        isSequenced ? scaleAndShiftY(i, length) : identity,
+      )(f),
     ),
-    splitN
+    splitN,
   );
 
 export const splitScale: CombinatorMany = splitScaleBase(false);

@@ -17,7 +17,7 @@ const NumberParameter: React.FC<NumberParameterProps> = ({
       </label>
       <Slider
         value={value}
-        onChange={(_e: Event, val) => setter(val as number)}
+        onChange={(_e: Readonly<Event>, val) => setter(val as number)}
         max={max}
         min={min}
         step={step}

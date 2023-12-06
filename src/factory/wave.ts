@@ -16,19 +16,19 @@ export const sinusoid =
   (frequency = 1) =>
     shiftX(-phase / frequency)(
       (x: number) =>
-        Math.sin(x * frequency * FULL_ROTATION_IN_RADIANS) / 2 + 0.5
+        Math.sin(x * frequency * FULL_ROTATION_IN_RADIANS) / 2 + 0.5,
     );
 
 export const sine = sinusoid(0);
 export const cosine = sinusoid(0.25);
 export const sawtooth: ReturnsEasingFunction<number> = wavifyFunction(I);
 export const triangle: ReturnsEasingFunction<number> = wavifyFunction(
-  mirror(I)
+  mirror(I),
 );
 export const pulse = (offset: number) => wavifyFunction(threshold(offset));
 export const square = pulse(0.5);
 
 const circEaseInOut = easeInOut(circular());
 export const circle: ReturnsEasingFunction<number> = wavifyFunction(
-  mirror(circEaseInOut)
+  mirror(circEaseInOut),
 );

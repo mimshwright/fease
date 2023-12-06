@@ -37,15 +37,15 @@ const constrainUtil = (lo: number) => (hi: number) =>
     ifElse(
       lte(hi - lo),
       (x: number) => hi - lo - (x % (hi - lo)),
-      modulo(__, hi - lo)
+      modulo(__, hi - lo),
     ),
-    add(lo)
+    add(lo),
   );
 
 export const constrain = (low: number) => (high: number) => {
   if (low < high) return o(constrainUtil(low)(high));
   throw new RangeError(
-    `high value must be greater than low value and cannot be equal.`
+    `high value must be greater than low value and cannot be equal.`,
   );
 };
 export const constrain01 = constrain(0)(1);

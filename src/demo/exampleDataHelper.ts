@@ -10,7 +10,7 @@ export const createListing = (
   code: string,
   description = "TBD",
   alias?: string,
-  hidden = false
+  hidden = false,
 ): DemoExample => ({
   f,
   section,
@@ -31,7 +31,7 @@ const createPolyPresetListing = (
   n: number,
   description: string,
   alias?: string,
-  hidden = false
+  hidden = false,
 ): DemoExample =>
   createListing(
     name + mod,
@@ -41,12 +41,12 @@ const createPolyPresetListing = (
     `preset.${name + mod}()`,
     `${name} (x^${n}) ${description}`,
     alias,
-    hidden
+    hidden,
   );
 
 export const createPolyPresetListingSet = (
   name: string,
-  n: number
+  n: number,
 ): Record<string, DemoExample> => ({
   [name]: createPolyPresetListing(
     name,
@@ -54,33 +54,33 @@ export const createPolyPresetListingSet = (
     n,
     `with ease in`,
     `${name}In`,
-    true
+    true,
   ),
   [name + "In"]: createPolyPresetListing(
     name,
     "In",
     n,
     `with easing at the start`,
-    name
+    name,
   ),
   [name + "Out"]: createPolyPresetListing(
     name,
     "Out",
     n,
-    `with easing at the end`
+    `with easing at the end`,
   ),
   [name + "InOut"]: createPolyPresetListing(
     name,
     "InOut",
     n,
-    "with easing in both the start and the end"
+    "with easing in both the start and the end",
   ),
   [name + "OutIn"]: createPolyPresetListing(
     name,
     "OutIn",
     n,
     "with slowdown in the middle",
-    name + "Middle"
+    name + "Middle",
   ),
   [name + "Middle"]: createPolyPresetListing(
     name,
@@ -88,6 +88,6 @@ export const createPolyPresetListingSet = (
     n,
     "with slowdown in the middle",
     name + "OutIn",
-    true
+    true,
   ),
 });

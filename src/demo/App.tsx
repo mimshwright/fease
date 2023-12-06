@@ -7,13 +7,13 @@ import { Button, ToggleButton, ToggleButtonGroup } from "@mui/material";
 
 import "./App.css";
 import { DemoExample } from "./demoTypes";
-import { collectBy, filter, head, prop } from "ramda";
+import { collectBy, filter, head, map, pipe, prop, sort } from "ramda";
 import color from "./color";
 import { isDarkMode } from "./demoUtil";
 import FunctionNameSlug from "./FunctionNameSlug";
 
 const filterOutHiddenExamples = filter(
-  ({ exampleType = "graph" }: DemoExample) => exampleType !== "hidden"
+  ({ exampleType = "graph" }: DemoExample) => exampleType !== "hidden",
 );
 
 const collectByProp = (propName: keyof DemoExample) => (list: DemoExample[]) =>
@@ -23,29 +23,35 @@ const collectBySubsection = collectByProp("subsection");
 
 const examples = filterOutHiddenExamples(Object.values(exampleData.examples));
 const sections = Object.keys(exampleData.sections);
-const alphaExamples = examples.sort((a, b) => a.title.localeCompare(b.title));
-const examplesBySection = collectBySection(examples)
-  .sort((a: DemoExample[], b: DemoExample[]) => {
-    const aTitle = head(a)?.section ?? "";
-    const bTitle = head(b)?.section ?? "";
-    return sections.indexOf(aTitle) - sections.indexOf(bTitle);
-  })
-  .map(collectBySubsection);
+const demoSortFunction = (a: DemoExample[], b: DemoExample[]): number => {
+  const aTitle = head(a)?.section ?? "";
+  const bTitle = head(b)?.section ?? "";
+  return sections.indexOf(aTitle) - sections.indexOf(bTitle);
+};
+const alphaSortFunction = (a: DemoExample, b: DemoExample): number =>
+  a.title.localeCompare(b.title);
+const alphaExamples = sort(alphaSortFunction)(examples);
+const examplesBySection = pipe(
+  collectBySection,
+  sort(demoSortFunction),
+  map(collectBySubsection),
+)(examples);
 
 type Props = {
   deepLink?: string;
 };
+type SortType = "section" | "alpha";
 
 const App: React.FC<Props> = ({ deepLink = "" }) => {
   const themeColors = isDarkMode() ? color.dark : color.light;
 
   const initialDemo =
     Object.values(exampleData.examples as Record<string, DemoExample>).filter(
-      (example: DemoExample) => example.title === deepLink
+      (example: DemoExample) => example.title === deepLink,
     )[0] ?? exampleData.examples.bounce;
 
   const [currentDemo, setCurrentDemo] = useState<DemoExample>(initialDemo);
-  const [sortBy, setSortBy] = useState<"section" | "alpha">("section");
+  const [sortBy, setSortBy] = useState<SortType>("section");
   const library =
     sortBy === "section" ? examplesBySection.flat(3) : alphaExamples;
 
@@ -61,7 +67,7 @@ const App: React.FC<Props> = ({ deepLink = "" }) => {
     setCurrentDemo(prev);
   };
 
-  const onCurrentDemoChanged = (demo: DemoExample) => {
+  const onCurrentDemoChanged = (demo: Readonly<DemoExample>) => {
     setCurrentDemo(demo);
   };
 
@@ -105,7 +111,7 @@ const App: React.FC<Props> = ({ deepLink = "" }) => {
           <ToggleButtonGroup
             exclusive
             value={sortBy}
-            onChange={(_e, value) => setSortBy(value)}
+            onChange={(_e, value: SortType) => setSortBy(value)}
           >
             <ToggleButton value="section">Cat.</ToggleButton>
             <ToggleButton value="alpha">A-Z</ToggleButton>

@@ -8,7 +8,7 @@ describe.concurrent("Decorator - split", () => {
     it("Should take an array of n easing funcitons and return a single funciton that switches between them over time.", () => {
       const splitEx = splitN([linear, cubic, linear]);
       expectAll([0.0, 0.1, 0.3, 0.33, 0.67, 0.8, 0.9, 1.0])(
-        splitEx
+        splitEx,
       ).toMatchFunction(linear);
       expectAll([0.34, 0.4, 0.5, 0.6, 0.665])(splitEx).toMatchFunction(cubic);
     });

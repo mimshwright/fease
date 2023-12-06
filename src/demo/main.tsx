@@ -12,5 +12,5 @@ render(
   <React.StrictMode>
     <App deepLink={hash} />
   </React.StrictMode>,
-  document.getElementById("root") as HTMLElement
+  document.getElementById("root") as HTMLElement,
 );

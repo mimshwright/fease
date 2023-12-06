@@ -112,7 +112,7 @@ describe.concurrent("limit", () => {
   describe("constrain01()", () => {
     it("Is same as constrain with values preset to 0 and 1.", () => {
       expectAll(vals)(limit.constrain01(I)).toMatchFunction(
-        limit.constrain(0)(1)(I)
+        limit.constrain(0)(1)(I),
       );
     });
   });

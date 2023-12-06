@@ -3,7 +3,8 @@ import { DemoExample } from "./demoTypes";
 import "./FunctionNameSlug.css";
 
 const FunctionNameSlug: React.FC<{
-  onCurrentDemoChanged: (demo: DemoExample) => void;
+  // eslint-disable-next-line functional/no-return-void
+  onCurrentDemoChanged: <T extends Readonly<DemoExample>>(demo: T) => void;
   example: DemoExample;
   selected?: boolean;
 }> = ({ onCurrentDemoChanged, example, selected = false }) => (
@@ -12,6 +13,7 @@ const FunctionNameSlug: React.FC<{
       href={`#${example.title}`}
       key={example.title}
       className={`FunctionNameSlug ${selected ? "selected" : ""}`}
+      // eslint-disable-next-line functional/functional-parameters, functional/no-return-void
       onClick={() => onCurrentDemoChanged(example)}
       // onMouseOver={() => onCurrentDemoChanged(example)}
     >

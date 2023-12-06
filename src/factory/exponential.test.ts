@@ -24,7 +24,7 @@ describe.concurrent("factories", () => {
       it("Should work with fractions & negatives ", () => {
         expect(exponential.exp(-1)(0.5)).toBe(2);
         expect(exponential.exp(2.5)(0.5)).toBeCloseTo(
-          Math.sqrt(0.5) * 0.5 * 0.5
+          Math.sqrt(0.5) * 0.5 * 0.5,
         );
       });
     });

@@ -1,20 +1,25 @@
+/* eslint-disable functional/functional-parameters */
+/* eslint-disable functional/no-return-void */
+
 import { expect } from "vitest";
 import { map, pipe, zip, __ } from "ramda";
 import { Unary } from "../types";
 
-const expectPairToBeCloseTo = ([result, output]: [number, number]): void =>
-  expect(result).toBeCloseTo(output);
+const expectPairToBeCloseTo = ([result, output]: readonly [
+  number,
+  number,
+]): void => expect(result).toBeCloseTo(output);
 
 // Takes inputs and outputs and a function, then checks that each result of f(input) is close to the output.
 export const expectAll =
-  <A>(inputs: A[]) =>
+  <A>(inputs: readonly A[]) =>
   <B>(f: Unary<A, B>) => ({
-    toEqual: (outputs: B[]) => expect(map(f, inputs)).toEqual(outputs),
-    toBeCloseTo: (outputs: number[]) =>
+    toEqual: (outputs: readonly B[]) => expect(map(f, inputs)).toEqual(outputs),
+    toBeCloseTo: (outputs: readonly number[]) =>
       pipe(
         map(f as Unary<A, number>),
         zip(outputs),
-        map(expectPairToBeCloseTo)
+        map(expectPairToBeCloseTo),
       )(inputs),
     toMatchFunction: (g: Unary<A, number>) =>
       map((x: A) => expect(f(x)).toBeCloseTo(g(x)))(inputs),

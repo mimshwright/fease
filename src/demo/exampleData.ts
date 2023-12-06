@@ -1664,6 +1664,30 @@ const sineResults = util.render(5)(preset.sinWave);
       description:
         "Takes a number of steps and a function. Generates a range of input values based on steps from 0 to 1 then maps the function over those values to get an array of results. Regardless of steps, the input always includes at least 2 values, [0, 1].",
     },
+    multiEase: {
+      f: fease.multiEase,
+      section: "util",
+      subsection: "easing",
+      title: "Multi Ease",
+      code: "util.multiEase([f,g,h])([a,b,c])",
+      description:
+        "Takes an array of easing functions (or a single function) and an array of values (or one value) between 0 and 1 and returns an array of the results of applying each function to each value.",
+      exampleType: "text",
+      exampleText: `const multiFunction = [preset.linear, preset.cubic, preset.sinWave];
+const multiInput = [0, 0.5, 1];
+
+// single-input, multi-function
+const simf = util.multiEase(multiFunction)(0.5); // [0.5, 0.125, 0.5];
+
+// multi-input, single-function
+const misf = ultil.multiEase(preset.cubic)(multiInput); // [0, 0.125, 1];
+
+// multi-input, multi-function
+const mimf = util.multiEase(multiFunction)(multiInput); 
+                    // [0, 0.5, 1,
+                    //  0, 0.125, 1,
+                    //  0.5, 0.5, 0.5]`,
+    },
     createEaseSet: {
       f: fease.createEaseSet,
       section: "util",
