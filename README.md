@@ -28,5 +28,5 @@ You can deploy an updated demo to github pages using `yarn deploy`
 
 ## See also
 
-- Easing function graph for pixi.js: [pixi-easing-template](https://github.com/mimshwright/pixi-easing-template)
+- Easing function graph for pixi.js: [pixi-easing-graph](https://github.com/mimshwright/pixi-easing-graph)
 - Project template: [vite-library-template](https://github.com/mimshwright/vite-library-template)
