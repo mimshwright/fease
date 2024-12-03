@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.3.12](https://github.com/mimshwright/fease/compare/v0.3.11...v0.3.12) (2024-12-03)
+
+### Features
+
+- **analog-waves:** added analog waveforms comprised of multiple sine waves ([7989959](https://github.com/mimshwright/fease/commit/798995923c7f80e6884e56f5c70adab2d8c19106))
+
 ### [0.3.11](https://github.com/mimshwright/fease/compare/v0.3.10...v0.3.11) (2023-12-06)
 
 ### [0.3.10](https://github.com/mimshwright/fease/compare/v0.3.9...v0.3.10) (2023-11-29)
