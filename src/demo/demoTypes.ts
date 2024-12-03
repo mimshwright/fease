@@ -19,10 +19,13 @@ export type ParameterFunction = Parameter<EasingFunction> & {
 export type ParameterNumberArray = Parameter<number[]> & {
   options: Record<string, number[]>;
 };
+export type ParameterBoolean = Parameter<boolean>;
+
 type Parameters = (
   | ParameterNumber
   | ParameterNumberArray
   | ParameterFunction
+  | ParameterBoolean
 )[];
 
 export const isNumberParameter = (
@@ -32,6 +35,9 @@ export const isNumberArrayParameter = (
   p: Parameter<unknown>,
 ): p is ParameterNumberArray =>
   p.defaultValue instanceof Array && typeof p.defaultValue[0] === "number";
+export const isBooleanParameter = (
+  p: Parameter<unknown>,
+): p is ParameterBoolean => typeof p.defaultValue === "boolean";
 
 export type ExampleType = "hidden" | "text" | "graph";
 
