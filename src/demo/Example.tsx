@@ -1,5 +1,6 @@
 import React, { useState, SetStateAction } from "react";
 import FunctionSelector from "./FunctionSelector";
+import BooleanParameter from "./BooleanParameter";
 import NumberParameter from "./NumberParameter";
 import NumberArrayParameter from "./NumberArrayParameter";
 // import Graph from "./Graph";
@@ -15,10 +16,12 @@ import {
   isNumberParameter,
   isNumberArrayParameter,
   Parameter,
+  ParameterBoolean,
   ParameterFunction,
   ParameterNumber,
   ParameterNumberArray,
   ThemeColors,
+  isBooleanParameter,
 } from "./demoTypes";
 
 import {
@@ -37,6 +40,7 @@ import Graph from "./Graph";
 import { Button } from "@mui/material";
 
 type Stateful<T> = { value: T; setter: React.Dispatch<SetStateAction<T>> };
+export type StatefulParameterBoolean = ParameterBoolean & Stateful<boolean>;
 export type StatefulParameterNumber = ParameterNumber & Stateful<number>;
 export type StatefulParameterNumberArray = ParameterNumberArray &
   Stateful<number[]>;
@@ -46,6 +50,7 @@ type StatefulParameters = (
   | StatefulParameterNumber
   | StatefulParameterNumberArray
   | StatefulParameterFunction
+  | StatefulParameterBoolean
 )[];
 
 const isFunction = (param: unknown): boolean => typeof param === "function";
@@ -57,8 +62,12 @@ const assignStateToParams = map(
   ):
     | StatefulParameterNumber
     | StatefulParameterNumberArray
-    | StatefulParameterFunction => {
-    if (isNumberParameter(param)) {
+    | StatefulParameterFunction
+    | StatefulParameterBoolean => {
+    if (isBooleanParameter(param)) {
+      const [value, setter] = useState<boolean>(() => param.defaultValue);
+      return { ...param, value, setter } as StatefulParameterBoolean;
+    } else if (isNumberParameter(param)) {
       const [value, setter] = useState<number>(() => param.defaultValue);
       return { ...param, value, setter } as StatefulParameterNumber;
     } else if (isNumberArrayParameter(param)) {
@@ -180,7 +189,11 @@ const Example: React.FC<Props> = (props) => {
           <div className="params">
             {paramsWithState.map((param, i) => (
               <div key={i}>
-                {typeof param.value === "number" ? (
+                {typeof param.value === "boolean" ? (
+                  <BooleanParameter
+                    parameter={param as StatefulParameterBoolean}
+                  />
+                ) : typeof param.value === "number" ? (
                   <NumberParameter
                     parameter={param as StatefulParameterNumber}
                   />

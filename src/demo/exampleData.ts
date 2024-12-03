@@ -381,6 +381,32 @@ const exampleData: DemoCollection<typeof fease> = {
       ],
     },
 
+    analogSquare: {
+      f: fease.analogSquare,
+      section: "factory",
+      subsection: "wave",
+      title: "AnalogSquare",
+      code: "factory.analogSquare(resolution)",
+      description:
+        "Creates an approximate square wave function that combines multiple sine waves at different frequencies.",
+      parameters: [
+        { label: "resolution", min: 1, max: 20, step: 1, defaultValue: 10 },
+        { label: "frequency", min: 0.25, max: 10, step: 0.25, defaultValue: 2 },
+      ],
+    },
+    analogSaw: {
+      f: fease.analogSaw,
+      section: "factory",
+      subsection: "wave",
+      title: "AnalogSaw",
+      code: "factory.analogSaw(resolution)",
+      description:
+        "Creates an approximate saw wave function that combines multiple sine waves at different frequencies.",
+      parameters: [
+        { label: "resolution", min: 1, max: 20, step: 1, defaultValue: 10 },
+        { label: "frequency", min: 0.25, max: 10, step: 0.25, defaultValue: 2 },
+      ],
+    },
     elastic: {
       f: fease.elastic,
       section: "factory",
