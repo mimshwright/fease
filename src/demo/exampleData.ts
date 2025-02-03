@@ -71,7 +71,7 @@ const sections: Record<string, DemoSection> = {
   factory: {
     title: "factory",
     description:
-      "Factories are functions that create a new type of Easing Funciton. They may take 1 or more parameters.",
+      "Factories are functions that create a new type of Easing Function. They may take 1 or more parameters.",
   },
   decorator: {
     title: "decorator",
@@ -299,7 +299,7 @@ const exampleData: DemoCollection<typeof fease> = {
       title: "Sinusoid",
       code: "factory.sinusoid(freq)",
       description:
-        "Creates a sinusoid wave funciton with phase as a decimal number and frequency as a number of in full oscillations between 0 and 1 input.",
+        "Creates a sinusoid wave function with phase as a decimal number and frequency as a number of in full oscillations between 0 and 1 input.",
       parameters: [
         { label: "phase", min: -1, max: 1, defaultValue: 0, step: 0.01 },
         { label: "frequency", min: 0.25, max: 20, defaultValue: 1 },
@@ -312,7 +312,7 @@ const exampleData: DemoCollection<typeof fease> = {
       title: "Sine",
       code: "factory.sine(freq)",
       description:
-        "Creates a sine wave funciton with frequency as a number of in full oscillations between 0 and 1 input. (Same as sinusoid but locks phase at 0)",
+        "Creates a sine wave function with frequency as a number of in full oscillations between 0 and 1 input. (Same as sinusoid but locks phase at 0)",
       parameters: [{ label: "frequency", min: 0.25, max: 20, defaultValue: 1 }],
     },
     cosine: {
@@ -322,7 +322,7 @@ const exampleData: DemoCollection<typeof fease> = {
       title: "Cosine",
       code: "factory.cosine(freq)",
       description:
-        "Creates a cosine wave funciton with frequency as a number of in full oscillations between 0 and 1 input. (Same as sinusoid but locks phase at 0.25)",
+        "Creates a cosine wave function with frequency as a number of in full oscillations between 0 and 1 input. (Same as sinusoid but locks phase at 0.25)",
       parameters: [{ label: "frequency", min: 0.25, max: 20, defaultValue: 1 }],
     },
     circle: {
@@ -332,7 +332,7 @@ const exampleData: DemoCollection<typeof fease> = {
       title: "Circle",
       code: "factory.circle(freq)",
       description:
-        "Creates a circular-shaped wave funciton with frequency as a number of in full oscillations between 0 and 1 input.",
+        "Creates a circular-shaped wave function with frequency as a number of in full oscillations between 0 and 1 input.",
       parameters: [{ label: "frequency", min: 0.25, max: 20, defaultValue: 2 }],
     },
     sawtooth: {
@@ -342,7 +342,7 @@ const exampleData: DemoCollection<typeof fease> = {
       title: "Sawtooth",
       code: "factory.sawtooth(freq)",
       description:
-        "Creates a sawtooth wave funciton with frequency as a number of in full oscillations between 0 and 1 input.",
+        "Creates a sawtooth wave function with frequency as a number of in full oscillations between 0 and 1 input.",
       parameters: [{ label: "frequency", min: 0.25, max: 20, defaultValue: 2 }],
     },
     triangle: {
@@ -352,7 +352,7 @@ const exampleData: DemoCollection<typeof fease> = {
       title: "Triangle",
       code: "factory.triangle(freq)",
       description:
-        "Creates a triangle wave funciton with frequency as a number of in full oscillations between 0 and 1 input.",
+        "Creates a triangle wave function with frequency as a number of in full oscillations between 0 and 1 input.",
       parameters: [{ label: "frequency", min: 0.25, max: 20, defaultValue: 2 }],
     },
     square: {
@@ -448,7 +448,7 @@ Stiffness: determines how fast the object comes to rest. 1 is roughly linear dec
       title: "Overshoot",
       code: "factory.overshoot(magnitude)",
       description:
-        "A funciton that goes beyond the end point of 1.0, then comes back to rest at 1.0",
+        "A function that goes beyond the end point of 1.0, then comes back to rest at 1.0",
       parameters: [
         { label: "magnitude", min: 0, max: 5, step: 0.01, defaultValue: 1 },
       ],
@@ -641,7 +641,7 @@ Stiffness: determines how fast the object comes to rest. 1 is roughly linear dec
       section: "decorator",
       subsection: "limit",
       title: "Absolute",
-      code: "deocrator.abs(f)",
+      code: "decorator.abs(f)",
       description:
         "Any negative values produced by the function lose their negative sign.",
       parameters: [
@@ -660,7 +660,7 @@ Stiffness: determines how fast the object comes to rest. 1 is roughly linear dec
       section: "decorator",
       subsection: "limit",
       title: "Constrain",
-      code: "deocrator.constrain(low)(high)(f)",
+      code: "decorator.constrain(low)(high)(f)",
       description:
         "If the value goes outside the range, it'll be reversed, as if bouncing off the ceiling or floor. Note that if 'low' is >= 'high' you'll get an error.",
       parameters: [
@@ -682,7 +682,7 @@ Stiffness: determines how fast the object comes to rest. 1 is roughly linear dec
       section: "decorator",
       subsection: "limit",
       title: "Constrain01",
-      code: "deocrator.constrain01(f)",
+      code: "decorator.constrain01(f)",
       description:
         "Same as constrain but automatically applies 0 and 1 as the range.",
       parameters: [
@@ -891,7 +891,7 @@ Stiffness: determines how fast the object comes to rest. 1 is roughly linear dec
       subsection: "repeat",
       code: "decorator.repeat(times)(f)",
       description:
-        "Creates a function that repeats another function n times within the span of the fuction.",
+        "Creates a function that repeats another function n times within the span of the function.",
       parameters: [
         { label: "times", defaultValue: 5, min: 1, max: 10, step: 1 },
         {
@@ -908,7 +908,7 @@ Stiffness: determines how fast the object comes to rest. 1 is roughly linear dec
       subsection: "repeat",
       code: "decorator.repeatSequence(times)(f)",
       description:
-        "Creates a function that repeats another function n times within the span of the fuction but each one will be played one after the next.",
+        "Creates a function that repeats another function n times within the span of the function but each one will be played one after the next.",
       parameters: [
         { label: "times", defaultValue: 5, min: 1, max: 10, step: 1 },
         {
@@ -1072,7 +1072,7 @@ Stiffness: determines how fast the object comes to rest. 1 is roughly linear dec
       subsection: "split",
       code: "decorator.split(f)(g)",
       description:
-        "Takes two functions, f and g, and returns an easing fucntion that splits the function into two parts using `f` for the first part and `g` for the second.",
+        "Takes two functions, f and g, and returns an easing function that splits the function into two parts using `f` for the first part and `g` for the second.",
       parameters: [
         {
           label: "Input Function 1",
@@ -1094,7 +1094,7 @@ Stiffness: determines how fast the object comes to rest. 1 is roughly linear dec
       subsection: "split",
       code: "decorator.splitn([f,g,h])",
       description:
-        "Takes an array of multiple functions, f and g, and returns an easing fucntion that is split into n parts, switching between the functions evenly.",
+        "Takes an array of multiple functions, f and g, and returns an easing function that is split into n parts, switching between the functions evenly.",
       parameters: [
         {
           label: "Input Function 1",
@@ -1121,7 +1121,7 @@ Stiffness: determines how fast the object comes to rest. 1 is roughly linear dec
       subsection: "split",
       code: "decorator.splitScale([f,g,h])",
       description:
-        "Same as splitN() except splitScale also scales each function so that it fits within its alloted space.",
+        "Same as splitN() except splitScale also scales each function so that it fits within its allotted space.",
       parameters: [
         {
           label: "Input Function 1",
@@ -1174,7 +1174,7 @@ Stiffness: determines how fast the object comes to rest. 1 is roughly linear dec
       title: "Transition",
       code: "transition(f)(g)",
       description:
-        "Combines two funcitons and transitions between them based on the value of x.",
+        "Combines two functions and transitions between them based on the value of x.",
       parameters: [
         {
           label: "Input function f",
@@ -1197,7 +1197,7 @@ Stiffness: determines how fast the object comes to rest. 1 is roughly linear dec
       title: "Transition With Control Function",
       code: "transitionWithControl(c)(f)(g)",
       description:
-        "Combines two funcitons and transitions between them based on the value of x using a third function to control the mix.",
+        "Combines two functions and transitions between them based on the value of x using a third function to control the mix.",
       parameters: [
         {
           label: "Control function c",
@@ -1231,7 +1231,7 @@ Stiffness: determines how fast the object comes to rest. 1 is roughly linear dec
       title: "Add",
       code: "add(f)(g)",
       description:
-        "Combines two funcitons into one by adding their results. Note, the result may exceed the range of 0 and 1",
+        "Combines two functions into one by adding their results. Note, the result may exceed the range of 0 and 1",
       parameters: [
         {
           label: "Input function f",
@@ -1255,7 +1255,7 @@ Stiffness: determines how fast the object comes to rest. 1 is roughly linear dec
       title: "AddN",
       code: "addN([f,g,h])",
       description:
-        "Combines any number of funcitons into one by adding their results. Note, the result may exceed the range of 0 and 1",
+        "Combines any number of functions into one by adding their results. Note, the result may exceed the range of 0 and 1",
       parameters: [
         {
           label: "Input function f",
@@ -1284,7 +1284,7 @@ Stiffness: determines how fast the object comes to rest. 1 is roughly linear dec
       title: "Merge",
       code: "merge(f)(g)",
       description:
-        "Combines two funcitons into one by adding their results. The output will be scaled so it stays within the normal range.",
+        "Combines two functions into one by adding their results. The output will be scaled so it stays within the normal range.",
       parameters: [
         {
           label: "Input function f",
@@ -1308,7 +1308,7 @@ Stiffness: determines how fast the object comes to rest. 1 is roughly linear dec
       title: "MergeN",
       code: "mergeN([f,g,h])",
       description:
-        "Combines any number of funcitons into one by adding their results. The output will be scaled so it stays within the normal range.",
+        "Combines any number of functions into one by adding their results. The output will be scaled so it stays within the normal range.",
       parameters: [
         {
           label: "Input function f",
@@ -1367,7 +1367,7 @@ Stiffness: determines how fast the object comes to rest. 1 is roughly linear dec
       title: "Take Minimum",
       code: "takeMin([f,g,h])",
       description:
-        "Takes multiple easing functions and returns a new one that give the lowest value produced by applying the functions.",
+        "Takes multiple easing functions and returns a new one that gives the lowest value produced by applying the functions.",
       parameters: [
         {
           label: "Input function f",
@@ -1390,7 +1390,7 @@ Stiffness: determines how fast the object comes to rest. 1 is roughly linear dec
       title: "Take Maximum",
       code: "takeMax([f,g,h])",
       description:
-        "Takes multiple easing functions and returns a new one that give the highest value produced by applying the functions.",
+        "Takes multiple easing functions and returns a new one that gives the highest value produced by applying the functions.",
       parameters: [
         {
           label: "Input function f",
