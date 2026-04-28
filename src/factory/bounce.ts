@@ -1,3 +1,4 @@
+import { curry } from "ramda";
 import { reflectY } from "../decorator";
 
 // TODO: cleanup, memoize and other optimization
@@ -44,5 +45,6 @@ const physics = (G: number) => (_rho: number) => {
   return doPhysics(0);
 };
 
-export const bounce = (gravity: number) => (bounciness: number) =>
-  reflectY(physics(gravity)(bounciness)(0)(1));
+export const bounce = curry((gravity: number, bounciness: number) =>
+  reflectY(physics(gravity)(bounciness)(0)(1)),
+);

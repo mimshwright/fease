@@ -1,8 +1,9 @@
+import { curry } from "ramda";
 import { discrete } from "../factory";
 import { render } from "../util";
-import { EasingFunctionDecorator } from "./../types";
+import { EasingFunction } from "./../types";
 
-export const stepped =
-  (steps: number): EasingFunctionDecorator =>
-  (f) =>
-    discrete(render(steps)(f));
+export const stepped = curry(
+  (steps: number, f: EasingFunction): EasingFunction =>
+    discrete(render(steps)(f)),
+);

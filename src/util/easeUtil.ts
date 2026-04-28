@@ -1,4 +1,4 @@
-import { times, max, ap, flatten } from "ramda";
+import { curry, times, max, ap, flatten } from "ramda";
 import { easeInOut, easeMiddle, easeOut } from "../decorator/ease";
 import {
   EasingFunction,
@@ -6,8 +6,9 @@ import {
   EasingFunctionSet,
 } from "../types";
 
-export const render = (steps: number) => (f: EasingFunction) =>
-  times((n) => f(n / (max(2, steps) - 1)), max(2, steps));
+export const render = curry((steps: number, f: EasingFunction): number[] =>
+  times((n) => f(n / (max(2, steps) - 1)), max(2, steps)),
+);
 
 export const createEaseSet = (
   easeIn: EasingFunction,
@@ -27,15 +28,15 @@ export const multiEase =
   (xOrXs: number | readonly number[]): number[] =>
     ap(flatten([easingFunctionOrFunctions]))(flatten([xOrXs]));
 
-export const lerp = (start: number) => (end: number) => (percent: number) =>
-  start + percent * (end - start);
+export const lerp = curry(
+  (start: number, end: number, percent: number): number =>
+    start + percent * (end - start),
+);
 
-export const easingLerp =
-  (f: EasingFunction) =>
-  (start: number) =>
-  (end: number) =>
-  (percent: number) =>
-    lerp(start)(end)(f(percent));
+export const easingLerp = curry(
+  (f: EasingFunction, start: number, end: number, percent: number): number =>
+    lerp(start)(end)(f(percent)),
+);
 
 // export const ease =
 //   (easingFunction: EasingFunction) =>

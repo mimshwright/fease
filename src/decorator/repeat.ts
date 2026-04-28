@@ -1,14 +1,14 @@
 import { sequence, splitScale } from "../combinator";
-import { repeat as arrayOfCopies } from "ramda";
+import { curry, repeat as arrayOfCopies } from "ramda";
 
-import { EasingFunctionDecorator } from "./../types";
+import { EasingFunction } from "./../types";
 
-export const repeat =
-  (times: number): EasingFunctionDecorator =>
-  (f) =>
-    splitScale(arrayOfCopies(f)(times));
+export const repeat = curry(
+  (times: number, f: EasingFunction): EasingFunction =>
+    splitScale(arrayOfCopies(f)(times)),
+);
 
-export const repeatSequence =
-  (times: number): EasingFunctionDecorator =>
-  (f) =>
-    sequence(arrayOfCopies(f)(times));
+export const repeatSequence = curry(
+  (times: number, f: EasingFunction): EasingFunction =>
+    sequence(arrayOfCopies(f)(times)),
+);
