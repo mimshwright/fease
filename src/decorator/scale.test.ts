@@ -87,4 +87,30 @@ describe.concurrent("decorators - scale", () => {
       });
     });
   });
+
+  describe("auto-curry", () => {
+    describe("Scale functions support both curried f(a)(b) and uncurried f(a, b) call styles", () => {
+      it("scaleX(scale)(f) and scaleX(scale, f) produce identical results", () => {
+        const curried = scaleX(2)(linear);
+        const uncurried = scaleX(2, linear);
+        expect(curried(0)).toBeCloseTo(uncurried(0));
+        expect(curried(0.5)).toBeCloseTo(uncurried(0.5));
+        expect(curried(1)).toBeCloseTo(uncurried(1));
+      });
+
+      it("scaleY(scale)(f) and scaleY(scale, f) produce identical results", () => {
+        const curried = scaleY(3)(linear);
+        const uncurried = scaleY(3, linear);
+        expect(curried(0)).toBeCloseTo(uncurried(0));
+        expect(curried(0.5)).toBeCloseTo(uncurried(0.5));
+        expect(curried(1)).toBeCloseTo(uncurried(1));
+      });
+
+      it("partial application returns a reusable decorator applicable to multiple functions", () => {
+        const doubleX = scaleX(2);
+        expect(doubleX(linear)(0.5)).toBeCloseTo(scaleX(2, linear)(0.5));
+        expect(doubleX(sinWave)(0.25)).toBeCloseTo(scaleX(2, sinWave)(0.25));
+      });
+    });
+  });
 });

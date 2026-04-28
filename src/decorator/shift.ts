@@ -1,15 +1,16 @@
-import { EasingFunction, EasingFunctionDecorator } from "../types";
+import { curry } from "ramda";
+import { EasingFunction } from "../types";
 
-// Todo: shift and scale simultaneously
+// TODO: shift and scale simultaneously
 
-export const shiftX =
-  (offset: number): EasingFunctionDecorator =>
-  (f: EasingFunction) =>
-  (x: number) =>
-    f(x - offset);
+export const shiftX = curry(
+  (offset: number, f: EasingFunction): EasingFunction =>
+    (x: number) =>
+      f(x - offset),
+);
 
-export const shiftY =
-  (offset: number): EasingFunctionDecorator =>
-  (f: EasingFunction) =>
-  (x: number) =>
-    f(x) + offset;
+export const shiftY = curry(
+  (offset: number, f: EasingFunction): EasingFunction =>
+    (x: number) =>
+      f(x) + offset,
+);
